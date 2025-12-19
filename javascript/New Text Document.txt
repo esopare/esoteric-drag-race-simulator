@@ -1,0 +1,29 @@
+first of all keep the theme in the code. keep the Home, Predefined Casts, Custom, etc Tabs the same but add a Custom Season Tab to it then
+I want a page where I can make a custom franchise like this
+CUSTOM DRAG RACE - TITLE
+
+MAKE A FRANCHISE (LIKE DRAG RACE USA, DRAG RACE PHILIPPINES) THEN AFTER MAKING A FRANCHISE, ENTER FRANCHISE NAME
+THEN AFTER THAT MAKE A SEASON SO IT MAKES SEASON 1
+THEN CHOOSE SEASON 1 CASTS
+THEN CHOOSE FORMAT
+CHOOSE FINALE
+CHOOSE RETURN FORMAT
+ETC
+THEN SAVE (SO I CAN SIMULATE IT WHEN OR WHEREVER I WANT)
+
+SO IT SHOWS
+
+MAKE A FRANCHISE
+DRAG RACE CUSTOM (FRANCHISE NAME)
+S1 (AN ADD SEASON BUTTON WITH SAME FUNCTION)
+
+THEN IF I MAKE ANOTHER FRANCHISE AND NAME ID DRAG RACE AI IT WILL BECOME LIKE
+DRAG RACE CUSTOM | DRAG RACE AI
+
+----------
+after making franchise etc.  I want it to be like the custom franchises to be in tabs, like
+
+DRAG RACE CUSTOM | DRAG RACE AI | REB'S UNIVERSE | KHLOE'S DRAG RACE (something like that 7 tabs per line)
+
+then once I click for example I click Drag Race AI
+then it shows the Season(s) that I made
