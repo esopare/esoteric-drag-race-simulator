@@ -2284,6 +2284,7 @@ if (queenFileInput) {
     });
 }
 
+
 function addQueen() {
   // 🧠 Validation check — make sure the name isn't empty
   let queenName = document.getElementById("queenName").value.trim();
@@ -2331,6 +2332,7 @@ if (image.startsWith("data:image/")) {
         return;
     }
 }
+
 
   // 👑 Create a proper Queen instance (important for main page search)
   let newQueen = new Queen(
