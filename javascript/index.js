@@ -2270,18 +2270,19 @@ function checkForDeptQuit(pana) {
         }
     }
 }
-document.getElementById("queenFile").addEventListener("change", function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+const queenFileInput = document.getElementById("queenFile");
+if (queenFileInput) {
+    queenFileInput.addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const base64Image = e.target.result;
-        // Use the Base64 string as the image
-        document.getElementById("url").value = base64Image;
-    };
-    reader.readAsDataURL(file);
-});
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("url").value = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
 
 function addQueen() {
   // 🧠 Validation check — make sure the name isn't empty
