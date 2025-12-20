@@ -2270,6 +2270,19 @@ function checkForDeptQuit(pana) {
         }
     }
 }
+document.getElementById("queenFile").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64Image = e.target.result;
+        // Use the Base64 string as the image
+        document.getElementById("url").value = base64Image;
+    };
+    reader.readAsDataURL(file);
+});
+
 function addQueen() {
   // 🧠 Validation check — make sure the name isn't empty
   let queenName = document.getElementById("queenName").value.trim();
@@ -2296,20 +2309,27 @@ function addQueen() {
   }
 
   // 🖼️ Validate image
-  let noimagemaybe = false;
-  let extension = image.substring(image.lastIndexOf(".") + 1).toLowerCase();
-  if (extension === "png" || extension === "jpg" || extension === "gif" || extension === "") {
-    if (image === "") {
-      image = "noimage";
-      noimagemaybe = false;
+let noimagemaybe = false;
+
+// If image is a Base64 string (uploaded file), accept it
+if (image.startsWith("data:image/")) {
+    noimagemaybe = true;
+} else {
+    // Otherwise, check URL extension as before
+    let extension = image.substring(image.lastIndexOf(".") + 1).toLowerCase();
+    if (extension === "png" || extension === "jpg" || extension === "gif" || extension === "") {
+        if (image === "") {
+            image = "noimage";
+            noimagemaybe = false;
+        } else {
+            noimagemaybe = true;
+        }
     } else {
-      noimagemaybe = true;
+        window.alert("Invalid image extension! Use jpg, gif or png instead!");
+        document.getElementById("url").value = "";
+        return;
     }
-  } else {
-    window.alert("Invalid image extension! Use jpg, gif or png instead!");
-    document.getElementById("url").value = "";
-    return;
-  }
+}
 
   // 👑 Create a proper Queen instance (important for main page search)
   let newQueen = new Queen(
