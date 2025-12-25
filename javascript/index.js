@@ -8580,51 +8580,92 @@ function spConf() {
     screen.createBold("Choose what is the first episode of the season!");
     screen.createHorizontalLine();
 
-    if (typeof window.firstEpisode === "undefined") window.firstEpisode = "design";
-
     let main = document.querySelector("div#MainBlock");
     let centering = document.createElement("center");
 
-    const episodeContainer = document.createElement("div");
-    episodeContainer.classList.add("episode-buttons");
-
+    // ===============================
+    // Episode options (MATCH OLD VALUES)
+    // ===============================
     const episodeOptions = [
         { name: "Design Challenge", value: "design" },
         { name: "Runway", value: "runway" },
-        { name: "Talent Show", value: "TalentShow" },
+        { name: "Talent Show", value: "talentshow" },
         { name: "Girl Groups", value: "girlgroup" }
     ];
 
-    // create buttons
+    // ===============================
+    // HIDDEN SELECT (OLD LOGIC DEPENDS ON THIS)
+    // ===============================
+    let hiddenSelect = document.createElement("select");
+    hiddenSelect.id = "challenge";
+    hiddenSelect.style.display = "none";
+
+    episodeOptions.forEach(opt => {
+        let o = document.createElement("option");
+        o.value = opt.value;
+        o.textContent = opt.name;
+        hiddenSelect.appendChild(o);
+    });
+
+    hiddenSelect.value = "design"; // default
+    main.appendChild(hiddenSelect);
+
+    // ===============================
+    // BUTTON CONTAINER
+    // ===============================
+    const episodeContainer = document.createElement("div");
+    episodeContainer.classList.add("episode-buttons");
+
     episodeOptions.forEach(opt => {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.innerText = opt.name;
         btn.dataset.val = opt.value;
         btn.classList.add("episode-btn");
-        btn.addEventListener("click", (e) => {
-            window.firstEpisode = e.currentTarget.dataset.val;
-            episodeContainer.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+
+        // default active
+        if (opt.value === "design") {
+            btn.classList.add("active");
+        }
+
+        btn.addEventListener("click", e => {
+            const val = e.currentTarget.dataset.val;
+
+            // sync EVERYTHING
+            hiddenSelect.value = val;
+            window.firstEpisode = val;
+
+            if (typeof frEp === "function") frEp();
+
+            episodeContainer
+                .querySelectorAll("button")
+                .forEach(b => b.classList.remove("active"));
             e.currentTarget.classList.add("active");
         });
+
         episodeContainer.appendChild(btn);
     });
 
-    // 🎲 Randomize button
+    // ===============================
+    // RANDOMIZE BUTTON
+    // ===============================
     const randomBtn = document.createElement("button");
     randomBtn.type = "button";
     randomBtn.innerText = "🎲 Randomize";
     randomBtn.classList.add("randomize-btn");
+
     randomBtn.addEventListener("click", () => {
-        const buttons = episodeContainer.querySelectorAll("button");
+        const buttons = episodeContainer.querySelectorAll(".episode-btn");
         const rand = Math.floor(Math.random() * episodeOptions.length);
         const chosen = episodeOptions[rand];
+
+        hiddenSelect.value = chosen.value;
         window.firstEpisode = chosen.value;
 
-        // visual update
-        buttons.forEach((b, i) => {
-            b.classList.toggle("active", i === rand);
-        });
+        if (typeof frEp === "function") frEp();
+
+        buttons.forEach(b => b.classList.remove("active"));
+        buttons[rand].classList.add("active");
     });
 
     centering.appendChild(episodeContainer);
@@ -8632,13 +8673,15 @@ function spConf() {
     main.appendChild(centering);
     main.appendChild(document.createElement("br"));
 
+    // ===============================
+    // START BUTTON (UNCHANGED LOGIC)
+    // ===============================
     screen.createHorizontalLine();
     screen.createButton("Start Now!", "", "strPrm");
 
     const start = document.querySelector("#strPrm");
     if (!start) return;
 
-    // keep your original start logic unchanged
     start.addEventListener("click", () => {
         if (typeof chocolateBarTwist !== "undefined" && chocolateBarTwist) {
             if (typeof chocolateBarTwistChoosable !== "undefined" && chocolateBarTwistChoosable) {
@@ -8667,6 +8710,7 @@ function spConf() {
         }
     });
 }
+
 
 let frEp1 = true;
 let frEp2 = false;
