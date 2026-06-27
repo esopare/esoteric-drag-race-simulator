@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Track Record Builder — Esoteric Simulator</title>
+
+  <!-- Minimal styling. Tweak colors or paste into your own stylesheet -->
+  <style>
+    :root{
+      --bg:#0f0f12;
+      --card:#111317;
+      --accent:#ff66cc;
+      --muted:#9aa0a6;
+      --success:#22c55e;
+      --danger:#ef4444;
+      --gold:#f59e0b;
+      --blue:#3b82f6;
+      --panel:#0b1020;
+      font-family: Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #e6eef6;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#07070a 0%, #0d0f16 100%);}
+    .wrap{max-width:1200px;margin:28px auto;padding:18px;}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    header img{width:52px;height:52px;border-radius:10px;object-fit:cover}
+    h1{margin:0;font-size:1.5rem;letter-spacing:0.6px}
+    .controls{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0 24px}
+    .panel{background:linear-gradient(180deg,var(--card),#08080a);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.6);min-width:260px}
+    .panel h3{margin:0 0 8px;font-size:1rem;color:var(--accent)}
+    input[type="text"], input[type="number"], select, textarea{width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;box-sizing:border-box}
+    button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+    .muted{color:var(--muted);font-size:0.9rem}
+    .flex{display:flex;gap:10px;align-items:center}
+    .col{display:flex;flex-direction:column;gap:8px}
+    .contestants-list{display:flex;flex-wrap:wrap;gap:12px}
+    .card-contestant{width:220px;background:linear-gradient(180deg,#0b0d10,#050607);border:1px solid rgba(255,255,255,0.03);padding:10px;border-radius:10px}
+    .card-top{display:flex;gap:10px;align-items:center}
+    .card-top img{width:56px;height:56px;border-radius:8px;object-fit:cover}
+    .card-name{font-weight:700}
+    .stats{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+    .stat{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:6px;font-size:0.85rem}
+    .timeline{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .ep{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:0.78rem;color:#050507;font-weight:700}
+    .ep.win{background:var(--gold);color:#071217}
+    .ep.high{background:var(--blue);color:white}
+    .ep.safe{background:rgba(255,255,255,0.06)}
+    .ep.low{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04);opacity:0.86}
+    .ep.bottom{background:var(--danger);color:white}
+    .ep.elim{background:#222;border:1px solid rgba(255,255,255,0.06);text-decoration:line-through;opacity:0.9}
+    .ep.lsfy{background:var(--accent);color:#071217}
+    .controls-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .wide{grid-column:1/-1}
+    .actions{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+    .import-area{width:100%;min-height:70px;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;color:var(--muted)}
+    footer{margin-top:18px;color:var(--muted);font-size:0.85rem}
+    .export-btn{background:#111827;padding:8px 10px;border-radius:8px}
+    .small{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted);font-size:0.9rem}
+    @media (max-width:900px){.controls-grid{grid-template-columns:repeat(1,1fr)} .card-contestant{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="image/logodiscord.png" alt="logo" onerror="this.style.display='none'">
+      <div>
+        <h1>Track Record Builder</h1>
+        <div class="muted">Create contestant track records & episode timelines (exportable)</div>
+      </div>
+    </header>
+
+    <div class="controls">
+      <!-- Add contestant -->
+      <div class="panel" style="min-width:320px">
+        <h3>Add contestant</h3>
+        <div class="col">
+          <input id="cr-name" placeholder="Name (ex: Sasha Velour)">
+          <input id="cr-image" placeholder="Image URL (optional)">
+          <div style="display:flex;gap:8px">
+            <button id="addContestant">Add contestant</button>
+            <button id="resetAll" class="small" style="background:#6b7280">Clear All</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Episode event -->
+      <div class="panel">
+        <h3>Add episode result</h3>
+        <div class="controls-grid">
+          <select id="ev-contestant" class="wide"><option value="">-- choose contestant --</option></select>
+          <input id="ev-ep" type="number" min="1" placeholder="Episode #">
+          <select id="ev-result">
+            <option value="win">WIN</option>
+            <option value="high">HIGH</option>
+            <option value="safe">SAFE</option>
+            <option value="low">LOW</option>
+            <option value="bottom">BOTTOM</option>
+            <option value="lip-sync">LIP-SYNC LOST</option>
+            <option value="lip-win">LIP-SYNC WON</option>
+            <option value="elim">ELIMINATED</option>
+          </select>
+          <input id="ev-note" placeholder="Optional note (e.g., team name)">
+          <div class="wide">
+            <div class="actions">
+              <button id="addEvent">Add Event</button>
+              <button id="removeLast" class="small">Undo last event</button>
+              <button id="exportJSON" class="small">Export JSON</button>
+              <button id="importJSONBtn" class="small">Import JSON</button>
+              <button id="exportPNG" class="export-btn">Export as Image</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Import / preview -->
+      <div class="panel" style="min-width:320px">
+        <h3>Import / Load</h3>
+        <div class="col">
+          <textarea id="importArea" class="import-area" placeholder='Paste JSON here then click "Import JSON"'></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button id="loadDemo" class="small">Load Demo</button>
+            <button id="clearImport" class="small">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Track record area (exportable) -->
+    <div id="trackExport" style="padding:10px;border-radius:10px;background:linear-gradient(180deg,#071018,#041018);border:1px solid rgba(255,255,255,0.02)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div>
+          <strong style="font-size:1.05rem">Track Records</strong>
+          <div class="muted">Contestant cards & episode timelines</div>
+        </div>
+        <div class="muted">Episodes: <span id="maxEp">0</span></div>
+      </div>
+
+      <div id="contestants" class="contestants-list"></div>
+    </div>
+
+    <footer>
+      Tip: build episodes in order (1,2,3...) and then export. Import JSON back in to continue editing.
+    </footer>
+  </div>
+
+  <!-- html2canvas for image export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNa5w2bUzx2fZx3a+2g+JvRQ+g0t6eG0zq2z2xJdXcDFVxNTsVleq6J5r4v8G2fBqs0n8z0JX5jQwqk1O3m0Qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+  // Simple in-memory model
+  const state = {
+    contestants: [], // { id, name, image, events: [{ep, result, note}] }
+  };
+
+  // DOM refs
+  const qName = document.getElementById('cr-name');
+  const qImage = document.getElementById('cr-image');
+  const addContestantBtn = document.getElementById('addContestant');
+  const contestantsDiv = document.getElementById('contestants');
+  const evContestant = document.getElementById('ev-contestant');
+  const evEp = document.getElementById('ev-ep');
+  const evResult = document.getElementById('ev-result');
+  const evNote = document.getElementById('ev-note');
+  const addEventBtn = document.getElementById('addEvent');
+  const removeLastBtn = document.getElementById('removeLast');
+  const importArea = document.getElementById('importArea');
+  const importBtn = document.getElementById('importJSONBtn');
+  const exportBtn = document.getElementById('exportJSON');
+  const exportPNG = document.getElementById('exportPNG');
+  const loadDemo = document.getElementById('loadDemo');
+  const clearImport = document.getElementById('clearImport');
+  const resetAll = document.getElementById('resetAll');
+  const maxEpSpan = document.getElementById('maxEp');
+
+  // helpers
+  function newId(){ return 'c_'+Math.random().toString(36).slice(2,9); }
+  function findById(id){ return state.contestants.find(c=>c.id===id); }
+  function getMaxEp(){
+    let max=0;
+    state.contestants.forEach(c=>{
+      c.events.forEach(e=>{ if (e.ep>max) max=e.ep; });
+    });
+    return max;
+  }
+
+  // rendering
+  function refreshContestantSelect(){
+    evContestant.innerHTML = '<option value="">-- choose contestant --</option>';
+    state.contestants.forEach(c=>{
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.name;
+      evContestant.appendChild(opt);
+    });
+  }
+
+  function calcStats(c){
+    const stats = { wins:0, highs:0, safes:0, lows:0, bottoms:0, lipsWon:0, lipsLost:0, eliminated: null };
+    c.events.forEach(ev=>{
+      if (ev.result === 'win') stats.wins++;
+      if (ev.result === 'high') stats.highs++;
+      if (ev.result === 'safe') stats.safes++;
+      if (ev.result === 'low') stats.lows++;
+      if (ev.result === 'bottom') stats.bottoms++;
+      if (ev.result === 'lip-win') stats.lipsWon++;
+      if (ev.result === 'lip-sync') stats.lipsLost++;
+      if (ev.result === 'elim') stats.eliminated = ev.ep;
+    });
+    return stats;
+  }
+
+  function render(){
+    contestantsDiv.innerHTML = '';
+    const maxEp = getMaxEp();
+    maxEpSpan.textContent = maxEp;
+    state.contestants.forEach(c=>{
+      const card = document.createElement('div');
+      card.className = 'card-contestant';
+
+      const top = document.createElement('div');
+      top.className = 'card-top';
+
+      const img = document.createElement('img');
+      img.src = c.image || 'https://via.placeholder.com/200x200?text=No+Image';
+      img.alt = c.name;
+
+      const txt = document.createElement('div');
+      txt.style.flex='1';
+      txt.innerHTML = `<div class="card-name">${c.name}</div><div class="muted" style="font-size:0.85rem">${c.events.length} events</div>`;
+
+      // edit / delete small buttons
+      const buttons = document.createElement('div');
+      buttons.style.display='flex';
+      buttons.style.flexDirection='column';
+      buttons.style.gap='6px';
+      const editBtn = document.createElement('button');
+      editBtn.textContent='Edit';
+      editBtn.className='small';
+      editBtn.onclick = ()=> editContestant(c.id);
+      const delBtn = document.createElement('button');
+      delBtn.textContent='Delete';
+      delBtn.className='small';
+      delBtn.onclick = ()=> {
+        if (!confirm('Remove this contestant?')) return;
+        state.contestants = state.contestants.filter(x=>x.id!==c.id);
+        refreshContestantSelect(); render();
+      };
+      buttons.appendChild(editBtn); buttons.appendChild(delBtn);
+
+      top.appendChild(img); top.appendChild(txt); top.appendChild(buttons);
+      card.appendChild(top);
+
+      // stats
+      const stats = calcStats(c);
+      const statsWrap = document.createElement('div');
+      statsWrap.className='stats';
+      statsWrap.innerHTML = `
+        <div class="stat">Wins: ${stats.wins}</div>
+        <div class="stat">Highs: ${stats.highs}</div>
+        <div class="stat">Lows: ${stats.lows}</div>
+        <div class="stat">Bottoms: ${stats.bottoms}</div>
+        <div class="stat">Lip Wins: ${stats.lipsWon}</div>
+        <div class="stat">Elim: ${stats.eliminated || '-'}</div>
+      `;
+      card.appendChild(statsWrap);
+
+      // timeline (1..maxEp)
+      const timeline = document.createElement('div');
+      timeline.className='timeline';
+      for (let e=1;e<=maxEp;e++){
+        const span = document.createElement('div');
+        span.className='ep';
+        const ev = c.events.find(x=>x.ep===e);
+        if (!ev) { span.classList.add('safe'); span.textContent = e; }
+        else {
+          span.textContent = e;
+          if (ev.result==='win') span.classList.add('win');
+          else if (ev.result==='high') span.classList.add('high');
+          else if (ev.result==='safe') span.classList.add('safe');
+          else if (ev.result==='low') span.classList.add('low');
+          else if (ev.result==='bottom') span.classList.add('bottom');
+          else if (ev.result==='lip-win') span.classList.add('lsfy');
+          else if (ev.result==='lip-sync') span.classList.add('ep','elim'); // lip sync lost treated as elimination-looking
+          else if (ev.result==='elim') span.classList.add('elim');
+        }
+        // note tooltip
+        if (ev && ev.note) span.title = ev.note;
+        timeline.appendChild(span);
+      }
+      card.appendChild(timeline);
+
+      contestantsDiv.appendChild(card);
+    });
+
+    refreshContestantSelect();
+    saveLocal();
+  }
+
+  // actions
+  addContestantBtn.addEventListener('click', () => {
+    const name = qName.value.trim();
+    if (!name) return alert('Name required');
+    const image = qImage.value.trim();
+    const newC = { id: newId(), name, image, events: [] };
+    state.contestants.push(newC);
+    qName.value=''; qImage.value='';
+    render();
+  });
+
+  function editContestant(id){
+    const c = findById(id);
+    if (!c) return;
+    const newName = prompt('Edit name', c.name);
+    if (newName===null) return;
+    c.name = newName || c.name;
+    const newImg = prompt('Edit image URL (leave blank to keep)', c.image || '');
+    if (newImg!==null) c.image = newImg || c.image;
+    render();
+  }
+
+  addEventBtn.addEventListener('click', () => {
+    const cid = evContestant.value;
+    if (!cid) return alert('Choose contestant');
+    const ep = parseInt(evEp.value,10);
+    if (!ep || ep < 1) return alert('Enter episode number >=1');
+    const result = evResult.value;
+    const note = evNote.value.trim();
+    const contestant = findById(cid);
+    // replace existing event for same episode
+    contestant.events = contestant.events.filter(ev=>ev.ep!==ep);
+    contestant.events.push({ ep, result, note });
+    // keep events sorted
+    contestant.events.sort((a,b)=>a.ep-b.ep);
+    evEp.value=''; evNote.value='';
+    render();
+  });
+
+  removeLastBtn.addEventListener('click', () => {
+    // Undo last event globally
+    let last = null;
+    state.contestants.forEach(c => {
+      c.events.forEach(ev => {
+        if (!last || ev.ep > last.ep || (ev.ep===last.ep && c.id>last.cid)) {
+          last = { ev, cid: c.id };
+        }
+      });
+    });
+    if (!last) return alert('No events to undo');
+    const c = findById(last.cid);
+    c.events = c.events.filter(e => e !== last.ev);
+    render();
+  });
+
+  // import / export
+  exportBtn.addEventListener('click', () => {
+    const json = JSON.stringify(state, null, 2);
+    const blob = new Blob([json], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'trackrecord.json'; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  importBtn.addEventListener('click', ()=> {
+    const txt = importArea.value.trim();
+    if (!txt) return alert('Paste JSON in the import area first');
+    try {
+      const data = JSON.parse(txt);
+      if (!data || !Array.isArray(data.contestants)) {
+        // allow both forms: { contestants: [...] } or [...]
+        if (Array.isArray(data)) state.contestants = data;
+        else if (data.contestants) state.contestants = data.contestants;
+        else throw new Error('Invalid format');
+      } else state.contestants = data.contestants;
+      render();
+      alert('Imported');
+    } catch(e){
+      alert('Invalid JSON: '+e.message);
+    }
+  });
+
+  clearImport.addEventListener('click', ()=> importArea.value='');
+  resetAll.addEventListener('click', ()=> {
+    if (!confirm('Clear all contestants & events?')) return;
+    state.contestants = []; render();
+  });
+
+  loadDemo.addEventListener('click', ()=> {
+    // small demo data
+    state.contestants = [
+      { id:newId(), name:'Astra Night', image:'https://via.placeholder.com/200?text=Astra', events:[ {ep:1,result:'high'},{ep:2,result:'win'},{ep:3,result:'bottom'},{ep:4,result:'elim'} ] },
+      { id:newId(), name:'Bella Noir', image:'https://via.placeholder.com/200?text=Bella', events:[ {ep:1,result:'win'},{ep:2,result:'high'},{ep:3,result:'high'},{ep:4,result:'safe'} ] },
+      { id:newId(), name:'Carmen Royale', image:'https://via.placeholder.com/200?text=Carmen', events:[ {ep:1,result:'low'},{ep:2,result:'bottom'},{ep:3,result:'lip-win'},{ep:4,result:'safe'} ] }
+    ];
+    render();
+  });
+
+  // export as PNG
+  exportPNG.addEventListener('click', ()=> {
+    const el = document.getElementById('trackExport');
+    // temporarily make background white-ish for PNG if desired (optional)
+    html2canvas(el, { scale:2, useCORS:true }).then(canvas=>{
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'trackrecord.png';
+      a.click();
+    }).catch(err=> alert('Export failed: '+err.message));
+  });
+
+  // local saving for convenience
+  function saveLocal(){
+    try{ localStorage.setItem('tr_state', JSON.stringify(state)); }catch(e){}
+  }
+  function loadLocal(){
+    try{
+      const raw = localStorage.getItem('tr_state');
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (data && Array.isArray(data.contestants)) { state.contestants = data.contestants; }
+    }catch(e){}
+  }
+  loadLocal();
+  render();
+
+  </script>
+</body>
+</html>

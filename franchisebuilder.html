@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franchise Builder - Esoteric Simulator</title>
+    <link rel="stylesheet" href="css/style.light.css">
+    <link rel="icon" href="image/logodiscord.png">
+    <script src="javascript/index.js" defer></script>
+    <script src="https://kit.fontawesome.com/65fd17a1f9.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .builder-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3em;
+            text-align: center;
+            margin: 20px 0 10px 0;
+            color: #ff0099;
+            text-shadow: 2px 2px 5px #000;
+        }
+        .builder-description {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .franchise-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .franchise-tab {
+            background: #ffccff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            text-align: center;
+            min-width: 140px;
+        }
+        .franchise-tab.active {
+            background: #ff66cc;
+            color: #fff;
+        }
+        .add-franchise-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .add-franchise-section input {
+            padding: 5px 10px;
+            font-size: 1em;
+        }
+        .add-franchise-section button {
+            padding: 5px 15px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .season-panel {
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+        .add-season-section {
+            background: #ffe6f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .season-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .season-button {
+            background: #ff99cc;
+            color: #000;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 150px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .season-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            opacity: 0.4;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .season-button span {
+            position: relative;
+            z-index: 2;
+        }
+        .cast-length {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+<header id="header" class="header">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="image/logodiscord.png" alt="">
+          <h1>Esoteric Simulator</h1>
+        </a>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="predef.html">Predefined Casts</a></li>
+            <li><a href="custom.html" class="active">Custom</a></li>
+            <li><a href="https://forms.gle/yM4fWVpARyArTKKi8" target=_blank>Suggest Songs</a></li>
+            <li><a href="https://discord.gg/kQ8QdpQs" target=_blank>Discord Server</a></li>
+          </ul>
+        </nav>
+  </div>
+</header>
+
+<h1 class="builder-title">FRANCHISE BUILDER / MAKER</h1>
+<p class="builder-description">Create, manage and save custom Drag Race-style franchises and seasons. Build casts, pick formats, and simulate seamlessly.</p>
+
+<div class="add-franchise-section">
+    <input type="text" id="franchiseNameInput" placeholder="Enter custom franchise">
+    <button id="createFranchiseBtn">Create Franchise</button>
+</div>
+
+<div class="franchise-tabs" id="franchiseTabs">
+    <!-- Franchise tabs will appear here -->
+</div>
+
+<div class="season-panel" id="seasonPanel">
+    <!-- Add Season Section -->
+    <div class="add-season-section" id="addSeasonSection" style="display:none;">
+        <p><strong>Season <span id="seasonNumber">1</span> | Cast Length: <span id="castLength">0</span></strong></p>
+        <div>
+            <input type="text" id="posterUrl" placeholder="Optional Poster URL">
+        </div>
+<div>
+    <label for="queenSearch">Select Queens:</label>
+    <input type="search" id="queenSearch" placeholder="Type a queen's name...">
+    <button id="randomQueenBtn" style="margin-left:5px;">🎲 Random Queen</button>
+    <div id="queenList" style="max-height:200px;overflow-y:auto;"></div>
+</div>
+
+<div>
+    <h3>Current Cast: <span id="currentCastCount">0 queens</span></h3>
+    <div id="currentCast" class="current-cast-grid"></div>
+</div>
+        <div>
+            <label for="formatSelect">Season Format:</label>
+            <select id="formatSelect"></select>
+        </div>
+        <div>
+            <label for="finaleSelect">Finale Format:</label>
+            <select id="finaleSelect"></select>
+        </div>
+        <div>
+            <label for="returningSelect">Returning Format:</label>
+            <select id="returningSelect"></select>
+        </div>
+        <div style="margin-top:10px;">
+            <button id="saveSeasonBtn">Save Season</button>
+            <button id="simulateSeasonBtn">Simulate Season</button>
+            <button id="deleteSeasonBtn">Delete Season</button>
+            <button id="backToSeasonsBtn" style="margin-top:10px; display:none;">← Back to Seasons</button>
+            <button id="cancelSeasonBtn" style="margin-top:10px;">✖ Cancel</button> <!-- New cancel button -->
+        </div>
+    </div>
+    <div class="season-buttons" id="seasonButtons">
+        <!-- Seasons buttons will appear here -->
+    </div>
+</div>
+
+<script src="javascript/franchisebuilder.js" defer></script>
+</body>
+</html>
