@@ -923,7 +923,7 @@ function snatchGame() {
     queensPerformances();
     isDesignChallenge = false;
     snatchCounter = true;
-    episodeChallenges.push("Snatch");
+    episodeChallenges.push("Snatch Game");
 }
 class Rusical {
     generateDescription() {
@@ -2044,11 +2044,11 @@ function createChallenge(challenges, miniChallengeScreen) {
         miniChallengeScreen.createButton("Proceed", "lipsyncChallenge()");
     }
     //snatch game for +12 cast
-    else if ( all_winners && episodeCount == 2 || totalCastSize >= 30 && (currentCast.length == 10 || currentCast.length == 8) && (lftc || canFinale || teamsF || top4 || top5 || juryt5 || top8 || top8lftc || allstars3Finale) && !snatchCounter && (team || mudrakels) || totalCastSize >= 12 && currentCast.length == 9 && (top3 || top2F || allstars3Finale) && !snatchCounter) {
+    else if ( all_winners && episodeCount == 2 || totalCastSize >= 12 && (currentCast.length == 10 || currentCast.length == 8) && (lftc || canFinale || teamsF || top4 || top5 || juryt5 || top8 || top8lftc || allstars3Finale) && !snatchCounter && (team || mudrakels) || totalCastSize >= 12 && currentCast.length == 9 && (top3 || top2F || allstars3Finale) && !snatchCounter) {
         miniChallengeScreen.createButton("Proceed", "snatchGame()");
     }
     //snatch game for -12 cast
-    else if (totalCastSize < 12 && currentCast.length == 6 && !snatchCounter && (lipsync_assassin) || totalCastSize < 30 && currentCast.length == randomNumber(7, 9) && !snatchCounter && (team || mudrakels) || totalCastSize < 12 && currentCast.length == 7 && !snatchCounter && (team || mudrakels) || totalCastSize >= 6 && currentCast.length == 5 && (team || mudrakels)) {
+    else if (totalCastSize < 12 && currentCast.length == 6 && !snatchCounter && (lipsync_assassin) || totalCastSize < 12 && currentCast.length == randomNumber(7, 9) && !snatchCounter && (team || mudrakels) || totalCastSize < 12 && currentCast.length == 7 && !snatchCounter && (team || mudrakels) || totalCastSize >= 6 && currentCast.length == 5 && (team || mudrakels)) {
         miniChallengeScreen.createButton("Proceed", "snatchGame()");
     }
     //the ball for +12 casts or all winners
@@ -2056,15 +2056,15 @@ function createChallenge(challenges, miniChallengeScreen) {
         miniChallengeScreen.createButton("Proceed", "ball()");
     }
     //the ball for -12 casts
-    else if (totalCastSize < 30 && (currentCast.length == 8 && randomNumber(0, 100) <= 10 && !ballCounter || currentCast.length == 5 && top4 && !ballCounter || currentCast.length == 4 && top3 && !ballCounter || currentCast.length == 3 && top2F && !ballCounter)) {
+    else if (totalCastSize < 12 && (currentCast.length == 8 && randomNumber(0, 100) <= 10 && !ballCounter || currentCast.length == 5 && top4 && !ballCounter || currentCast.length == 4 && top3 && !ballCounter || currentCast.length == 3 && top2F && !ballCounter)) {
         miniChallengeScreen.createButton("Proceed", "ball()");
     }
     //Girl Group
-    else if (totalCastSize >= 30 && (currentCast.length == 8 || currentCast.length == 9) && !girlGroupCounter && randomNumber(0, 100) >= 50 && !kittyGirlGroup && !attentionGGroup || totalCastSize < 12 && currentCast.length == 6 && !girlGroupCounter && !kittyGirlGroup && !attentionGGroup && randomNumber(0, 100) >= 50) {
+    else if (totalCastSize >= 12 && (currentCast.length == 8 || currentCast.length == 9) && !girlGroupCounter && randomNumber(0, 100) >= 50 && !kittyGirlGroup && !attentionGGroup || totalCastSize < 12 && currentCast.length == 6 && !girlGroupCounter && !kittyGirlGroup && !attentionGGroup && randomNumber(0, 100) >= 50) {
         miniChallengeScreen.createButton("Proceed", "girlgroup()");
     }
     //rusical
-    else if (totalCastSize >= 30 && (currentCast.length == 11 || currentCast.length == 9) && !rusicalCounter && randomNumber(0, 100) >= 50 || totalCastSize < 12 && currentCast.length == 7 && !rusicalCounter  && randomNumber(0, 100) >= 50 || currentCast.length > 5 && randomNumber(0, 20) >= 19 && (team || mudrakels) && !rusicalCounter) {
+    else if (totalCastSize >= 12 && (currentCast.length == 11 || currentCast.length == 9) && !rusicalCounter && randomNumber(0, 100) >= 50 || totalCastSize < 12 && currentCast.length == 7 && !rusicalCounter  && randomNumber(0, 100) >= 50 || currentCast.length > 5 && randomNumber(0, 20) >= 19 && (team || mudrakels) && !rusicalCounter) {
         miniChallengeScreen.createButton("Proceed", "rusical()");
     }
     //makeover
@@ -14896,6 +14896,51 @@ function awLipsyncJudging(giveAway) {
     }
     screen.createButton("Proceed", "untucked()");
 }
+class GuestJudge {
+    constructor(name, image = "noimage", custom = false) {
+        this._name = name;
+
+        if (image == "noimage") {
+            this.image = "image/SpecielGuestJudges/noimage.jpg";
+        } else if (custom) {
+            this.image = image;
+        } else {
+            this.image = "image/SpecielGuestJudges/" + image + ".webp";
+        }
+    }
+
+    getName() {
+        return this._name;
+    }
+}
+let kimk = new GuestJudge("Kim Kardashian", "KimKardashian");
+let oliviarodrigo = new GuestJudge("Olivia Rodrigo", "OliviaRodrigo");
+let sydneysw = new GuestJudge("Sydney Sweeney", "SydneySweeney");
+let alexademie = new GuestJudge("Alexa Demie", "AlexaDemie");
+let beyonce = new GuestJudge("Beyonce", "Beyonce");
+let arianag = new GuestJudge("Ariana Grande", "ArianaGrande");
+let britneys = new GuestJudge("Britney Spears", "BritneySpears");
+let cher = new GuestJudge("Cher", "Cher");
+let christinaa = new GuestJudge("Christina Aguilera", "ChristinaAguilera");
+let dovecam = new GuestJudge("Dove Cameron", "DoveCameron");
+let katyperry = new GuestJudge("Katy Perry", "KatyPerry");
+let khloek = new GuestJudge("Khloe Kardashian", "KhloeKardashian");
+let mariahca = new GuestJudge("Mariah Carey", "MariahCarey");
+let melaniem = new GuestJudge("Melanie Martinez", "MelanieMartinez");
+let taylors = new GuestJudge("Taylor Swift", "TaylorSwift");
+let jlo = new GuestJudge("Jennifer Lopez", "Jlo");
+let bebere = new GuestJudge("Bebe Rexha", "BebeRexha");
+let beckyg = new GuestJudge("Becky G", "BeckyG");
+let cardib = new GuestJudge("Cardi-B", "CardiB");
+let latoya = new GuestJudge("La Toya Jackson", "LaToyaJackson");
+let samsmith = new GuestJudge("Sam Smith", "SamSmith");
+let teyana = new GuestJudge("Teyana Taylor", "TeyanaTaylor");
+let whitneyc = new GuestJudge("Whitney Cummings", "WhitneyCummings");
+
+let sgjudges = [
+    kimk, oliviarodrigo, sydneysw, alexademie, beyonce, arianag, britneys, cher, christinaa, dovecam, katyperry, khloek,
+    mariahca, melaniem, taylors, jlo, bebere, beckyg, cardib, latoya, samsmith, teyana, whitneyc
+];
 class Gjudges {
     constructor(name, acting, comedy, dance, design, improv, runway, lipsync, image = "noimage", custom = false) {
         this.trackRecord = [];
@@ -20690,108 +20735,24 @@ let snatchToDo = [
   "Sydney Sweeney",
   "Alexa Demie",
   "Beyonce",
-  "Christina Aguilera",
-  "Emily Alyn Lind",
-  "Jennifer Tilly",
-  "Cher",
-  "Jojo Siwa",
-  "Katy Perry",
-  "Mariah Carey",
-  "Jennifer Lopez",
   "Ariana Grande",
   "Britney Spears",
+  "Cher",
+  "Christina Aguilera",
+  "Dove Cameron",
+  "Jennifer Lopez",
+  "Katy Perry",
+  "Khloe Kardashian",
+  "Mariah Carey",
   "Melanie Martinez",
   "Taylor Swift",
-  "Dove Cameron",
-  "Khloe Kardashian",
-  "Pangina Heals",
-  "Barbie Breakout",
-  "Paolo Ballesteros",
-  "Priscilla",
-  "Robert Fux",
-  "Supremme De Luxe",
-  "Dracmorda Boulet",
-  "Swanthula Boulet",
-  "Fred Van Leer",
-  "Sassa Gurl",
-  "Sabrina Carpenter",
-  "Kelly Hyland",
-  "Rihanna",
-  "Nicki Minaj",
-  "Cardi B",
-  "Doja Cat",
-  "Zendaya",
-  "Billie Eilish",
-  "Selena Gomez",
-  "Demi Lovato",
-  "Madonna",
-  "Lady Gaga",
-  "Fergie",
-  "Lana Del Rey",
-  "Kylie Minogue",
-  "Dua Lipa",
-  "SZA",
-  "Charli XCX",
-  "Rina Sawayama",
-  "Chappell Roan",
-  "Madison Beer",
-  "Sofia Carson",
-  "Margot Robbie",
-  "Angelina Jolie",
-  "Anne Hathaway",
-  "Natalie Portman",
-  "Miley Cyrus",
-  "Gal Gadot",
-  "Jessica Chastain",
-  "Amy Poehler",
-  "Melissa McCarthy",
-  "Anna Kendrick",
-  "Alicia Keys",
-  "Shakira",
-  "Adele",
-  "Harry Styles",
-  "Shawn Mendes",
-  "Justin Bieber",
-  "Drake",
-  "Bruno Mars",
+  "Bebe Rexha",
+  "Becky G",
+  "La Toya Jackson",
   "Sam Smith",
-  "Timothée Chalamet",
-  "Chris Hemsworth",
-  "Ryan Gosling",
-  "Ryan Reynolds",
-  "Tom Holland",
-  "Zayn Malik",
-  "Joe Jonas",
-  "Nick Jonas",
-  "Adam Lambert",
-  "Conan Gray",
-  "Bad Bunny",
-  "Jungkook",
-  "Taehyung",
-  "RM",
-  "Suga",
-  "J-Hope",
-  "Henry Cavill",
-  "Michael B. Jordan",
-  "Pedro Pascal",
-  "Chris Evans",
-  "Robert Downey Jr.",
-  "Brad Pitt",
-  "Will Smith",
-  "Dwayne Johnson",
-  "John Cena",
-  "Leonardo DiCaprio",
-  "Johnny Depp",
-  "Tom Cruise",
-  "James McAvoy",
-  "Jamie Foxx",
-  "Nicolas Cage",
-  "Matthew McConaughey",
-  "Chris Pratt",
-  "Vin Diesel",
-  "Bretman Rock",
-  "Markiplier",
-  "MatPat"
+  "Teyana Taylor",
+  "Whitney Cummings",
+  "Cardi-B"
 ];
 let panelS = [
     "Ts Madison",
@@ -20888,9 +20849,9 @@ function Judge() {
 	screen.createHorizontalLine();
     let snatch = randomNumber(0, snatchToDo.length - 1);
     screen.createBold(`${snatchToDo[snatch]}!!`);
-	for (let i = 0; i < judges.length; i++) {
-		if(snatchToDo[snatch]==judges[i].getName()) {
-			screen.createImage(judges[i].image);
+	for (let i = 0; i < sgjudges.length; i++) {
+		if(snatchToDo[snatch]==sgjudges[i].getName()) {
+			screen.createImage(sgjudges[i].image);
 		}
     }
 	screen.createHorizontalLine();
