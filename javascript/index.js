@@ -2359,6 +2359,7 @@ if (image.startsWith("data:image/")) {
   // 💾 Save to localStorage
   let allCustomQueens = JSON.parse(localStorage.getItem("customQueens")) || [];
   allCustomQueens.push(newQueen);
+  MQueens.push(newQueen);
   localStorage.setItem("customQueens", JSON.stringify(allCustomQueens));
 
   // 💬 Confirmation message
@@ -15134,6 +15135,234 @@ let judges = [
   // 🪩 Drag Race staples
   rupaulhost
 ];
+class MQueen {
+    constructor(name, acting, comedy, dance, design, improv, runway, lipsync, image = "noimage", custom = false) {
+        this.trackRecord = [];
+        this.friends = [];
+        this.allies = [];
+        this.enemies = [];
+        this.sisters = [];
+        this.miniEpisode = [];
+        this.gftdS = [];
+        this.tCaptain = [];
+        this.voteHerstory = [];
+        this.immuneEp = [];
+        this.runwayScore = 0;
+        this.lipsyncScore = 0;
+        this.performanceScore = 0;
+        this.finaleScore = 0;
+        this.favoritism = 0;
+        this.unfavoritism = 0;
+        this.ppe = 0;
+        this.stars = 0;
+        this.episodesOn = 0;
+        this.votes = 0;
+        this.rankP = 0;
+        this.retEp = 0;
+        this.ogPlace = 0;
+        this.minqdd = 0;
+        this.blocked = false;
+        this.queenDisqOrDept = false;
+        this.customqueen = false;
+        this.immune = false;
+        this.immPotion = false;
+        this.chocolate = false;
+        this.badonka = false;
+        this.maxiT = false;
+        this._name = name;
+        this._actingStat = acting;
+        this._comedyStat = comedy;
+        this._danceStat = dance;
+        this._designStat = design;
+        this._improvStat = improv;
+        this._runwayStat = runway;
+        this._lipsyncStat = lipsync;
+        if (image == "noimage") {
+            this.image = "image/queens/noimage.jpg";
+        } else if (custom == true) {
+            this.image = image;
+        } else {
+            this.image = "image/queens/others/" + image + ".webp";
+        }
+    }
+    _calculateScores(min, max, stat = 0) {
+        let score = randomNumber(min, max);
+        return score - stat;
+    }
+    getName() {
+        return this._name;
+    }
+    getLipSyncStat() {
+        return this._lipsyncStat;
+    }
+    getActing() {
+        this.performanceScore = this._calculateScores(15, 35, this._actingStat);
+    }
+    getComedy() {
+        this.performanceScore = this._calculateScores(15, 35, this._comedyStat);
+    }
+    getMarketing() {
+        this.performanceScore = this._calculateScores(25, 45, this._comedyStat + this._actingStat);
+    }
+    getDance() {
+        this.performanceScore = this._calculateScores(15, 35, this._danceStat);
+    }
+    getDesign() {
+        this.performanceScore = this._calculateScores(15, 35, this._designStat);
+    }
+    getRunwayChallenge() {
+        this.performanceScore = this._calculateScores(15, 35, this._runwayStat);
+    }
+    getImprov() {
+        this.performanceScore = this._calculateScores(15, 35, this._improvStat);
+    }
+    //special 'gets':
+    getSnatch() {
+        this.performanceScore = this._calculateScores(25, 45, this._improvStat + this._comedyStat);
+    }
+    getRusical() {
+        this.performanceScore = this._calculateScores(25, 45, this._danceStat + this._lipsyncStat);
+    }
+    getBall() {
+        this.performanceScore = this._calculateScores(25, 45, this._designStat + this._runwayStat);
+    }
+    getRumix() {
+        this.performanceScore = this._calculateScores(25, 45, this._danceStat + this._improvStat);
+    }
+    getTalentShow() {
+        this.performanceScore = this._calculateScores(15, 35, randomNumber(1, 35));
+    }
+    getFinale() {
+        this.finaleScore = this.favoritism - this.unfavoritism;
+    }
+    getRunway() {
+        this.runwayScore = this._calculateScores(12, 35, this._runwayStat);
+    }
+    getLipsync() {
+        this.lipsyncScore = this._calculateScores(0, this._lipsyncStat, this.unfavoritism) + this.favoritism;
+    }
+    getASLipsync() {
+        this.lipsyncScore = this._calculateScores(0, this._lipsyncStat);
+    }
+    addToTrackRecord(placement) {
+        this.trackRecord.push(placement);
+    }
+    editTrackRecord(added) {
+        this.trackRecord[this.trackRecord.length - 1] += added;
+    }
+}
+//DRAG DEN SEASON 1
+let aries = new MQueen("Aries Night", 7, 7, 7, 7, 7, 7, 7, "AriesNight");
+let barbieQ = new MQueen("Barbie-Q", 7, 7, 7, 7, 7, 7, 7, "Barbie-Q");
+let lgagita = new MQueen("Lady Gagita", 7, 7, 7, 7, 7, 7, 7, "LadyGagita");
+let mcris = new MQueen("Maria Cristina", 7, 7, 7, 7, 7, 7, 7, "MariaCristina");
+let naia = new MQueen("Naia", 9, 10, 8, 6, 10, 9, 12, "NAIA");
+let oa = new MQueen("O-A", 7, 7, 7, 7, 7, 7, 7, "O-A");
+let pura = new MQueen("Pura Luka Vega", 7, 7, 7, 7, 7, 7, 7, "PuraLukaVega");
+let shewarma = new MQueen("Shewarma", 6, 9, 8, 7, 8, 10, 8, "Shewarma");
+let dragden_1 = [aries, barbieQ, lgagita, mcris, naia, oa, pura, shewarma];
+//DRAG DEN SEASON 2
+let dejad = new MQueen("Deja", 7, 7, 7, 7, 7, 7, 7, "Dejad");
+let elvira = new MQueen("Elvira", 7, 7, 7, 7, 7, 7, 7, "Elvira");
+let feyvah = new MQueen("Feyvah Fatale", 7, 7, 7, 7, 7, 7, 7, "FeyvahFatale");
+let jean = new MQueen("Jean Villogue", 7, 7, 7, 7, 7, 7, 7, "JeanVilogue");
+let margaux = new MQueen("Margaux", 7, 7, 7, 7, 7, 7, 7, "Margaux");
+let mlava = new MQueen("Maria Lava", 7, 7, 7, 7, 7, 7, 7, "MariaLava");
+let marlyn = new MQueen("Marlyn", 10, 4, 8, 8, 4, 8, 9, "Marlyn");
+let moi = new MQueen("Moi", 7, 7, 7, 7, 7, 7, 7, "Moi");
+let tan = new MQueen("Mrs. Tan", 7, 7, 7, 7, 7, 7, 7, "MrsTan");
+let russia = new MQueen("Russia Fox", 7, 7, 7, 7, 7, 7, 7, "RussiaFox");
+let dragden_2 = [dejad, elvira, feyvah, jean, margaux, mlava, marlyn, moi, tan, russia];
+//MUDRAKELS
+let collision = new MQueen("Collision Course", 7, 7, 7, 7, 7, 7, 7, "CollisionCourse");
+let gorgeous = new MQueen("Gorgeous Dawn", 7, 7, 7, 7, 7, 7, 7, "GorgeousDawn");
+let lumina = new MQueen("Lumina Klum", 7, 7, 7, 7, 7, 7, 7, "LuminaKlum");
+let mimid = new MQueen("Mimi The Doll", 7, 7, 7, 7, 7, 7, 7, "MimiTheDoll");
+//LA MAS DRAGA SEASON 1
+let barbara = new MQueen("Barbara Durango", 7, 7, 7, 7, 7, 7, 7, "BárbaraDurango");
+let cordelia = new MQueen("Cordelia Durango", 7, 7, 7, 7, 7, 7, 7, "CordeliaDurango");
+let deborah = new MQueen("Deborah La Grande", 7, 7, 7, 7, 7, 7, 7, "DeborahLaGrande");
+let debramen = new MQueen("Debra Men", 7, 7, 7, 7, 7, 7, 7, "DebraMen");
+let lanalmd = new MQueen("Lana", 7, 7, 7, 7, 7, 7, 7, "Lana");
+//LA MAS DRAGA SEASON 2
+let alexis3xl = new MQueen("Alexis 3XL", 7, 7, 7, 7, 7, 7, 7, "Alexis3XL");
+let amelia = new MQueen("Amelia Waldorlf", 7, 7, 7, 7, 7, 7, 7, "AmeliaWaldorlf");
+let gvajardo = new MQueen("Gvajardo", 7, 7, 7, 7, 7, 7, 7, "Gvajardo");
+let jobstar = new MQueen("Job Star", 7, 7, 7, 7, 7, 7, 7, "JobStar");
+let leandra = new MQueen("Leandra Rose", 7, 7, 7, 7, 7, 7, 7, "LeandraRose");
+let redrabbitduo = new MQueen("Red Rabbit Duo", 7, 7, 7, 7, 7, 7, 7, "RedRabbitDuo");
+let sophiaj = new MQueen("Sophia Jiménez", 7, 7, 7, 7, 7, 7, 7, "SophiaJimenez");
+let soro = new MQueen("Soro Nasty", 7, 7, 7, 7, 7, 7, 7, "SoroNasty");
+//LA MAS DRAGA SEASON 3
+let aviesc = new MQueen("Aviesc Who?", 7, 7, 7, 7, 7, 7, 7, "AviescWho");
+let hunty = new MQueen("Hunty B", 7, 7, 7, 7, 7, 7, 7, "HuntyyB");
+let iviza = new MQueen("Iviza Lioza", 7, 7, 7, 7, 7, 7, 7, "IvizaLioza");
+let madisonbasrey = new MQueen("Madison Basrey", 7, 7, 7, 7, 7, 7, 7, "MadisonBasrey");
+let mista = new MQueen("Mista Boo", 7, 7, 7, 7, 7, 7, 7, "MistaBoo");
+let raga = new MQueen("Raga Diamante", 7, 7, 7, 7, 7, 7, 7, "RagaDiamante");
+let reginabronx = new MQueen("Regina Bronx", 7, 7, 7, 7, 7, 7, 7, "ReginaBronx");
+let rudy = new MQueen("Rudy Reyes", 7, 7, 7, 7, 7, 7, 7, "RudyReyes");
+let stupi = new MQueen("Stupi Drag", 7, 7, 7, 7, 7, 7, 7, "StupiDrag");
+let wynter = new MQueen("Wynter", 7, 7, 7, 7, 7, 7, 7, "Wynter");
+let yayoi = new MQueen("Yayoi Bowery", 7, 7, 7, 7, 7, 7, 7, "YayoiBowery");
+//LA MAS DRAGA SEASON 4
+let auwonders = new MQueen("Aurora Wonders", 7, 7, 7, 7, 7, 7, 7, "AuroraWonders");
+let cpher = new MQueen("C-Pher", 7, 7, 7, 7, 7, 7, 7, "C-Pher");
+let georgiana = new MQueen("Georgiana", 7, 7, 7, 7, 7, 7, 7, "Georgiana");
+let irisxc = new MQueen("Iris XC", 7, 7, 7, 7, 7, 7, 7, "IrisXC");
+let lacarrera = new MQueen("La Carrera", 7, 7, 7, 7, 7, 7, 7, "LaCarrera");
+let lamorra = new MQueen("La Morra Lisa", 7, 7, 7, 7, 7, 7, 7, "LaMorraLisa");
+let lupita = new MQueen("Lupita Kush", 7, 7, 7, 7, 7, 7, 7, "LupitaKush");
+let paper = new MQueen("Paper Cut", 7, 7, 7, 7, 7, 7, 7, "PaperCut");
+let rebel = new MQueen("Rebel Mörk", 7, 7, 7, 7, 7, 7, 7, "RebelMork");
+let sirenalmd = new MQueen("Sirena", 7, 7, 7, 7, 7, 7, 7, "Sirena");
+let tiresias = new MQueen("Tiresias", 7, 7, 7, 7, 7, 7, 7, "Tiresias");
+let veracruz = new MQueen("Vera Cruz", 7, 7, 7, 7, 7, 7, 7, "VeraCruz");
+//LA MAS DRAGA SEASON 5
+let aisha = new MQueen("Aisha Dollkills", 7, 7, 7, 7, 7, 7, 7, "AishaDollkills");
+let deseos = new MQueen("Deseos Fab", 7, 7, 7, 7, 7, 7, 7, "DeseosFab");
+let fifi = new MQueen("Fifi Estah", 7, 7, 7, 7, 7, 7, 7, "FifiEstah");
+let gretha = new MQueen("Gretha White", 7, 7, 7, 7, 7, 7, 7, "GrethaWhite");
+let hidden = new MQueen("Hidden Mistake", 7, 7, 7, 7, 7, 7, 7, "HiddenMistake");
+let huma = new MQueen("Huma Kyle", 7, 7, 7, 7, 7, 7, 7, "HumaKyle");
+let isaycat = new MQueen("Isabella y Catalina", 7, 7, 7, 7, 7, 7, 7, "IsabellayCatalina");
+let light = new MQueen("Light King", 7, 7, 7, 7, 7, 7, 7, "LightKing");
+let liza = new MQueen("Liza Zan Zuzzi", 7, 7, 7, 7, 7, 7, 7, "LizaZanZuzzi");
+let peke = new MQueen("Peke Balderas", 7, 7, 7, 7, 7, 7, 7, "PekeBalderas");
+let santa = new MQueen("Santa Lucia", 7, 7, 7, 7, 7, 7, 7, "SantaLucia");
+//LA MAS DRAGA SEASON 6
+let almvgler = new MQueen("Alexis Mvgler", 7, 7, 7, 7, 7, 7, 7, "AlexisMvgler");
+let ank = new MQueen("Ank Cosart", 7, 7, 7, 7, 7, 7, 7, "AnkCosart");
+let ariellmd = new MQueen("Ariel", 7, 7, 7, 7, 7, 7, 7, "Ariel");
+let arieslmd = new MQueen("Aries", 7, 7, 7, 7, 7, 7, 7, "Aries");
+let braulio = new MQueen("Braulio 8000", 7, 7, 7, 7, 7, 7, 7, "Braulio8000");
+let cattriona = new MQueen("Cattriona", 7, 7, 7, 7, 7, 7, 7, "Cattriona");
+let dimittra = new MQueen("Dimittra", 7, 7, 7, 7, 7, 7, 7, "Dimittra");
+let electraw = new MQueen("Electra Walpurgis", 7, 7, 7, 7, 7, 7, 7, "ElectraWalpurgis");
+let juana = new MQueen("Juana Guadalupe", 7, 7, 7, 7, 7, 7, 7, "JuanaGuadalupe");
+let kellylmd = new MQueen("Kelly", 7, 7, 7, 7, 7, 7, 7, "Kelly");
+let lakyliezz = new MQueen("La Kyliezz", 7, 7, 7, 7, 7, 7, 7, "LaKyliezz");
+let mizzpeaches = new MQueen("Mizz Peaches", 7, 7, 7, 7, 7, 7, 7, "MizzPeaches");
+let purga = new MQueen("Purga", 7, 7, 7, 7, 7, 7, 7, "Purga");
+let shantelle = new MQueen("Shantelle", 7, 7, 7, 7, 7, 7, 7, "Shantelle");
+//LA MAS DRAGA SEASON 7
+let axelle = new MQueen("Axelle De Vil", 7, 7, 7, 7, 7, 7, 7, "AxelleDeVil");
+let brighty = new MQueen("Brighty Stun", 7, 7, 7, 7, 7, 7, 7, "BrightyStun");
+let calypso = new MQueen("Calypso", 7, 7, 7, 7, 7, 7, 7, "Calypso");
+let candela = new MQueen("Candela Yeye", 7, 7, 7, 7, 7, 7, 7, "CandelaYeye");
+let caos = new MQueen("Caos Lascivia", 7, 7, 7, 7, 7, 7, 7, "CaosLascivia");
+let deetox = new MQueen("Deetox Alanis", 7, 7, 7, 7, 7, 7, 7, "Deetox");
+let greta = new MQueen("Greta Grimm", 7, 7, 7, 7, 7, 7, 7, "GretaGrimm");
+let konny = new MQueen("Konny Kortez", 7, 7, 7, 7, 7, 7, 7, "KonnyKortez");
+let moonlmd = new MQueen("Moon", 7, 7, 7, 7, 7, 7, 7, "Moon");
+let nayla = new MQueen("Nayla Downs", 7, 7, 7, 7, 7, 7, 7, "NaylaDowns");
+let oslo = new MQueen("Oslo", 7, 7, 7, 7, 7, 7, 7, "Oslo");
+let paty = new MQueen("Paty Piñata", 7, 7, 7, 7, 7, 7, 7, "PatyPinata");
+let ricura = new MQueen("Ricura Santana", 7, 7, 7, 7, 7, 7, 7, "RicuraSantana");
+let tulsa = new MQueen("Tulsa", 7, 7, 7, 7, 7, 7, 7, "Tulsa");
+//SOLO LAS MAS
+let velvetine = new MQueen("Velvetine", 7, 7, 7, 7, 7, 7, 7, "Velvetine");
+
 class Queen {
     constructor(name, acting, comedy, dance, design, improv, runway, lipsync, image = "noimage", custom = false) {
         this.trackRecord = [];
@@ -15345,7 +15574,7 @@ let jaidynn = new Queen("Jaidynn Diore Fierce", 9, 7, 8, 6, 6, 7, 11, "Jaidynn")
 let jasmine = new Queen("Jasmine Masters", 3, 4, 6, 5, 2, 7, 6, "Jasmine");
 let kandy = new Queen("Kandy Ho", 4, 4, 7, 5, 4, 7, 10, "KandyH");
 let katya = new Queen("Katya", 9, 12, 9, 7, 12, 10, 10, "Katya");
-let kennedy = new Queen("Kennedy Davenport", 9, 8, 10, 8, 11, 10, 14, "Kennedy");
+let kennedy = new Queen("Kennedy Davenport", 10, 10, 11, 8, 13, 7, 15, "Kennedy");
 let max = new Queen("Max", 10, 7, 5, 8, 4, 8, 5, "Max");
 let fame = new Queen("Miss Fame", 8, 4, 5, 11, 3, 10, 5, "MissFame");
 let kasha = new Queen("Mrs. Kasha Davis", 11, 8, 10, 7, 6, 9, 7, "Kasha");
@@ -15416,7 +15645,7 @@ let ninaw = new Queen("Nina West", 14, 11, 7, 9, 11, 9, 6, "NinaW");
 let plastique = new Queen("Plastique Tiara", 11, 10, 10, 15, 8, 15, 9, "Plastique");
 let rajah = new Queen("Ra'Jah O'Hara", 8, 8, 11, 12, 9, 12, 13, "Rajah");
 let scarlet = new Queen("Scarlet Envy", 13, 9, 6, 13, 9, 11, 8, "Scarlet");
-let shuga = new Queen("Shuga Cain", 10, 9, 7, 6, 7, 10, 7, "Shuga");
+let shuga = new Queen("Shuga Cain", 10, 9, 7, 7, 8, 11, 7, "Shuga");
 let silky = new Queen("Silky Nutmeg Ganache", 11, 11, 9, 9, 10, 9, 12, "Silky");
 let soju = new Queen("Soju", 4, 4, 4, 4, 4, 4, 4, "Soju");
 let yvie = new Queen("Yvie Oddly", 12, 7, 13, 12, 9, 12, 15, "Yvie");
@@ -15442,7 +15671,7 @@ let allstars_5 = [alexis, blair, derrick, india, jujubee, mariah, mayhem, miz, o
 let denali = new Queen("Denali", 4, 8, 14, 9, 10, 11, 13, "Denali");
 let elliott = new Queen("Elliott With 2 Ts", 5, 5, 12, 9, 3, 8, 11, "Elliott");
 let mik = new Queen("Gottmik", 9, 11, 7, 14, 14, 15, 9, "Gottmik");
-let joey = new Queen("Joey Jay", 6, 7, 6, 5, 5, 7, 7, "Joey");
+let joey = new Queen("Joey Jay", 8, 9, 8, 8, 9, 11, 7, "Joey");
 let kahmora = new Queen("Kahmora Hall", 3, 4, 3, 5, 4, 12, 4, "Kahmora");
 let kandym = new Queen("Kandy Muse", 11, 10, 10, 7, 8, 10, 14, "KandyM");
 let lala = new Queen("LaLa Ri", 6, 8, 13, 7, 10, 9, 14, "LaLa");
@@ -15461,7 +15690,7 @@ let angeria = new Queen("Angeria Paris VanMicheals", 13, 11, 10, 12, 9, 13, 11, 
 let bosco = new Queen("Bosco", 11, 12, 6, 7, 12, 11, 6, "Bosco");
 let daya = new Queen("Daya Betty", 9, 8, 9, 9, 10, 10, 8, "DayaBetty");
 let deja = new Queen("DeJa Skye", 9, 7, 9, 8, 13, 8, 8, "DeJa");
-let jasmineK = new Queen("Jasmine Kennedie", 7, 6, 13, 7, 6, 10, 14, "JasmineK");
+let jasmineK = new Queen("Jasmine Kennedie", 8, 6, 13, 9, 6, 11, 13, "JasmineK");
 let jorgeous = new Queen("Jorgeous", 9, 7, 15, 10, 6, 11, 15, "Jorgeous");
 let june = new Queen("June Jambalaya", 5, 6, 6, 4, 5, 6, 6, "June");
 let kerri = new Queen("Kerri Colby", 6, 6, 5, 5, 6, 9, 6, "Kerri");
@@ -15495,7 +15724,7 @@ let us_season15 = [amethyst, anetra, auraMayari, irene, jax, loosey, luxx, malay
 let amandaTori = new Queen("Amanda Tori Meating", 9, 7, 7, 7, 7, 7, 9, "AmandaToriMeating");
 let dawn = new Queen("Dawn", 10, 10, 10, 14, 10, 14, 8, "Dawn");
 let geneva = new Queen("Geneva Karr", 5, 7, 10, 6, 8, 8, 11, "GenevaKarr");
-let hershii = new Queen("Hershii LiqCour-Jeté", 4, 4, 4, 4, 4, 4, 4, "HershiiLiqCourJete");
+let hershii = new Queen("Hershii LiqCour-Jeté", 7, 8, 6, 3, 8, 6, 7, "HershiiLiqCourJete");
 let megami = new Queen("Megami", 9, 7, 10, 10, 9, 10, 12, "Megami");
 let mhiya = new Queen("Mhi'ya Iman LePaige", 8, 6, 9, 9, 9, 9, 15, "MhiyaImanLePaige");
 let mirage = new Queen("Mirage", 6, 7, 13, 7, 6, 10, 13, "Mirage");
@@ -15520,7 +15749,7 @@ let lexi = new Queen("Lexi Valentine L.", 9, 8, 13, 11, 7, 13, 13, "LexiLove");
 let lucky = new Queen("Lucky Starzzz", 6, 6, 6, 6, 6, 8, 7, "LuckyStarzzz");
 let lydia = new Queen("Lydia B Kollins", 9, 9, 10, 8, 9, 8, 12, "LydiaBKollins");
 let onya = new Queen("Onya Nurve", 14, 13, 10, 7, 12, 7, 8, "OnyaNurve");
-let samStar = new Queen("Sam Star", 11, 10, 10, 10, 10, 13, 9, "SamStar");
+let samStar = new Queen("Sam Star", 12, 11, 10, 14, 12, 13, 10, "SamStar");
 let suzie = new Queen("Suzie Toot", 13, 9, 11, 6, 8, 10, 12, "SuzieToot");
 let us_season17 = [acacia, arrietty, crystalE, hormona, jewels, joella, kori, lana, lexi, lucky, lydia, onya, samStar, suzie];
 //ALL STARS 10
@@ -16306,34 +16535,6 @@ let msistrata = new Queen("Miss Sistrata", 9, 8, 5, 6, 7, 7, 6, "MissSistrata");
 let taiga = new Queen("Taiga Brava", 10, 11, 12, 6, 11, 13, 11, "TaigaBrava");
 let trevor = new Queen("Trevor Ashley", 4, 6, 15, 6, 10, 9, 12, "TrevorAshley");
 let qotu_2 = [aura, chloev, jazell, love, maxie, militia, msistrata, taiga, trevor, viola];
-//DRAG DEN SEASON 1
-let aries = new Queen("Aries Night", 7, 7, 7, 7, 7, 7, 7, "AriesNight");
-let barbieQ = new Queen("Barbie-Q", 7, 7, 7, 7, 7, 7, 7, "Barbie-Q");
-let lgagita = new Queen("Lady Gagita", 7, 7, 7, 7, 7, 7, 7, "LadyGagita");
-let mcris = new Queen("Maria Cristina", 7, 7, 7, 7, 7, 7, 7, "MariaCristina");
-let naia = new Queen("Naia", 9, 10, 8, 6, 10, 9, 12, "NAIA");
-let oa = new Queen("O-A", 7, 7, 7, 7, 7, 7, 7, "O-A");
-let pura = new Queen("Pura Luka Vega", 7, 7, 7, 7, 7, 7, 7, "PuraLukaVega");
-let shewarma = new Queen("Shewarma", 6, 9, 8, 7, 8, 10, 8, "Shewarma");
-let dragden_1 = [aries, barbieQ, lgagita, mcris, naia, oa, pura, shewarma];
-//DRAG DEN SEASON 2
-let dejad = new Queen("Deja", 7, 7, 7, 7, 7, 7, 7, "Dejad");
-let elvira = new Queen("Elvira", 7, 7, 7, 7, 7, 7, 7, "Elvira");
-let feyvah = new Queen("Feyvah Fatale", 7, 7, 7, 7, 7, 7, 7, "FeyvahFatale");
-let jean = new Queen("Jean Villogue", 7, 7, 7, 7, 7, 7, 7, "JeanVilogue");
-let margaux = new Queen("Margaux", 7, 7, 7, 7, 7, 7, 7, "Margaux");
-let mlava = new Queen("Maria Lava", 7, 7, 7, 7, 7, 7, 7, "MariaLava");
-let marlyn = new Queen("Marlyn", 10, 4, 8, 8, 4, 8, 9, "Marlyn");
-let moi = new Queen("Moi", 7, 7, 7, 7, 7, 7, 7, "Moi");
-let tan = new Queen("Mrs. Tan", 7, 7, 7, 7, 7, 7, 7, "MrsTan");
-let russia = new Queen("Russia Fox", 7, 7, 7, 7, 7, 7, 7, "RussiaFox");
-let dragden_2 = [dejad, elvira, feyvah, jean, margaux, mlava, marlyn, moi, tan, russia];
-//MUDRAKELS
-let collision = new Queen("Collision Course", 7, 7, 7, 7, 7, 7, 7, "CollisionCourse");
-let gorgeous = new Queen("Gorgeous Dawn", 7, 7, 7, 7, 7, 7, 7, "GorgeousDawn");
-let lumina = new Queen("Lumina Klum", 7, 7, 7, 7, 7, 7, 7, "LuminaKlum");
-let mimid = new Queen("Mimi The Doll", 7, 7, 7, 7, 7, 7, 7, "MimiTheDoll");
-let mudrakelsshow = [arizona, collision, gorgeous, lumina, mimid, morgana, tan, pura];
 //SPECIAL 
 let pangina = new Queen("Pangina Heals", 9, 7, 14, 11, 8, 13, 14, "Pangina");
 let artarya = new Queen("Art Arya", 6, 7, 5, 7, 6, 7, 6, "ArtArya");
@@ -16361,6 +16562,9 @@ let phsr_1 = [arizona, bernie, brigiding, ivory, khianna, kittyS, yoko, siam, su
 let gas_1 = [alyssa, athena, eva, gala, kitty, kweenKong, miranda, nehellenia, pythia, soa, tessa, vanityVain];
 //Latina Royale
 let latr_1 = [alexis, barbie, desiree, elektraV, evaB, horacio, mariana, matraka, abby, regina, xunami];
+//PREDEF
+//MUDRAKELS
+let mudrakelsshow = [arizona, collision, gorgeous, lumina, mimid, morgana, tan, pura];
 //all possible queens:
 let allCustomQueens = [];
 if (localStorage.getItem("customQueens") != null) {
@@ -16454,6 +16658,14 @@ let allQueens = [
     dejad, elvira, feyvah, jean, margaux, mlava, marlyn, moi, tan, russia,
     collision, gorgeous, lumina, mimid,
     artarya, barbiebreakout, paolo, priscillahost, robert, rupaul, supremme, michellev, dracmorda, swanthula, fred, sassa,
+    barbara, cordelia, deborah, debramen, lanalmd,
+    alexis3xl, amelia, gvajardo, jobstar, leandra, redrabbitduo, sophiaj, soro,
+    aviesc, hunty, iviza, madisonbasrey, mista, raga, reginabronx, rudy, stupi, wynter, yayoi,
+    auwonders, cpher, georgiana, irisxc, lacarrera, lamorra, lupita, paper, rebel, sirenalmd, tiresias, veracruz,
+    aisha, deseos, fifi, gretha, hidden, huma, isaycat, light, liza, peke, santa,
+    almvgler, ank, ariellmd, arieslmd, braulio, cattriona, dimittra, electraw, juana, kellylmd, lakyliezz, mizzpeaches, purga, shantelle,
+    axelle, brighty, calypso, candela, caos, deetox, greta, konny, moonlmd, nayla, oslo, paty, ricura, tulsa,
+    velvetine,
     pangina 
 ].concat(allCustomQueens).sort((a, b) => a.getName().toLowerCase().localeCompare(b.getName().toLowerCase()));
 /*/Drag-Race-Simulator*/
@@ -24147,8 +24359,12 @@ chosenKweensContainer.addEventListener("click", (e) => {
     const mainFile = queenFound.image.split("/").pop().replace(".webp", "");
     const baseName = mainFile.split("_")[0]; // ensures we remove _1, _2 etc.
 
-    const defaultImage = `image/queens/${baseName}.webp`;
-    const altBase = `image/queens/alt/${baseName}`;
+const folder = queenFound.image.includes("image/queens/others/")
+    ? "image/queens/others"
+    : "image/queens";
+
+const defaultImage = `${folder}/${baseName}.webp`;
+const altBase = `image/queens/alt/${baseName}`;
 
     // Build availableImages only once
     if (!queenFound.availableImages) {
