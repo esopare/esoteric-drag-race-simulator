@@ -1294,15 +1294,7 @@ function lipsyncsLC() {
                                 eliminatedCast.unshift(lipSync[1]);
                                 currentCast.splice(currentCast.indexOf(lipSync[1]), 1);
                             }
-                        } else {
-                            screen.createImage(lipSync[1].image, "red");
-                            screen.createBold(lipSync[1].getName() + ", sashay away. ");
-                            lipSync[1].addToTrackRecord("  ELIM ");
-                            lipSync[1].unfavoritism += 5;
-                            eliminatedCast.unshift(lipSync[1]);
-                            currentCast.splice(currentCast.indexOf(lipSync[1]), 1);
-                        }
-                        if (badonkaDunkTwist  && !badonkaDunkTwistCheck) {
+                        } else if (badonkaDunkTwist  && !badonkaDunkTwistCheck) {
                             screen.createBold(lipSync[1].getName() + ", now your fate rests in the hands of the drag gods.");
                             screen.createBold("If you pull the right lever, you will be safe.");
                             if (badonkaDunkCheck(lipSync[1]) == true) {
