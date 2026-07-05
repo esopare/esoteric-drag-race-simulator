@@ -17434,6 +17434,79 @@ let ricura = new MQueen("Ricura Santana", 7, 7, 7, 7, 7, 7, 7, "RicuraSantana");
 let tulsa = new MQueen("Tulsa", 7, 7, 7, 7, 7, 7, 7, "Tulsa");
 //SOLO LAS MAS
 let velvetine = new MQueen("Velvetine", 7, 7, 7, 7, 7, 7, 7, "Velvetine");
+//CALL ME MOTHER S1
+let calypsocos = new MQueen("Calypso Cosmic", 7, 7, 7, 7, 7, 7, 7, "CalypsoCosmic");
+let elamour = new MQueen("Ella Lamoureux", 7, 7, 7, 7, 7, 7, 7, "EllaLamoureux");
+let felicia = new MQueen("Felicia Bonée", 7, 7, 7, 7, 7, 7, 7, "FeliciaBonee");
+let hercu = new MQueen("HercuSleaze", 7, 7, 7, 7, 7, 7, 7, "HercuSleaze");
+let narcissa = new MQueen("Narcissa Wolfe", 7, 7, 7, 7, 7, 7, 7, "NarcissaWolfe");
+let rosie = new MQueen("Rosie", 7, 7, 7, 7, 7, 7, 7, "Rosie");
+let toddy = new MQueen("Toddy", 7, 7, 7, 7, 7, 7, 7, "Toddy");
+let valerie = new MQueen("Valerie Hunt", 7, 7, 7, 7, 7, 7, 7, "ValerieHunt");
+//CALL ME MOTHER S2
+let champagna = new MQueen("Champagna", 7, 7, 7, 7, 7, 7, 7, "Champagna");
+let imarra = new MQueen("Imarra", 7, 7, 7, 7, 7, 7, 7, "Imarra");
+let jenna = new MQueen("Jenna Seppa", 7, 7, 7, 7, 7, 7, 7, "JennaSeppa");
+let jessie = new MQueen("Jessie Précieuse", 7, 7, 7, 7, 7, 7, 7, "JessiePrecieuse");
+let justin = new MQueen("Justin Abit", 7, 7, 7, 7, 7, 7, 7, "JustinAbit");
+let kingchella = new MQueen("Kingchella", 7, 7, 7, 7, 7, 7, 7, "Kingchella");
+let mshay = new MQueen("Miss Shay Dee", 7, 7, 7, 7, 7, 7, 7, "MissShayDee");
+let newfound = new MQueen("Newfound Lad", 7, 7, 7, 7, 7, 7, 7, "NewfoundLad");
+let pepper = new MQueen("Pepper", 7, 7, 7, 7, 7, 7, 7, "Pepper");
+let pblack = new MQueen("Phoenix Black", 7, 7, 7, 7, 7, 7, 7, "PhoenixBlack");
+let seyonce = new MQueen("Seyoncé Knows", 7, 7, 7, 7, 7, 7, 7, "SeyonceKnows");
+let stony = new MQueen("Stony Mac", 7, 7, 7, 7, 7, 7, 7, "StonyMac");
+let webee = new MQueen("Weebee", 7, 7, 7, 7, 7, 7, 7, "Weebee");
+//QUEEN OF DRAGS
+let arias = new MQueen("Aria Addams", 7, 7, 7, 7, 7, 7, 7, "AriaAddams");
+let bambi = new MQueen("Bambi Mercury", 7, 7, 7, 7, 7, 7, 7, "BambiMercury");
+let candy = new MQueen("Candy Crash", 7, 7, 7, 7, 7, 7, 7, "CandyCrash");
+let catherine = new MQueen("Catherrine Leclery", 7, 7, 7, 7, 7, 7, 7, "CatherrineLeclery");
+let hayden = new MQueen("Hayden Kryze", 7, 7, 7, 7, 7, 7, 7, "HaydenKryze");
+let janisha = new MQueen("Janisha Jones", 7, 7, 7, 7, 7, 7, 7, "JanishaJones");
+let katyb = new MQueen("Katy Bähm", 7, 7, 7, 7, 7, 7, 7, "KatyBahm");
+let samgold = new MQueen("Samantha Gold", 7, 7, 7, 7, 7, 7, 7, "SamanthaGold");
+let vava = new MQueen("Vava Vilde", 7, 7, 7, 7, 7, 7, 7, "VavaVilde");
+let yobanks = new MQueen("Yoncé Banks", 7, 7, 7, 7, 7, 7, 7, "YonceBanks");
+//REGIAS DEL DRAG ESPANA S1
+let astra = new MQueen("Astra", 7, 7, 7, 7, 7, 7, 7, "Astra");
+let cachalote = new MQueen("Cachalote Jenner", 7, 7, 7, 7, 7, 7, 7, "CachaloteJenner");
+let coca = new MQueen("Coca Boom", 7, 7, 7, 7, 7, 7, 7, "CocaBoom");
+let florenz = new MQueen("Florenz La Bella", 7, 7, 7, 7, 7, 7, 7, "FlorenzLaBella");
+let lola = new MQueen("Lola Menta", 7, 7, 7, 7, 7, 7, 7, "LolaMenta");
+let morfina = new MQueen("Morfina", 7, 7, 7, 7, 7, 7, 7, "Morfina");
+//REGIAS DEL DRAG ESPANA S2
+let alice = new MQueen("Alice Wonderland", 7, 7, 7, 7, 7, 7, 7, "AliceWonderland");
+let ely = new MQueen("Ely Ferrari", 7, 7, 7, 7, 7, 7, 7, "ElyFerrari");
+let hunky = new MQueen("Hunky Mattel", 7, 7, 7, 7, 7, 7, 7, "HunkyMattel");
+let itayetzi = new MQueen("Itayetzi", 7, 7, 7, 7, 7, 7, 7, "Itayetzi");
+let jeneva = new MQueen("Jeneva Gina", 7, 7, 7, 7, 7, 7, 7, "JenevaGina");
+let loba = new MQueen("Loba Mordiscos", 7, 7, 7, 7, 7, 7, 7, "LobaMordiscos");
+let mamiloma = new MQueen("Mamiloma", 7, 7, 7, 7, 7, 7, 7, "Mamiloma");
+//THE SWITCH DRAG RACE S1
+let alvaro = new MQueen("Álvaro Lynch", 7, 7, 7, 7, 7, 7, 7, "AlvaroLynch");
+let arianda = new MQueen("Arianda Sodi", 7, 7, 7, 7, 7, 7, 7, "AriandaSodi");
+let botota = new MQueen("Botota Fox", 7, 7, 7, 7, 7, 7, 7, "BototaFox");
+let elizabeth = new MQueen("Elizabeth San Martin", 7, 7, 7, 7, 7, 7, 7, "ElizabethSanMartin");
+let fernanda = new MQueen("Fernanda Brown", 7, 7, 7, 7, 7, 7, 7, "FernandaBrown");
+let francisca = new MQueen("Francisca Thompson", 7, 7, 7, 7, 7, 7, 7, "FranciscaThompson");
+let jessipa = new MQueen("Jessica Parker", 7, 7, 7, 7, 7, 7, 7, "JessicaParker");
+let kristinna = new MQueen("Kristina La Veneno", 7, 7, 7, 7, 7, 7, 7, "KristinaLaVeneno");
+let laurabell = new MQueen("Laura Bell", 7, 7, 7, 7, 7, 7, 7, "LauraBell");
+let layoyi = new MQueen("La Yoyi", 7, 7, 7, 7, 7, 7, 7, "LaYoyi");
+let lunadi = new MQueen("Luna di Mauri", 7, 7, 7, 7, 7, 7, 7, "LunadiMauri");
+let luz = new MQueen("Luz Violeta", 7, 7, 7, 7, 7, 7, 7, "LuzVioleta");
+let nery = new MQueen("Nery Lefferti", 7, 7, 7, 7, 7, 7, 7, "NeryLefferti");
+let paulette = new MQueen("Paulette Palmery", 7, 7, 7, 7, 7, 7, 7, "PaulettePalmery");
+let rubis = new MQueen("Rubí Blonde", 7, 7, 7, 7, 7, 7, 7, "RubiBlonde");
+let sofiaca = new MQueen("Sofía Camará", 7, 7, 7, 7, 7, 7, 7, "SofiaCamara");
+let yume = new MQueen("Yume Hime", 7, 7, 7, 7, 7, 7, 7, "YumeHime");
+//THE SWITCH DRAG RACE S2
+let divah = new MQueen("Diva Houston", 7, 7, 7, 7, 7, 7, 7, "DivaHouston");
+let frandel = new MQueen("Francisca Del Solar", 7, 7, 7, 7, 7, 7, 7, "FranciscaDelSolar");
+let mariela = new MQueen("Marie Laveau", 7, 7, 7, 7, 7, 7, 7, "MarieLaveau");
+let pavel = new MQueen("Pavel Arámbula", 7, 7, 7, 7, 7, 7, 7, "PavelArambula");
+let rochelle = new MQueen("Rochelle Mon Chéri", 7, 7, 7, 7, 7, 7, 7, "RochelleMonCheri");
 
 class Queen {
     constructor(name, acting, comedy, dance, design, improv, runway, lipsync, image = "noimage", custom = false) {
@@ -18739,6 +18812,12 @@ let allQueens = [
     almvgler, ank, ariellmd, arieslmd, braulio, cattriona, dimittra, electraw, juana, kellylmd, lakyliezz, mizzpeaches, purga, shantelle,
     axelle, brighty, calypso, candela, caos, deetox, greta, konny, moonlmd, nayla, oslo, paty, ricura, tulsa,
     velvetine,
+    calypsocos, elamour, felicia, hercu, narcissa, rosie, toddy, valerie,
+    champagna, imarra, jenna, jessie, justin, kingchella, mshay, newfound, pepper, pblack, seyonce, stony, webee,
+    arias, bambi, candy, catherine, hayden, janisha, katyb, samgold, vava, yobanks,
+    astra, cachalote, coca, florenz, lola, morfina, alice, ely, hunky, itayetzi, jeneva, loba, mamiloma,
+    alvaro, arianda, botota, elizabeth, fernanda, francisca, jessipa, kristinna, laurabell, layoyi, lunadi, luz, nery, paulette, rubis, sofiaca, yume,
+    divah, frandel, mariela, pavel, rochelle,
     pangina 
 ].concat(allCustomQueens).sort((a, b) => a.getName().toLowerCase().localeCompare(b.getName().toLowerCase()));
 /*/Drag-Race-Simulator*/
@@ -19508,7 +19587,7 @@ function lipsyncSmackdown(word = "") {
 }
 function hellboundShowdown(word = "") {
     if (word) {
-        episodeChallenges.push("Hellbound Showdown");
+        episodeChallenges.push("The Last Supper");
         episodeCount++;
         let screen = new Scene();
         screen.clean();
