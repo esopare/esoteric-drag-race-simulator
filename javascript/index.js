@@ -10430,7 +10430,7 @@ function startSimulation(challenge = "") {
             lookperdido = false;
             slayoff = false;
             reuls = false;
-        } else if(bracketSeason11 && (smackdown || s14Premiere || s12Premiere || s9Premiere || s6Premiere || tripleprem || porkchopPremiere || porkchopElim || uk3Premiere || lipassPremiere || parPremiere || ph2Premiere || conjoinedQueens || queensOfComedy || reinasDLC || kittyGirlGroup || attentionGGroup || readingIF || lalaparuza || voteReturn || chocolateBarTwist || badonkaDunkTwist || fameGames || top8 || top5 || top3 || top2F || canFinale || slayoff || reuls) || bracketSeason11 && currentCast.length < 12) {
+        } else if(bracketSeason11 && (smackdown || s14Premiere || s12Premiere || s9Premiere || s6Premiere || tripleprem || porkchopPremiere || porkchopElim || uk3Premiere || lipassPremiere || parPremiere || ph2Premiere || conjoinedQueens || queensOfComedy || reinasDLC || kittyGirlGroup || attentionGGroup || readingIF || lalaparuza || voteReturn || chocolateBarTwist || badonkaDunkTwist || fameGames || top8 || top5 || top2F || canFinale || slayoff || reuls) || bracketSeason11 && currentCast.length < 12) {
             window.alert("Tournament Of All Stars Format isn't avaliable with any combination of premiere, returning challenge, Fame Games or Chocolate Bar Twist. Finale format must be Top 8 Lipsync for the Crown. It needs at least 12 contestants. Only available return formats are Random and Choose.");
             s6Premiere = false;
             tripleprem = false;
