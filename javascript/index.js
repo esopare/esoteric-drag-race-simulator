@@ -356,7 +356,11 @@ if (designChallengeCounter == 3) {
 if (improvChallengeCounter == 3) {
     challenges.splice(challenges.indexOf(challenges.find(prueba => prueba.type == "improvChallenge()")), 1);
     }
+if (queenOfTheUniverse) {
+    queenOfTheUniverseChallenge();
+} else {
     createChallenge(challenges, miniChallengeScreen);
+}
 }
 //GENERAL CHALLENGES:
 let team1 = [];
@@ -1577,9 +1581,11 @@ function queensPerformances() {
             currentCast[i].runwayScore = 0;
         }
         performanceScreen.createButton("Proceed", "judgingThailand()");
-    } else {
-        performanceScreen.createButton("Proceed", "runway()", "button2");
-    }
+} else if (queenOfTheUniverse) {
+    performanceScreen.createButton("Proceed", "qotuJudging()");
+} else {
+    performanceScreen.createButton("Proceed", "runway()", "button2");
+}
 }
 function maxiWin() {
     let screen = new Scene();
@@ -3543,6 +3549,7 @@ function newEpisode() {
     }
 if ((bracketSeason || bracketSeason11) && episodeCount == 10) {
 
+
     currentCast = [
         ...bracket1AdvancedQueens,
         ...bracket2AdvancedQueens,
@@ -3552,6 +3559,7 @@ if ((bracketSeason || bracketSeason11) && episodeCount == 10) {
 }
 
     contestantProgress();
+
 
     if ((bracketSeason || bracketSeason11) && episodeCount <= 9) {
         currentCast = savedCast;
@@ -3614,6 +3622,12 @@ if ((bracketSeason || bracketSeason11) && episodeCount == 10) {
     //add an empty placement on eliminated queen's track records
     for (let i = 0; i < eliminatedCast.length; i++) {
         eliminatedCast[i].addToTrackRecord('');
+    }
+    if (wildcardQueenr) {
+for (let q of wildcardLosers) {
+    q.trackRecord[q.trackRecord.length - 1] = "OUT ";
+}
+wildcardLosers = [];
     }
 }
 function edRelStrt() {
@@ -4009,6 +4023,477 @@ function reSimulate() {
     else {
         newEpisode();
     }
+}
+function qotuChallengeDescription(theme) {
+
+    let description = document.querySelector("b#Description");
+
+    switch (theme) {
+
+        case "Round 1":
+            description.innerHTML = "The queens must introduce themselves to the world by performing a song that showcases their unique voice, charisma, and star quality.";
+            break;
+
+        case "Throw Back":
+            description.innerHTML = "The queens must travel back in time and perform an iconic throwback hit, proving they can breathe new life into timeless classics.";
+            break;
+
+        case "Dance Off":
+            description.innerHTML = "Tonight the queens must keep the audience on their feet with a high-energy dance anthem full of powerful vocals and electrifying stage presence.";
+            break;
+
+        case "Ballad Night":
+            description.innerHTML = "The queens must strip it back and perform an emotional ballad, relying solely on their vocals to captivate the judges.";
+            break;
+
+        case "Diva Battle":
+            description.innerHTML = "Inspired by legendary divas, the queens must channel confidence, glamour, and powerhouse vocals in a performance worthy of pop royalty.";
+            break;
+
+        case "Girl Groups":
+            description.innerHTML = "The queens form supergroups to deliver unforgettable harmonies, synchronized choreography, and chart-topping performances.";
+            break;
+
+        case "Power Anthems":
+            description.innerHTML = "Tonight the queens must perform inspirational anthems that celebrate strength, resilience, and self-expression.";
+            break;
+
+        case "A Cappella":
+            description.innerHTML = "With no instrumental backing, the queens must rely entirely on their voices to deliver flawless vocal performances.";
+            break;
+
+        case "Decades Night":
+            description.innerHTML = "Each queen must pay tribute to a different musical decade, celebrating its signature sound, style, and unforgettable hits.";
+            break;
+
+        case "Love Songs":
+            description.innerHTML = "The queens must perform heartfelt love songs that showcase emotion, storytelling, and vocal control.";
+            break;
+
+        case "Broadway Night":
+            description.innerHTML = "It's opening night! The queens must combine acting, choreography, and live vocals in spectacular Broadway-inspired performances.";
+            break;
+
+        case "Disco Fever":
+            description.innerHTML = "The queens must bring the sparkle and groove as they perform disco classics guaranteed to light up the dance floor.";
+            break;
+
+        case "RuMix":
+            description.innerHTML = "The queens write and perform original verses in the ultimate Queen of the Universe.";
+            break;
+    }
+
+}
+let qotuThemes = [
+    "Round 1",
+    "Throw Back",
+    "Dance Off",
+    "Ballad Night",
+    "Diva Battle",
+    "Girl Groups",
+    "Power Anthems",
+    "A Cappella",
+    "Decades Night",
+    "Love Songs",
+    "Broadway Night",
+    "Disco Fever",
+    "RuMix"
+];
+function queenOfTheUniverseChallenge() {
+    let screen = new Scene();
+    screen.clean();
+    if (!solidbk) {
+        document.body.style.backgroundImage = "url('image/QOTUSTAGE.webp')";
+    }
+
+for (let i = 0; i < currentCast.length; i++) {
+    currentCast[i].episodesOn++;
+}
+
+    screen.createHeader("Queen of the Universe");
+
+    let theme = qotuThemes[Math.min(episodeCount - 1, qotuThemes.length - 1)];
+    episodeChallenges.push(theme);
+
+    screen.createBold("Tonight's Theme:");
+    screen.createBold(theme);
+    screen.createHorizontalLine();
+
+   screen.createBold("", "Description");
+   qotuChallengeDescription(theme);
+   screen.createHorizontalLine();
+
+    // Performance
+    for (let i = 0; i < currentCast.length; i++) {
+
+        let queen = currentCast[i];
+
+queen.getQOTUSinging(theme);
+
+        screen.createImage(queen.image);
+        screen.createBold(queen.getName());
+    }
+
+    queensPerformances();
+}
+function qotuJudging() {
+
+    let screen = new Scene();
+    screen.clean();
+    if (!solidbk) {
+        document.body.style.backgroundImage = "url('image/POPPANEL.webp')";
+    }
+
+    screen.createHeader("Judging");
+
+screen.createBold("Tonight's Pop Diva Panel");
+
+for (let i = 0; i < popdivpanel.length; i++) {
+    screen.createImage(popdivpanel[i].image);
+}
+let names = "";
+
+for (let i = 0; i < popdivpanel.length; i++) {
+    names += popdivpanel[i].getName();
+
+    if (i < popdivpanel.length - 1)
+        names += " • ";
+}
+
+screen.createBold(names);
+
+screen.createHorizontalLine();
+
+    currentCast.sort((a, b) => a.performanceScore - b.performanceScore);
+
+    topQueens = [];
+    bottomQueens = [];
+    safeQueens = [];
+
+let eliminationCount = (episodeCount <= 2) ? 3 : 1;
+
+let bottomCount = 0;
+
+if (episodeCount <= 2) {
+
+    bottomCount = 3;
+
+} else {
+
+    let worst = currentCast[currentCast.length - 1].performanceScore;
+    let secondWorst = currentCast[currentCast.length - 2].performanceScore;
+    let thirdWorst = currentCast[currentCast.length - 3].performanceScore;
+
+    // Decide bottom size based on how badly they performed
+    if (Math.abs(thirdWorst - secondWorst) <= 3) {
+        bottomCount = 3;
+    } 
+    else {
+        bottomCount = 2;
+    }
+
+}
+
+let advCount = currentCast.length - bottomCount;
+
+let advPlacement;
+
+if (episodeCount <= 2) {
+    screen.createBold("The Pop Diva Panel has made their decision...");
+    advPlacement = "PPADV";
+} else {
+    screen.createBold("The Audience has voted...");
+    advPlacement = "AVADV";
+}
+
+screen.createHorizontalLine();
+
+
+// ADV queens
+for (let i = 0; i < advCount; i++) {
+
+    currentCast[i].addToTrackRecord(advPlacement);
+    currentCast[i].ppe += 3;
+
+    safeQueens.push(currentCast[i]);
+
+    screen.createImage(currentCast[i].image);
+
+    screen.createBold(currentCast[i].getName());
+
+}
+
+    screen.createBold(
+        "You are advancing to the next episode."
+    );
+
+    screen.createHorizontalLine();
+
+    screen.createBold(
+        "The following queens are in danger..."
+    );
+
+    // Bottom queens
+for (let i = advCount; i < currentCast.length; i++) {
+
+    currentCast[i].addToTrackRecord(
+        "BTM" + bottomCount
+    );
+    currentCast[i].ppe += 2;
+
+    bottomQueens.push(currentCast[i]);
+
+        screen.createImage(currentCast[i].image, "red");
+
+        screen.createBold(currentCast[i].getName());
+
+    }
+
+    screen.createHorizontalLine();
+
+    screen.createButton("Proceed", "qotuDecision()");
+}
+function qotuDecision() {
+
+    let screen = new Scene();
+    screen.clean();
+    if (!solidbk) {
+        document.body.style.backgroundImage = "url('image/POPPANEL.webp')";
+    }
+
+    screen.createHeader("Final Decision");
+
+screen.createBold("Pop Diva Panel");
+
+for (let i = 0; i < popdivpanel.length; i++) {
+    screen.createImage(popdivpanel[i].image);
+}
+let names = "";
+
+for (let i = 0; i < popdivpanel.length; i++) {
+    names += popdivpanel[i].getName();
+
+    if (i < popdivpanel.length - 1)
+        names += " • ";
+}
+
+screen.createBold(names);
+
+screen.createHorizontalLine();
+
+
+    // Episodes 1-2: No Sing For Your Life
+    if (episodeCount <= 2) {
+
+        screen.createBold(
+            "The judges have made their decision..."
+        );
+
+        screen.createButton(
+            "Reveal Decision",
+            "qotuJudgeElimination()"
+        );
+
+        return;
+    }
+
+
+    // Episode 3+: 50/50 chance
+    if (randomNumber(1,100) <= 50) {
+
+        screen.createBold(
+            "The judges have made their decision..."
+        );
+
+        screen.createButton(
+            "Reveal Decision",
+            "qotuJudgeElimination()"
+        );
+
+    } else {
+
+screen.createBold(
+    "Bottom queens... prepare to Sing For Your Life!"
+);
+
+// Change BTM to PBTM
+for (let i = 0; i < bottomQueens.length; i++) {
+
+    let queen = bottomQueens[i];
+
+    queen.trackRecord.pop();
+
+    let bottomPlacement = "PBTM" + bottomQueens.length;
+
+    queen.addToTrackRecord(bottomPlacement);
+
+}
+
+screen.createButton(
+    "Proceed",
+    "qotuSingForYourSurvival()"
+);
+
+    }
+
+}
+function qotuJudgeElimination() {
+
+    let screen = new Scene();
+    screen.clean();
+    if (!solidbk) {
+        document.body.style.backgroundImage = "url('image/POPPANEL.webp')";
+    }
+
+    screen.createHeader("Final Decision");
+screen.createBold("Pop Diva Panel");
+
+for (let i = 0; i < popdivpanel.length; i++) {
+    screen.createImage(popdivpanel[i].image);
+}
+let names = "";
+
+for (let i = 0; i < popdivpanel.length; i++) {
+    names += popdivpanel[i].getName();
+
+    if (i < popdivpanel.length - 1)
+        names += " • ";
+}
+
+screen.createBold(names);
+
+screen.createHorizontalLine();
+
+    let elimCount = (episodeCount <= 2) ? 3 : 1;
+
+    screen.createBold(
+        "The judges have made their final decision..."
+    );
+
+    screen.createHorizontalLine();
+
+    for (let i = bottomQueens.length - elimCount; i < bottomQueens.length; i++) {
+
+        let queen = bottomQueens[i];
+
+        // Replace BTM2/BTM3 with ELIM
+        queen.trackRecord.pop();
+        queen.addToTrackRecord("ELIM");
+
+        screen.createImage(queen.image, "red");
+        screen.createBold(
+            queen.getName() +
+            ", I'm sorry my dear, this is not your time."
+        );
+
+        if (!eliminatedCast.includes(queen))
+            eliminatedCast.unshift(queen);
+
+        let index = currentCast.indexOf(queen);
+
+        if (index != -1)
+            currentCast.splice(index, 1);
+
+    }
+
+    screen.createButton("Proceed", "newEpisode()");
+
+}
+function qotuSingForYourSurvival() {
+
+    let screen = new Scene();
+    screen.clean();
+    if (!solidbk) {
+        document.body.style.backgroundImage = "url('image/QOTUSTAGE.webp')";
+    }
+
+    screen.createHeader("Sing For Your Survival");
+
+    screen.createBold("The following queens must sing for their survival...");
+
+    for (let i = 0; i < bottomQueens.length; i++) {
+        screen.createImage(bottomQueens[i].image, "red");
+        screen.createBold(bottomQueens[i].getName());
+    }
+
+    screen.createButton("Proceed", "qotuElimination()");
+}
+function qotuElimination() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    if (!solidbk) {
+        document.body.style.backgroundImage = "url('image/QOTUSTAGE.webp')";
+    }
+
+    screen.createHeader("Results");
+screen.createBold("Pop Diva Panel");
+
+for (let i = 0; i < popdivpanel.length; i++) {
+    screen.createImage(popdivpanel[i].image);
+}
+let names = "";
+
+for (let i = 0; i < popdivpanel.length; i++) {
+    names += popdivpanel[i].getName();
+
+    if (i < popdivpanel.length - 1)
+        names += " • ";
+}
+
+screen.createBold(names);
+
+screen.createHorizontalLine();
+
+    // Every bottom queen performs
+    for (let i = 0; i < bottomQueens.length; i++) {
+        bottomQueens[i].getLipsync();
+    }
+
+    // Highest lipsyncScore survives
+    bottomQueens.sort((a, b) => b.lipsyncScore - a.lipsyncScore);
+
+    let elimCount = (episodeCount <= 2) ? 3 : 1;
+
+    // Queens that survive the sing-off
+    for (let i = 0; i < bottomQueens.length - elimCount; i++) {
+
+        screen.createImage(bottomQueens[i].image, "orange");
+        screen.createBold(
+            bottomQueens[i].getName() +
+            "... shantay, you stay."
+        );
+
+    }
+
+    screen.createHorizontalLine();
+
+    // Eliminate the weakest performances
+    for (let i = bottomQueens.length - elimCount; i < bottomQueens.length; i++) {
+
+        let queen = bottomQueens[i];
+
+        queen.trackRecord.pop();
+        queen.addToTrackRecord("PELIM");
+
+        screen.createImage(queen.image, "red");
+        screen.createBold(
+            queen.getName() +
+            "... I'm sorry my dear, now sing your last note."
+        );
+
+        if (!eliminatedCast.includes(queen))
+            eliminatedCast.unshift(queen);
+
+        let index = currentCast.indexOf(queen);
+
+        if (index != -1)
+            currentCast.splice(index, 1);
+
+    }
+
+    screen.createButton("Proceed", "newEpisode()");
 }
 let firstLS = [];
 let secondLS = [];
@@ -7205,6 +7690,27 @@ function contestantProgress() {
                 placement.setAttribute("style", "font-weight: bold; background-color: deepskyblue;");
                 placement.innerHTML = "<b>WIN <br>+<br>ADV</b>";
             }
+            else if (placement.innerHTML == "PPADV") {
+                placement.setAttribute("style", "font-weight: bold; background-color: deepskyblue;");
+	    placement.innerHTML = "ADV";
+            }
+            else if (placement.innerHTML == "AVADV") {
+            placement.setAttribute("style", "font-weight: bold; background-color: royalblue; color: white;");
+            placement.innerHTML = "ADV";
+            }
+            else if (
+            placement.innerHTML == "PBTM2" ||
+    	    placement.innerHTML == "PBTM3" ||
+            placement.innerHTML == "PBTM4" ||
+            placement.innerHTML == "PBTM5"
+            ) {
+            placement.setAttribute("style", "font-weight: bold; background-color: #ED3197; color: white;");
+            placement.innerHTML = placement.innerHTML.replace("P", "");
+            }
+            else if (placement.innerHTML == "PELIM") {
+            placement.setAttribute("style", "font-weight: bold; background-color: #C2006A; color:white;");
+            placement.innerHTML = "ELIM";
+            }
             else if (placement.innerHTML == "TOP 2") {
                 placement.setAttribute("style", "font-weight: bold; background-color: lightgreen;");
             }
@@ -7710,6 +8216,27 @@ function contestantProgress() {
             else if (placement.innerHTML == "WIN SAFE+ADV") {
                 placement.setAttribute("style", "font-weight: bold; background-color: deepskyblue;");
                 placement.innerHTML = "<b>WIN <br>+<br>ADV</b>";
+            }
+            else if (placement.innerHTML == "PPADV") {
+                placement.setAttribute("style", "font-weight: bold; background-color: deepskyblue;");
+	    placement.innerHTML = "ADV";
+            }
+            else if (placement.innerHTML == "AVADV") {
+            placement.setAttribute("style", "font-weight: bold; background-color: royalblue; color: white;");
+            placement.innerHTML = "ADV";
+            }
+            else if (
+            placement.innerHTML == "PBTM2" ||
+    	    placement.innerHTML == "PBTM3" ||
+            placement.innerHTML == "PBTM4" ||
+            placement.innerHTML == "PBTM5"
+            ) {
+            placement.setAttribute("style", "font-weight: bold; background-color: #ED3197; color: white;");
+            placement.innerHTML = placement.innerHTML.replace("P", "");
+            }
+            else if (placement.innerHTML == "PELIM") {
+            placement.setAttribute("style", "font-weight: bold; background-color: #C2006A; color:white;");
+            placement.innerHTML = "ELIM";
             }
                 else if (placement.innerHTML == "TOP 2") {
                     placement.setAttribute("style", "font-weight: bold; background-color: lightgreen;");
@@ -8264,6 +8791,27 @@ else if (
             else if (placement.innerHTML == "WIN SAFE+ADV") {
                 placement.setAttribute("style", "font-weight: bold; background-color: deepskyblue;");
                 placement.innerHTML = "<b>WIN <br>+<br>ADV</b>";
+            }
+            else if (placement.innerHTML == "PPADV") {
+                placement.setAttribute("style", "font-weight: bold; background-color: deepskyblue;");
+	    placement.innerHTML = "ADV";
+            }
+            else if (placement.innerHTML == "AVADV") {
+            placement.setAttribute("style", "font-weight: bold; background-color: royalblue; color: white;");
+            placement.innerHTML = "ADV";
+            }
+            else if (
+            placement.innerHTML == "PBTM2" ||
+    	    placement.innerHTML == "PBTM3" ||
+            placement.innerHTML == "PBTM4" ||
+            placement.innerHTML == "PBTM5"
+            ) {
+            placement.setAttribute("style", "font-weight: bold; background-color: #ED3197; color: white;");
+            placement.innerHTML = placement.innerHTML.replace("P", "");
+            }
+            else if (placement.innerHTML == "PELIM") {
+            placement.setAttribute("style", "font-weight: bold; background-color: #C2006A; color:white;");
+            placement.innerHTML = "ELIM";
             }
             else if (placement.innerHTML == "TOP 2") {
                 placement.setAttribute("style", "font-weight: bold; background-color: lightgreen;");
@@ -9120,10 +9668,10 @@ let lipsync_assassin = false;
 let all_winners = false;
 let bracketSeason = false;
 let bracketSeason11 = false;
-let queenoftu = false;
 let thailandFormat = false;
 let team = false;
 let dragula = false;
+let queenOfTheUniverse = false;
 let as9_dstw = false;
 let mudrakels = false;
 let solidbk = false;
@@ -9148,6 +9696,8 @@ function predefCast(cast, format, finale, premiere = '', returning = '') {
         team = true;
     } else if (format == "dragula") {
         dragula = true;
+    } else if (format == "queenoftu") {
+        queenOfTheUniverse = true;
     } else if (format == "mudrakels") {
         mudrakels = true;
     } else if (format == "lipsync-assassin"){ 
@@ -9173,8 +9723,6 @@ function predefCast(cast, format, finale, premiere = '', returning = '') {
         top2F = true;
     } else if (finale == "teams") {
         teamsF = true;
-    } else if (finale == "queen-oftu") {
-        queenoftu = true;
     } else if (finale == "LFTC") {
         lftc = true;
     } else if (finale == "LFTF") {
@@ -9352,6 +9900,7 @@ function predefCast(cast, format, finale, premiere = '', returning = '') {
         smackdown = false;
         all_stars = false;
         all_winners = false;
+	queenOfTheUniverse = false;
         allstars3Finale = false;
         smackdown = false;
         voteReturn = false;
@@ -9403,6 +9952,7 @@ function predefCast(cast, format, finale, premiere = '', returning = '') {
         smackdown = false;
         all_stars = false;
         all_winners = false;
+	queenOfTheUniverse = false;
         allstars3Finale = false;
         smackdown = false;
         voteReturn = false;
@@ -9717,6 +10267,8 @@ function startSimulation(challenge = "") {
             thailandFormat = true;
         } else if (select.options[select.selectedIndex].value == "dragula") {
             dragula = true;
+        } else if (select.options[select.selectedIndex].value == "queenoftu") {
+            queenOfTheUniverse = true;
         } else if (select.options[select.selectedIndex].value == "all-stars") {
             all_stars = true;
         } else if (select.options[select.selectedIndex].value == "all-winners") {
@@ -9754,8 +10306,6 @@ function startSimulation(challenge = "") {
             top3 = true;
         } else if (select4.options[select4.selectedIndex].value == "top2") {
             top2F = true;
-        } else if (select4.options[select4.selectedIndex].value == "queen-oftu") {
-            queenoftu = true;
         } else if (select4.options[select4.selectedIndex].value == "teams") {
             teamsF = true;
         } else if (select4.options[select4.selectedIndex].value == "LFTC") {
@@ -10009,6 +10559,7 @@ function startSimulation(challenge = "") {
             lipsync_assassin = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
         } else if (tripleprem && currentCast.length < 12 ) {
             window.alert("Triple Premiere format needs at least 12 queens!");
@@ -10043,6 +10594,7 @@ function startSimulation(challenge = "") {
             lipsync_assassin = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
         } else if ((s6Premiere || s12Premiere || porkchopPremiere || porkchopElim || s14Premiere || ph2Premiere || newImmTwst || tripleprem) && (top5 || juryt5) && currentCast.length < 12 ) {
             window.alert("Top 5 finale with triple/double premiere formats needs at least 12 queens!");
@@ -10077,6 +10629,7 @@ function startSimulation(challenge = "") {
             lipsync_assassin = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
         } else if (uk3Premiere && currentCast.length < 6) {
             window.alert("Uk3 Premiere needs at least 6 queens!");
@@ -10110,6 +10663,7 @@ function startSimulation(challenge = "") {
             lipsync_assassin = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10155,7 +10709,7 @@ function startSimulation(challenge = "") {
             lipsync_assassin = false;
             all_stars = false;
             all_winners = false;
-            queenoftu = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10202,6 +10756,7 @@ function startSimulation(challenge = "") {
             lipsync_assassin = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10247,6 +10802,7 @@ function startSimulation(challenge = "") {
             lipsync_assassin = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10347,6 +10903,7 @@ function startSimulation(challenge = "") {
             smackdown = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10405,6 +10962,7 @@ function startSimulation(challenge = "") {
             smackdown = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10463,6 +11021,7 @@ function startSimulation(challenge = "") {
             smackdown = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10515,6 +11074,7 @@ function startSimulation(challenge = "") {
             smackdown = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10575,6 +11135,7 @@ function startSimulation(challenge = "") {
             smackdown = false;
             all_stars = false;
             all_winners = false;
+            queenOfTheUniverse = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10863,25 +11424,16 @@ function judging() {
             currentCast[3].ppe += 4;
             currentCast[currentCast.length - 2].ppe += 2;
             currentCast[currentCast.length - 1].ppe += 2;
+
             for (let i = 4; i < currentCast.length - 2; i++) {
-		if (queenoftu == true) {
-                currentCast[i].addToTrackRecord(" ADV");
-		}
-		else if (queenoftu == false) {
                 currentCast[i].addToTrackRecord("SAFE");
-		}
                 currentCast[i].ppe += 3;
             }
         } else {
             for (let i = 0; i < currentCast.length; i++) {
                 currentCast[i].ppe += 3;
                 if (topQueens.indexOf(currentCast[i]) == -1) {
-		if (queenoftu == true) {
-                currentCast[i].addToTrackRecord(" ADV");
-		}
-		else if (queenoftu == false) {
-                currentCast[i].addToTrackRecord("SAFE");
-		}
+                    currentCast[i].addToTrackRecord("SAFE");
                 }
             }
         }
@@ -11482,12 +12034,7 @@ function judgingThailand() {
             if (currentCast[i].maxiT == true) {
                 currentCast[i].maxiT = false;
             } else {
-		if (queenoftu == true) {
-                currentCast[i].addToTrackRecord(" ADV");
-		}
-		else if (queenoftu == false) {
                 currentCast[i].addToTrackRecord("SAFE");
-		}
             }
             currentCast[i].ppe += 3;
         }
@@ -11916,12 +12463,7 @@ function s9judgingScreen() {
     for (let i = 2; i < currentCast.length; i++) {
         if (topQueens.indexOf(currentCast[i]) == -1) {
             safeQueens.innerHTML += currentCast[i].getName() + ", ";
-		if (queenoftu == true) {
-                currentCast[i].addToTrackRecord(" ADV");
-		}
-		else if (queenoftu == false) {
-                currentCast[i].addToTrackRecord("SAFE");
-		}
+            currentCast[i].addToTrackRecord("SAFE");
             currentCast[i].ppe += 3;
         }
     }
@@ -12031,12 +12573,7 @@ function judging6WayScreen() {
     for (let i = 0; i < currentCast.length; i++) {
         if (topQueens.indexOf(currentCast[i]) == -1 && bottomQueens.indexOf(currentCast[i]) == -1) {
             safeQueens.innerHTML += currentCast[i].getName() + ", ";
-		if (queenoftu == true) {
-                currentCast[i].addToTrackRecord(" ADV");
-		}
-		else if (queenoftu == false) {
-                currentCast[i].addToTrackRecord("SAFE");
-		}
+            currentCast[i].addToTrackRecord("SAFE");
             currentCast[i].ppe += 3;
         }
     }
@@ -12450,12 +12987,7 @@ function judgingSlayersScreen() {
         let safeQueens = document.querySelector("b#safeQueens");
         for (let i = 0; i < 3; i++) {
             safeQueens.innerHTML += topQueens[topQueens.length - (i + 1)].getName() + ", ";
-		if (queenoftu == true) {
-            topQueens[topQueens.length - (i + 1)].addToTrackRecord(" ADV");
-		}
-		else if (queenoftu == false) {
             topQueens[topQueens.length - (i + 1)].addToTrackRecord("SAFE");
-		}
             topQueens[topQueens.length - (i + 1)].ppe += 3;
         }
         topQueens.splice(topQueens.length - 3, 3);
@@ -13499,7 +14031,7 @@ function resolveBracketAdvancement11() {
     if (tiedQueens.length > 0) {
 
         // 3% chance everyone tied advances
-        if (randomNumber(1, 100) <= 3) {
+        if (randomNumber(1, 100) <= 41) {
 
             tieMessage =
                 "We have a tie.... based on your performances tonight, and all season long, the tie... will not be broken. You are all advancing to the Semi-Finals.";
@@ -13540,6 +14072,12 @@ function resolveBracketAdvancement11() {
         tieMessage
     };
 }
+let wildcardQueenr = null;
+let wildcardDone = false;
+
+let bracket1Wildcard = null;
+let bracket2Wildcard = null;
+let bracket3Wildcard = null;
 function showBracketResult11() {
 
     let result = resolveBracketAdvancement11();
@@ -13582,6 +14120,9 @@ for (let q of result.advanced) {
 
     screen.createBold("The rest...");
 
+// Save one wildcard candidate from this bracket (highest PPE eliminated)
+let wildcardCandidate = [...result.eliminated].sort((a, b) => b.ppe - a.ppe)[0];
+
 for (let q of result.eliminated) {
 
     let last = q.trackRecord[q.trackRecord.length - 1];
@@ -13592,6 +14133,13 @@ for (let q of result.eliminated) {
         q.editTrackRecord("HIGH+ELIM");
     else
         q.editTrackRecord("SAFE+ELIM");
+
+if (getBracketNumber() == 1)
+    bracket1Wildcard = wildcardCandidate;
+else if (getBracketNumber() == 2)
+    bracket2Wildcard = wildcardCandidate;
+else if (getBracketNumber() == 3)
+    bracket3Wildcard = wildcardCandidate;
 
         q.rankP = 0;
 
@@ -13628,14 +14176,106 @@ else if (getBracketNumber() == 2)
     currentCast = [...bracket3Cast];
 if (getBracketNumber() == 3) {
 
+    if (!wildcardDone) {
+        screen.createButton("Proceed", "wildcardSelection()");
+        return;
+    }
+
+    // Add the wildcard to the advancing queens
+    bracket3AdvancedQueens.push(wildcardQueenr);
+
+    currentCast = [
+        ...bracket1AdvancedQueens,
+        ...bracket2AdvancedQueens,
+        ...bracket3AdvancedQueens
+    ];
+}
+    
+    screen.createButton("Proceed", "untucked()");
+}
+let wildcardLosers = [];
+let wildcardStep = 0;
+function wildcardSelection() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    let candidates = [
+        bracket1Wildcard,
+        bracket2Wildcard,
+        bracket3Wildcard
+    ];
+
+    // STEP 1 — SHOW CANDIDATES
+    if (wildcardStep == 0) {
+
+        wildcardStep = 1;
+
+        screen.createHeader("The Wildcard");
+        screen.createBold("One eliminated queen from each bracket has been selected based on her overall performance.");
+
+        for (let i = 0; i < candidates.length; i++) {
+            screen.createImage(candidates[i].image, "gold");
+            screen.createBold(candidates[i].getName());
+        }
+
+        screen.createHorizontalLine();
+        screen.createButton("Show Result", "wildcardSelection()");
+        return;
+    }
+
+    // STEP 2 — REVEAL WINNER
+    if (wildcardStep == 1) {
+
+        wildcardStep = 2;
+
+        screen.createHeader("The Wildcard");
+        screen.createBold("Spinning the Wildcard Lottery...");
+
+        let winner = candidates[randomNumber(0, candidates.length - 1)];
+        wildcardQueenr = winner;
+        wildcardLosers = candidates.filter(q => q !== winner);
+
+wildcardLosers = [];
+
+for (let q of candidates) {
+    if (q !== winner) {
+        wildcardLosers.push(q);
+    }
+}
+
+        screen.createImage(winner.image, "royalblue");
+        screen.createBold(
+            winner.getName() +
+            ", condragulations! You are the Wildcard and return to the competition!"
+        );
+
+        let index = eliminatedCast.indexOf(winner);
+        if (index != -1)
+            eliminatedCast.splice(index, 1);
+
+        screen.createButton("Proceed", "finishWildcardMerge()");
+    }
+}
+function finishWildcardMerge() {
+    let screen = new Scene();
+    screen.clean();
+
+if (wildcardQueenr.retEp != 0)
+    wildcardQueenr.retEp2 = episodeCount + 1;
+else
+    wildcardQueenr.retEp = episodeCount + 1;
+
+quitarDoubleElim(wildcardQueenr);
+
+    bracket3AdvancedQueens.push(wildcardQueenr);
+
     currentCast = [
         ...bracket1AdvancedQueens,
         ...bracket2AdvancedQueens,
         ...bracket3AdvancedQueens
     ];
 
-}
-    
     screen.createButton("Proceed", "untucked()");
 }
 function winnersJudging() {
@@ -13730,20 +14370,17 @@ function judgingScreen() {
     for (let i = 0; i < currentCast.length; i++) {
         if (topQueens.indexOf(currentCast[i]) == -1 && bottomQueens.indexOf(currentCast[i]) == -1) {
             safeQueens.innerHTML += currentCast[i].getName() + ", ";
-            if ((team || mudrakels) == false) {
+            if (team == false) {
                 currentCast[i].addToTrackRecord("SAFE");
                 currentCast[i].ppe += 3;
             }
-            if ((team || mudrakels) == true) {
+            if (team == true) {
                 currentCast[i].addToTrackRecord("SAFE");
                 currentCast[i].QueenA.addToTrackRecord("SAFE");
                 currentCast[i].QueenA.ppe += 3;
                 currentCast[i].QueenB.addToTrackRecord("SAFE");
                 currentCast[i].QueenB.ppe += 3;
             }
-		if (queenoftu == true) {
-                currentCast[i].addToTrackRecord(" ADV");
-		}
         }
     }
     if (isTeamChallenge && currentCast.length <= 8 && safeQueens.innerHTML == "") {
@@ -14014,13 +14651,14 @@ if (dragula) {
     screen.createBold(topQueens[0].getName() + ", condragulations, you're the winner of today's challenge!");
 }
             }
+            challengeWinners = [topQueens[0]];
 	    chalwinner = topQueens[0];
             gbm = topQueens.splice(0, 1);
 if (bracketSeason11 && episodeCount >= 10) {
 
     // Give SAFE to everyone except the winner
     for (let queen of currentCast) {
-        if (queen != gbm[0]) {
+        if (!gbm.includes(queen)) {
             queen.addToTrackRecord("SAFE");
             queen.ppe += 3;
         }
@@ -14045,6 +14683,8 @@ if (bracketSeason11 && episodeCount >= 10) {
             conjoinedReturn(topQueens[0], topQueens[1]);
             conjoinedCheck = false;
         }
+	gbm = [topQueens[0], topQueens[1]];
+        challengeWinners = [topQueens[0], topQueens[1]];
         topQueens.splice(0, 2);
     }
     else {
@@ -14083,7 +14723,7 @@ if (bracketSeason11 && episodeCount >= 10) {
 
     // Give SAFE to everyone except the winner
     for (let queen of currentCast) {
-        if (queen != gbm[0]) {
+        if (!gbm.includes(queen)) {
             queen.addToTrackRecord("SAFE");
             queen.ppe += 3;
         }
@@ -14245,7 +14885,7 @@ if (bracketSeason11 && episodeCount >= 10) {
     }
     
 }
-
+let challengeWinners = [];
 function rateAQMerge() {
 if (!chalwinner) {
     chalwinner = topQueens[0];
@@ -14255,25 +14895,54 @@ if (!chalwinner) {
     if (!solidbk) {
         document.body.style.backgroundImage = "url('image/RATEAQMVQ.webp')";
     }
+let isDoubleWinner = challengeWinners.length == 2;
 
 screen.createHeader("Rate-A-Queen");
 screen.createBold("The winner of this week's challenge is safe from elimination.");
 
 let challengeWinner = chalwinner;
 
+if (isDoubleWinner) {
+    screen.createImage(challengeWinners[0].image, "royalblue");
+    screen.createImage(challengeWinners[1].image, "royalblue");
+    screen.createBold(
+        challengeWinners[0].getName() +
+        " and " +
+        challengeWinners[1].getName() +
+        " will not participate in the Rate-A-Queen."
+    );
+} else {
+
 screen.createImage(challengeWinner.image, "royalblue");
 screen.createBold(challengeWinner.getName() + " will not participate in the Rate-A-Queen.");
+}
+
 screen.createHorizontalLine();
 
-let voters = currentCast.filter(q => q != challengeWinner);
+let voters;
+
+if (isDoubleWinner) {
+    voters = currentCast.filter(q => !challengeWinners.includes(q));
+} else {
+    voters = currentCast.filter(q => q != challengeWinner);
+}
 
 for (let i = 0; i < voters.length; i++) {
 
     // Can't vote for yourself or the challenge winner
-    let choices = currentCast.filter(q =>
+let choices;
+
+if (isDoubleWinner) {
+    choices = currentCast.filter(q =>
+        q != voters[i] &&
+        !challengeWinners.includes(q)
+    );
+} else {
+    choices = currentCast.filter(q =>
         q != voters[i] &&
         q != challengeWinner
     );
+}
 
     let rankedCont = upNdownRAQmer(voters[i], choices);
 
@@ -14292,7 +14961,10 @@ for (let i = 0; i < voters.length; i++) {
     screen.createHorizontalLine();
 }
 for (let i = 0; i < currentCast.length; i++) {
-    if (currentCast[i] != challengeWinner) {
+    if (
+    (isDoubleWinner && !challengeWinners.includes(currentCast[i])) ||
+    (!isDoubleWinner && currentCast[i] != challengeWinner)
+) {
         currentCast[i].votes /= (voters.length - 1);
     }
 }
@@ -16969,6 +17641,31 @@ function awLipsyncJudging(giveAway) {
     }
     screen.createButton("Proceed", "untucked()");
 }
+class PopDivaPanel {
+    constructor(name, image = "noimage", custom = false) {
+        this._name = name;
+
+        if (image == "noimage") {
+            this.image = "image/SpecielGuestJudges/noimage.jpg";
+        } else if (custom) {
+            this.image = image;
+        } else {
+            this.image = "image/Judges/Pop Diva Panel/" + image + ".webp";
+        }
+    }
+
+    getName() {
+        return this._name;
+    }
+}
+let gnorton = new PopDivaPanel("Graham Nortom", "GrahamNorton");
+let melb = new PopDivaPanel("Mel B", "MelB");
+let mvis = new PopDivaPanel("Michelle Visage", "MichelleVisage");
+let trixma = new PopDivaPanel("Trixie Mattel", "TrixieMattel");
+let vanwil = new PopDivaPanel("Vanessa Williams", "VanessaWilliams");
+let popdivpanel = [
+	melb, mvis, gnorton, trixma, vanwil
+];
 class GuestJudge {
     constructor(name, image = "noimage", custom = false) {
         this._name = name;
@@ -17301,6 +17998,72 @@ class MQueen {
     getRumix() {
         this.performanceScore = this._calculateScores(25, 45, this._danceStat + this._improvStat);
     }
+getQOTUSinging(theme) {
+
+    let bonus = 0;
+
+    switch (theme) {
+
+        case "Round 1":
+            bonus = this._runwayStat;
+            break;
+
+        case "Throw Back":
+            bonus = this._comedyStat;
+            break;
+
+        case "Dance Off":
+            bonus = this._danceStat;
+            break;
+
+        case "Ballad Night":
+            bonus = this._lipsyncStat;
+            break;
+
+        case "Diva Battle":
+            bonus = this._runwayStat;
+            break;
+
+        case "Girl Groups":
+            bonus = this._danceStat;
+            break;
+
+        case "Power Anthems":
+            bonus = this._runwayStat;
+            break;
+
+        case "A Cappella":
+            bonus = this._lipsyncStat;
+            break;
+
+        case "Decades Night":
+            bonus = this._actingStat;
+            break;
+
+        case "Love Songs":
+            bonus = this._runwayStat;
+            break;
+
+        case "Broadway Night":
+            bonus = this._actingStat + this._danceStat;
+            break;
+
+        case "Disco Fever":
+            bonus = this._danceStat;
+            break;
+
+        case "RuMix":
+            bonus = this._danceStat + this._runwayStat;
+            break;
+    }
+
+    this.performanceScore = this._calculateScores(
+        25,
+        55,
+        this._lipsyncStat + bonus
+    );
+
+}
     getTalentShow() {
         this.performanceScore = this._calculateScores(15, 35, randomNumber(1, 35));
     }
@@ -17696,6 +18459,72 @@ class Queen {
     getRumix() {
         this.performanceScore = this._calculateScores(25, 45, this._danceStat + this._improvStat);
     }
+getQOTUSinging(theme) {
+
+    let bonus = 0;
+
+    switch (theme) {
+
+        case "Round 1":
+            bonus = this._runwayStat;
+            break;
+
+        case "Throw Back":
+            bonus = this._comedyStat;
+            break;
+
+        case "Dance Off":
+            bonus = this._danceStat;
+            break;
+
+        case "Ballad Night":
+            bonus = this._lipsyncStat;
+            break;
+
+        case "Diva Battle":
+            bonus = this._runwayStat;
+            break;
+
+        case "Girl Groups":
+            bonus = this._danceStat;
+            break;
+
+        case "Power Anthems":
+            bonus = this._runwayStat;
+            break;
+
+        case "A Cappella":
+            bonus = this._lipsyncStat;
+            break;
+
+        case "Decades Night":
+            bonus = this._actingStat;
+            break;
+
+        case "Love Songs":
+            bonus = this._runwayStat;
+            break;
+
+        case "Broadway Night":
+            bonus = this._actingStat + this._danceStat;
+            break;
+
+        case "Disco Fever":
+            bonus = this._danceStat;
+            break;
+
+        case "RuMix":
+            bonus = this._danceStat + this._runwayStat;
+            break;
+    }
+
+    this.performanceScore = this._calculateScores(
+        25,
+        55,
+        this._lipsyncStat + bonus
+    );
+
+}
     getTalentShow() {
         this.performanceScore = this._calculateScores(15, 35, randomNumber(1, 35));
     }
@@ -18996,6 +19825,10 @@ function CheckForReturning() {
     returningQueen = true;
     return true;
 }
+    if (queenOfTheUniverse && (randomReturn || chooseReturn) && episodeCount == 3 && !returningQueen && eliminatedCast.length > 0) {
+    returningQueen = true;
+    return true;
+}
     if (bracketSeason && choosetwoReturn && episodeCount == 10 && !returningQueen && eliminatedCast.length >= 2) {
     returningQueen = true;
     return true;
@@ -20017,14 +20850,6 @@ function LaLaPaRUza(sena = "") {
                     smack1.splice(i, 1);
                     i--;
                 }
-            } else if (dragula) {
-                if (smack1[i].trackRecord[trds] == "WIN" || smack1[i].trackRecord[trds] == " WIN") {
-                    screen.createImage(smack1[i].image, "magenta");
-                    screen.createBold(smack1[i].getName() + ", as the winner of last week's challenge, you have immunity.");
-                    smack1[i].addToTrackRecord("RUN");
-                    smack1.splice(i, 1);
-                    i--;
-                }
             } else if (thailandFormat) {
                 if (smack1[i].trackRecord[trds] == " WIN" || smack1[i].trackRecord[trds] == " WINWIN" || smack1[i].trackRecord[trds] == "WINWIN") {
                     screen.createImage(smack1[i].image, "magenta");
@@ -20083,28 +20908,16 @@ function LaLaPaRUza(sena = "") {
                         queen1.addToTrackRecord("RTRN ");
                         quitarDoubleElim(queen1);
                         eliminatedCast.splice(eliminatedCast.indexOf(queen1), 1);
-		if (queenoftu == true) {
-                        queen2.addToTrackRecord(" ADV");
-                        queen3.addToTrackRecord(" ADV");
-		}
-		else if (queenoftu == false) {
                         queen2.addToTrackRecord("SAFE ");
                         queen3.addToTrackRecord("SAFE ");
-		}
                     } else {
                         toAlots([lipSync_1[0], lipSync_1[1]], [lipSync_1[2]], alotsSong);
                         screen.createImage(lipSync_1[0].image, "royalblue");
                         screen.createImage(lipSync_1[1].image, "royalblue");
                         screen.createBold(lipSync_1[0].getName() + " and " + lipSync_1[1].getName() + ", shantay you stay!");
                         if (queen1 == lipSync_1[2]) {
-		if (queenoftu == true) {
-                            lipSync_1[0].addToTrackRecord(" ADV");
-                            lipSync_1[1].addToTrackRecord(" ADV");
-		}
-		else if (queenoftu == false) {
                             lipSync_1[0].addToTrackRecord("SAFE ");
                             lipSync_1[1].addToTrackRecord("SAFE ");
-		}
                             queen1.addToTrackRecord("OUT ");
                         } else {
                             if (chocolateBarTwist  && !chocolateBarTwistCheck) {
@@ -20127,39 +20940,6 @@ function LaLaPaRUza(sena = "") {
                                 } else {
                                     screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
                                     screen.createBold("It's chocolate.");
-                                    screen.createImage(lipSync_1[2].image, "red");
-                                    screen.createBold(lipSync_1[2].getName() + ", sashay away...");
-                                    lipSync_1[2].addToTrackRecord("ELIM");
-                                    eliminatedCast.unshift(lipSync_1[2]);
-                                    currentCast.splice(currentCast.indexOf(lipSync_1[2]), 1);
-                                    lipSync_1[2].unfavoritism += 5;
-                                    if (queen2 != lipSync_1[2]) {
-                                        queen2.addToTrackRecord("SAFE ");
-                                    }
-                                    if (queen3 != lipSync_1[2]) {
-                                        queen3.addToTrackRecord("SAFE ");
-                                    }
-                                }
-                           } else if (badonkaDunkTwist  && !badonkaDunkTwistCheck) {
-                                screen.createBold(lipSync_1[2].getName() + ", now your fate rests in the hands of the drag gods.");
-                                screen.createBold("If you pull the right lever, you will be safe.");
-                                if (badonkaDunkCheck(lipSync_1[2]) == true) {
-                                    screen.createImage("image/ChocolateBarWithTicket.webp", "gold");
-                                    screen.createBold("You've got the RIGHT LEVER!!!! The gods have spoken!");
-                                    screen.createImage(lipSync_1[2].image, "gold");
-                                    screen.createBold(lipSync_1[2].getName() + "!! Condragulations, you are safe to slay another day!");
-                                    lipSync_1[2].addToTrackRecord("BDNK");
-                                    lipSync_1[2].unfavoritism += 3;
-                                    badonkaDunkTwistCheck = true;
-                                    if (queen2 != lipSync_1[2]) {
-                                        queen2.addToTrackRecord("SAFE ");
-                                    }
-                                    if (queen3 != lipSync_1[2]) {
-                                        queen3.addToTrackRecord("SAFE ");
-                                    }
-                                } else {
-                                    screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
-                                    screen.createBold("nothing happens to michelle visage.");
                                     screen.createImage(lipSync_1[2].image, "red");
                                     screen.createBold(lipSync_1[2].getName() + ", sashay away...");
                                     lipSync_1[2].addToTrackRecord("ELIM");
@@ -20257,27 +21037,6 @@ function LaLaPaRUza(sena = "") {
                                     currentCast.splice(currentCast.indexOf(lipSync_1[2]), 1);
                                     lipSync_1[2].unfavoritism += 5;
                                 }
-                           } else if (badonkaDunkTwist  && !badonkaDunkTwistCheck) {
-                                screen.createBold(lipSync_1[2].getName() + ", now your fate rests in the hands of the drag gods.");
-                                screen.createBold("If you pull the right lever, you will be safe.");
-                                if (badonkaDunkCheck(lipSync_1[2]) == true) {
-                                    screen.createImage("image/ChocolateBarWithTicket.webp", "gold");
-                                    screen.createBold("You've got the RIGHT LEVER!!!! The gods have spoken!");
-                                    screen.createImage(lipSync_1[2].image, "gold");
-                                    screen.createBold(lipSync_1[2].getName() + "!! Condragulations, you are safe to slay another day!");
-                                    lipSync_1[2].addToTrackRecord("BDNK");
-                                    lipSync_1[2].unfavoritism += 3;
-                                    badonkaDunkTwistCheck = true;
-                                } else {
-                                    screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
-                                    screen.createBold("nothing happens to michelle visage.");
-                                    screen.createImage(lipSync_1[2].image, "red");
-                                    screen.createBold(lipSync_1[2].getName() + ", sashay away...");
-                                    lipSync_1[2].addToTrackRecord("ELIM");
-                                    eliminatedCast.unshift(lipSync_1[2]);
-                                    currentCast.splice(currentCast.indexOf(lipSync_1[2]), 1);
-                                    lipSync_1[2].unfavoritism += 5;
-                                }
                             } else {
                                 screen.createImage(lipSync_1[2].image, "red");
                                 screen.createBold(lipSync_1[2].getName() + ", sashay away...");
@@ -20337,27 +21096,6 @@ function LaLaPaRUza(sena = "") {
                                     currentCast.splice(currentCast.indexOf(queen2), 1);
                                     queen2.unfavoritism += 5;
                                 }
-                           } else if (badonkaDunkTwist  && !badonkaDunkTwistCheck) {
-                                screen.createBold(queen2.getName() + ", now your fate rests in the hands of the drag gods.");
-                                screen.createBold("If you pull the right lever, you will be safe.");
-                                if (badonkaDunkCheck(queen2) == true) {
-                                    screen.createImage("image/ChocolateBarWithTicket.webp", "gold");
-                                    screen.createBold("You've got the RIGHT LEVER!!!! The gods have spoken!");
-                                    screen.createImage(queen2.image, "gold");
-                                    screen.createBold(queen2.getName() + "!! Condragulations, you are safe to slay another day!");
-                                    queen2.addToTrackRecord("BDNK");
-                                    queen2.unfavoritism += 3;
-                                    badonkaDunkTwistCheck = true;
-                                } else {
-                                    screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
-                                    screen.createBold("nothing happens to michelle visage.");
-                                    screen.createImage(queen2.image, "red");
-                                    screen.createBold(queen2.getName() + ", sashay away...");
-                                    queen2.addToTrackRecord("ELIM");
-                                    eliminatedCast.unshift(queen2);
-                                    currentCast.splice(currentCast.indexOf(queen2), 1);
-                                    queen2.unfavoritism += 5;
-                                }
                             } else {
                                 screen.createImage(queen2.image, "red");
                                 screen.createBold(queen2.getName() + ", sashay away...");
@@ -20396,27 +21134,6 @@ function LaLaPaRUza(sena = "") {
                                     currentCast.splice(currentCast.indexOf(queen2), 1);
                                     queen2.unfavoritism += 5;
                                 }
-                           } else if (badonkaDunkTwist  && !badonkaDunkTwistCheck) {
-                                screen.createBold(queen2.getName() + ", now your fate rests in the hands of the drag gods.");
-                                screen.createBold("If you pull the right lever, you will be safe.");
-                                if (chocolateBarCheck(queen2) == true) {
-                                    screen.createImage("image/ChocolateBarWithTicket.webp", "gold");
-                                    screen.createBold("You've got the RIGHT LEVER!!!! The gods have spoken!");
-                                    screen.createImage(queen2.image, "gold");
-                                    screen.createBold(queen2.getName() + "!! Condragulations, you are safe to slay another day!");
-                                    queen2.addToTrackRecord("BDNK");
-                                    queen2.unfavoritism += 3;
-                                    badonkaDunkTwistCheck = true;
-                                } else {
-                                    screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
-                                    screen.createBold("nothing happens to michelle visage.");
-                                    screen.createImage(queen2.image, "red");
-                                    screen.createBold(queen2.getName() + ", sashay away...");
-                                    queen2.addToTrackRecord("ELIM");
-                                    eliminatedCast.unshift(queen2);
-                                    currentCast.splice(currentCast.indexOf(queen2), 1);
-                                    queen2.unfavoritism += 5;
-                                }
                             } else {
                                 queen2.addToTrackRecord("ELIM");
                                 eliminatedCast.unshift(queen2);
@@ -20434,8 +21151,8 @@ function LaLaPaRUza(sena = "") {
                 }
             }else{
                 screen.createBold(queen1.getName() + " and " + queen2.getName() + " will lipsync...");
-                lsSong();
                 screen.createBold("The time has come for you to lip-sync... for your lives! Good luck, and don't fuck it up.");
+                lsSong();
                 screen.createBold("I've made my decision.");
                 let lipSync = [queen1, queen2];
                 for (let i_1 = 0; i_1 < lipSync.length; i_1++) {
@@ -20477,36 +21194,6 @@ function LaLaPaRUza(sena = "") {
                             } else {
                                 screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
                                 screen.createBold("It's chocolate.");
-                                screen.createImage(lipSync[1].image, "red");
-                                screen.createBold(lipSync[1].getName() + ", sashay away. ");
-                                insOgPla(lipSync[0]);
-                                currentCast.push(lipSync[0]);
-                                lipSync[0].addToTrackRecord("RTRN ");
-                                eliminatedCast.splice(eliminatedCast.indexOf(lipSync[0]), 1);
-                                lipSync[1].addToTrackRecord("ELIM");
-                                eliminatedCast.unshift(lipSync[1]);
-                                currentCast.splice(currentCast.indexOf(lipSync[1]), 1);
-                                lipSync[1].unfavoritism += 5;
-                                
-                            }
-                       } else if (badonkaDunkTwist  && !badonkaDunkTwistCheck) {
-                            screen.createBold(lipSync[1].getName() + ", now your fate rests in the hands of the drag gods.");
-                            screen.createBold("If you pull the right lever, you will be safe.");
-                            if (badonkaDunkCheck(lipSync[1]) == true) {
-                                insOgPla(queen1);
-                                currentCast.push(lipSync[0]);
-                                lipSync[0].addToTrackRecord("RTRN ");
-                                eliminatedCast.splice(eliminatedCast.indexOf(lipSync[0]), 1);
-                                screen.createImage("image/ChocolateBarWithTicket.webp", "gold");
-                                screen.createBold("You've got the RIGHT LEVER!!!! The gods have spoken!");
-                                screen.createImage(lipSync[1].image, "gold");
-                                screen.createBold(lipSync[1].getName() + "!! Condragulations, you are safe to slay another day!");
-                                lipSync[1].addToTrackRecord("BDNK");
-                                lipSync[1].unfavoritism += 3;
-                                badonkaDunkTwistCheck = true;
-                            } else {
-                                screen.createImage("image/ChocolateBarWithNoTicket.webp", "brown");
-                                screen.createBold("nothing happens to michelle visage.");
                                 screen.createImage(lipSync[1].image, "red");
                                 screen.createBold(lipSync[1].getName() + ", sashay away. ");
                                 insOgPla(lipSync[0]);
@@ -22507,6 +23194,11 @@ function badonkaDunkCheck(queen, queen2 = "") {
 }
 class Scene {
     constructor(div = undefined) {
+window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "instant"
+});
         if (div == undefined) {
             this._MainBlock = document.querySelector("div#MainBlock");
         } else {
