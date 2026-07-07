@@ -17650,7 +17650,7 @@ class PopDivaPanel {
         } else if (custom) {
             this.image = image;
         } else {
-            this.image = "image/Judges/Pop Diva Panel/" + image + ".webp";
+            this.image = "image/judges/Pop Diva Panel/" + image + ".webp";
         }
     }
 
