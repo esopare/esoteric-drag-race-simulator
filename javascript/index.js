@@ -358,6 +358,12 @@ if (improvChallengeCounter == 3) {
     }
 if (queenOfTheUniverse) {
     queenOfTheUniverseChallenge();
+    }
+else if (queenOfTheUni2 && episodeCount <= 2) {
+    queenOfTheUniverseChallenge2();
+    }
+else if (queenOfTheUni2 && episodeCount >= 3) {
+    queenOfTheUniverseChallenge();
 } else {
     createChallenge(challenges, miniChallengeScreen);
 }
@@ -1582,6 +1588,8 @@ function queensPerformances() {
         }
         performanceScreen.createButton("Proceed", "judgingThailand()");
 } else if (queenOfTheUniverse) {
+    performanceScreen.createButton("Proceed", "qotuJudging()");
+} else if (queenOfTheUni2) {
     performanceScreen.createButton("Proceed", "qotuJudging()");
 } else {
     performanceScreen.createButton("Proceed", "runway()", "button2");
@@ -4494,6 +4502,410 @@ screen.createHorizontalLine();
     }
 
     screen.createButton("Proceed", "newEpisode()");
+}
+let qotuGroup1 = [];
+let qotuGroup2 = [];
+let qotuPerformers = [];
+
+let qotuGroup1Bottom = [];
+let qotuGroup2Bottom = [];
+
+let qotuAudienceElim = null;
+function qotuSplitGroups() {
+
+    qotuGroup1 = [];
+    qotuGroup2 = [];
+
+    let shuffled = [...currentCast];
+
+    // Shuffle
+    for (let i = shuffled.length - 1; i > 0; i--) {
+
+        let j = randomNumber(0, i);
+
+        let temp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = temp;
+
+    }
+
+    let half = Math.ceil(shuffled.length / 2);
+
+    qotuGroup1 = shuffled.slice(0, half);
+    qotuGroup2 = shuffled.slice(half);
+
+}
+function queenOfTheUniverseChallenge2() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    if (!solidbk)
+        document.body.style.backgroundImage = "url('image/QOTUSTAGE.webp')";
+
+    // Split only once
+    if (episodeCount == 1)
+        qotuSplitGroups();
+
+    for (let queen of currentCast)
+        queen.episodesOn++;
+
+    screen.createHeader("Queen of the Universe");
+
+    let theme;
+
+    if (episodeCount <= 2)
+        theme = "Round 1";
+    else
+        theme = qotuThemes[Math.min(episodeCount - 2, qotuThemes.length - 1)];
+
+    episodeChallenges.push(theme);
+
+    screen.createBold("Tonight's Theme");
+    screen.createBold(theme);
+
+    screen.createHorizontalLine();
+
+    screen.createBold("", "Description");
+    qotuChallengeDescription(theme);
+
+    screen.createHorizontalLine();
+
+    // Decide who performs
+    if (episodeCount == 1) {
+
+        qotuPerformers = qotuGroup1;
+
+        for (let queen of qotuGroup2)
+            queen.addToTrackRecord("RUN ");
+
+    }
+
+    else if (episodeCount == 2) {
+
+        qotuPerformers = qotuGroup2;
+
+        for (let queen of qotuGroup1)
+            queen.addToTrackRecord("RUN ");
+
+    }
+
+    else {
+
+        qotuPerformers = [...currentCast];
+
+    }
+
+    // Perform
+    for (let queen of qotuPerformers) {
+
+        queen.getQOTUSinging(theme);
+
+        screen.createImage(queen.image);
+        screen.createBold(queen.getName());
+
+    }
+
+    screen.createButton(
+        "Proceed",
+        "qotuJudging2()"
+    );
+
+}
+function qotuJudging2() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    if (!solidbk)
+        document.body.style.backgroundImage = "url('image/POPPANEL.webp')";
+
+    screen.createHeader("Judging");
+
+    qotuPerformers.sort((a,b)=>a.performanceScore-b.performanceScore);
+
+    let judgedCast = qotuPerformers;
+
+    let bottomCount;
+
+    if (judgedCast.length <= 5)
+        bottomCount = 3;
+    else if (judgedCast.length <= 8)
+        bottomCount = 4;
+    else if (judgedCast.length <= 10)
+        bottomCount = 5;
+    else
+        bottomCount = Math.floor(judgedCast.length/2);
+
+    let advCount = judgedCast.length-bottomCount;
+
+    screen.createBold("The Pop Diva Panel has made their decision...");
+
+    screen.createHorizontalLine();
+
+    // ADV
+    for(let i=0;i<advCount;i++){
+
+        judgedCast[i].addToTrackRecord("AVADV");
+        judgedCast[i].ppe+=3;
+
+        screen.createImage(judgedCast[i].image);
+        screen.createBold(judgedCast[i].getName());
+
+    }
+
+    screen.createHorizontalLine();
+
+    screen.createBold("The following queens are in danger...");
+
+    // Bottoms
+    for(let i=advCount;i<judgedCast.length;i++){
+
+        let queen=judgedCast[i];
+
+if (episodeCount == 1)
+    queen.addToTrackRecord("BTM6");
+        queen.ppe+=2;
+
+        if(episodeCount==1)
+            qotuGroup1Bottom.push(queen);
+
+        else if(episodeCount==2)
+            qotuGroup2Bottom.push(queen);
+
+        screen.createImage(queen.image,"red");
+        screen.createBold(queen.getName());
+
+    }
+
+    screen.createHorizontalLine();
+
+    if(episodeCount==1){
+
+        screen.createButton(
+            "Proceed",
+            "qotuRoundOneResults()"
+        );
+
+    }
+
+    else if(episodeCount==2){
+
+        screen.createButton(
+            "Proceed",
+            "qotuAudienceVote()"
+        );
+
+    }
+
+    else if (episodeCount >= 3) {
+
+        screen.createButton(
+            "Proceed",
+            "qotuDecision()"
+        );
+
+    }
+
+    else{
+
+        screen.createButton(
+            "Proceed",
+            "qotuDecision2()"
+        );
+
+    }
+
+}
+function qotuAudienceVote() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    screen.createHeader("Audience Vote");
+
+    // Merge both groups
+    bottomQueens = [
+        ...qotuGroup1Bottom,
+        ...qotuGroup2Bottom
+    ];
+
+    let totalBottom = bottomQueens.length;
+
+    // ==========================
+    // GROUP 1
+    // BTM3 -> BTM6
+    // then add RUN
+    // ==========================
+
+
+    // ==========================
+    // GROUP 2
+    // RUN -> RUN | BTM6
+    // ==========================
+
+    for (let queen of qotuGroup2Bottom) {
+
+        queen.addToTrackRecord(
+            "BTM" + totalBottom
+        );
+
+    }
+
+    screen.createParagraph(
+        "America has voted..."
+    );
+// Random audience elimination
+let eliminated =
+    bottomQueens[randomNumber(0, bottomQueens.length - 1)];
+
+screen.createImage(eliminated.image);
+
+screen.createBold(
+    eliminated.getName() +
+    ", you received the fewest audience votes..."
+);
+
+// ======================
+// Replace ONLY Episode 2
+// ======================
+
+
+    // Remove BTM6
+    eliminated.trackRecord.pop();
+
+    // Add ELIM
+    eliminated.addToTrackRecord("ELIM");
+
+
+
+// Save audience eliminated queen
+qotuAudienceElim = eliminated;
+
+// Remove from competition
+eliminated.queenDisqOrDept = true;
+
+eliminatedCast.unshift(eliminated);
+
+currentCast.splice(
+    currentCast.indexOf(eliminated),
+    1
+);
+
+// Remove from bottom list
+bottomQueens.splice(
+    bottomQueens.indexOf(eliminated),
+    1
+);
+
+screen.createHorizontalLine();
+// Round 1 is finished.
+// Clear temporary lists so Episode 3 starts fresh.
+
+screen.createButton(
+    "Proceed",
+    "qotuDecision2()"
+);
+
+}
+function qotuRoundOneResults() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    screen.createHeader("Round 1");
+
+    screen.createParagraph(
+        "The first group has finished competing. Next episode, the remaining queens will perform before the first eliminations take place."
+    );
+
+    screen.createButton(
+        "Proceed",
+        "newEpisode()"
+    );
+
+}
+function qotuDecision2() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    if (!solidbk)
+        document.body.style.backgroundImage = "url('image/POPPANEL.webp')";
+
+    screen.createHeader("Final Decision");
+
+    screen.createBold(
+        "The Pop Diva Panel has made their final decision..."
+    );
+
+    screen.createHorizontalLine();
+
+    screen.createButton(
+        "Reveal Decision",
+        "qotuJudgeElimination2()"
+    );
+
+}
+function qotuJudgeElimination2() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    if (!solidbk)
+        document.body.style.backgroundImage = "url('image/POPPANEL.webp')";
+
+    screen.createHeader("Final Decision");
+
+    screen.createBold(
+        "The Pop Diva Panel has made their final decision..."
+    );
+
+    screen.createHorizontalLine();
+
+    // Pick ONE queen from the remaining bottom queens
+    let queen =
+        bottomQueens[randomNumber(0, bottomQueens.length - 1)];
+
+    // Group 1
+    // BTM6 | RUN
+
+        queen.trackRecord.pop(); // remove RUN
+        queen.addToTrackRecord("ELIM");
+
+    screen.createImage(queen.image, "red");
+
+    screen.createBold(
+        queen.getName() +
+        ", I'm sorry my dear, this is not your time."
+    );
+
+    queen.queenDisqOrDept = true;
+
+    eliminatedCast.unshift(queen);
+
+    currentCast.splice(
+        currentCast.indexOf(queen),
+        1
+    );
+
+// Round 1 is over
+qotuGroup1 = [];
+qotuGroup2 = [];
+
+qotuGroup1Bottom = [];
+qotuGroup2Bottom = [];
+
+qotuPerformers = [];
+qotuAudienceElim = null;
+
+bottomQueens = [];
+
+    screen.createButton(
+        "Proceed",
+        "newEpisode()"
+    );
+
 }
 let firstLS = [];
 let secondLS = [];
@@ -9672,6 +10084,7 @@ let thailandFormat = false;
 let team = false;
 let dragula = false;
 let queenOfTheUniverse = false;
+let queenOfTheUni2 = false;
 let as9_dstw = false;
 let mudrakels = false;
 let solidbk = false;
@@ -9698,6 +10111,8 @@ function predefCast(cast, format, finale, premiere = '', returning = '') {
         dragula = true;
     } else if (format == "queenoftu") {
         queenOfTheUniverse = true;
+    } else if (format == "queenoftus2") {
+        queenOfTheUni2 = true;
     } else if (format == "mudrakels") {
         mudrakels = true;
     } else if (format == "lipsync-assassin"){ 
@@ -9901,6 +10316,7 @@ function predefCast(cast, format, finale, premiere = '', returning = '') {
         all_stars = false;
         all_winners = false;
 	queenOfTheUniverse = false;
+	queenOfTheUni2 = false;
         allstars3Finale = false;
         smackdown = false;
         voteReturn = false;
@@ -9953,6 +10369,7 @@ function predefCast(cast, format, finale, premiere = '', returning = '') {
         all_stars = false;
         all_winners = false;
 	queenOfTheUniverse = false;
+	queenOfTheUni2 = false;
         allstars3Finale = false;
         smackdown = false;
         voteReturn = false;
@@ -10269,6 +10686,8 @@ function startSimulation(challenge = "") {
             dragula = true;
         } else if (select.options[select.selectedIndex].value == "queenoftu") {
             queenOfTheUniverse = true;
+        } else if (select.options[select.selectedIndex].value == "queenoftus2") {
+            queenOfTheUni2 = true;
         } else if (select.options[select.selectedIndex].value == "all-stars") {
             all_stars = true;
         } else if (select.options[select.selectedIndex].value == "all-winners") {
@@ -10560,6 +10979,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
         } else if (tripleprem && currentCast.length < 12 ) {
             window.alert("Triple Premiere format needs at least 12 queens!");
@@ -10595,6 +11015,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
         } else if ((s6Premiere || s12Premiere || porkchopPremiere || porkchopElim || s14Premiere || ph2Premiere || newImmTwst || tripleprem) && (top5 || juryt5) && currentCast.length < 12 ) {
             window.alert("Top 5 finale with triple/double premiere formats needs at least 12 queens!");
@@ -10630,6 +11051,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
         } else if (uk3Premiere && currentCast.length < 6) {
             window.alert("Uk3 Premiere needs at least 6 queens!");
@@ -10664,6 +11086,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10710,6 +11133,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10757,6 +11181,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10803,6 +11228,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10904,6 +11330,65 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
+            allstars3Finale = false;
+            smackdown = false;
+            voteReturn = false;
+            conjoinedQueens = false;
+            queensOfComedy = false;
+            reinasDLC = false;
+            kittyGirlGroup = false;
+            attentionGGroup = false;
+            randomReturn = false;
+            readingIF = false;
+            chooseReturn = false;
+            choosetwoReturn = false;
+            lalaparuza = false;
+            chocolateBarTwist = false;
+            chocolateBarTwistChoosable = false;
+            badonkaDunkTwist = false;
+            badonkaDunkTwistChoosable = false;
+            immunityTwist = false;
+            newImmTwst = false;
+            goldenBeaverTwist = false;
+            fameGames = false;
+            goldenBoot = false;
+            lookperdido = false;
+            slayoff = false;
+            reuls = false;
+        } else if((queenOfTheUniverse || queenOfTheUni2) && (smackdown || s14Premiere || s12Premiere || s9Premiere || s6Premiere || tripleprem || porkchopPremiere || porkchopElim || uk3Premiere || lipassPremiere || parPremiere || ph2Premiere || voteReturn || conjoinedQueens || queensOfComedy || reinasDLC || kittyGirlGroup || attentionGGroup || randomReturn || readingIF || chooseReturn || choosetwoReturn || lalaparuza || chocolateBarTwist || badonkaDunkTwist)) {
+            window.alert("Queen of the Universe format is not compatible with any premiere or return formats.");
+            s6Premiere = false;
+            tripleprem = false;
+            s9Premiere = false;
+            s12Premiere = false;
+            s14Premiere = false;
+            porkchopPremiere = false;
+            porkchopElim = false;
+            uk3Premiere = false;
+            lipassPremiere = false;
+            parPremiere = false;
+            ph2Premiere = false;
+            top5 = false;
+            juryt5 = false;
+            top8 = false;
+            top8lftc = false;
+            top8return = false;
+            top4 = false;
+            top3 = false;
+            top2F = false;
+            teamsF = false;
+            regularFormat = false;
+            dragula = false;
+            thailandFormat = false;
+            canFinale = false;
+            lftc = false;
+            lipsync_assassin = false;
+            smackdown = false;
+            all_stars = false;
+            all_winners = false;
+            queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -10963,6 +11448,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -11022,6 +11508,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -11075,6 +11562,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -11136,6 +11624,7 @@ function startSimulation(challenge = "") {
             all_stars = false;
             all_winners = false;
             queenOfTheUniverse = false;
+            queenOfTheUni2 = false;
             allstars3Finale = false;
             smackdown = false;
             voteReturn = false;
@@ -13579,6 +14068,7 @@ function tournamentLipsyncJudging() {
 
         screen.createBold("Condragulations, you're both winners, baby!");
 
+
 top2[0].stars++;
 top2[1].stars++;
 
@@ -13593,8 +14083,8 @@ for (let it = 0; it < legLeyT.length; it++) {
     }
 }
 
-        top2[0].addToTrackRecord("WIN");
-        top2[1].addToTrackRecord("WIN");
+        top2[0].addToTrackRecord(" WIN");
+        top2[1].addToTrackRecord(" WIN");
 
         top2[0].favoritism += 5;
         top2[1].favoritism += 5;
@@ -18251,7 +18741,7 @@ let alexia = new MQueen("Alexia Thenight", 7, 7, 7, 7, 7, 7, 7, "AlexiaThenight"
 let barda = new MQueen("Barda Petarda", 7, 7, 7, 7, 7, 7, 7, "BardaPetarda");
 let bombom = new MQueen("Bombombun", 7, 7, 7, 7, 7, 7, 7, "BombomBun");
 let capria = new MQueen("Capria Black", 7, 7, 7, 7, 7, 7, 7, "CapriaBlack");
-let dama = new MQueen("Dama D'night", 7, 7, 7, 7, 7, 7, 7, "DamaD'night");
+let dama = new MQueen("Dama D'night", 7, 7, 7, 7, 7, 7, 7, "DamaDnight");
 let lakesiss = new MQueen("Lakesiss", 7, 7, 7, 7, 7, 7, 7, "Lakesiss");
 let nadine = new MQueen("Nadine Rodríguez", 7, 7, 7, 7, 7, 7, 7, "NadineRodriguez");
 let pietra = new MQueen("Pietra Halliwell", 7, 7, 7, 7, 7, 7, 7, "PietraHalliwell");
