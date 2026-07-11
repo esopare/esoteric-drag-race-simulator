@@ -5657,7 +5657,7 @@ function finaleLS8FinalDesc() {
 
     screen.createHorizontalLine();
 
-    let event = checkForLipsyncEvent(finalLS);
+    let event = checkForLipsyncEvent(T8finalLS);
 
     if (event != false) {
         let eventQueen = T8finalLS.find(q => q.getName() == event.queen.getName());
@@ -6833,6 +6833,7 @@ function finaleAS9Judging() {
     AS9T3 = true;
         isThisA3Way = true;
 
+    episodeChallenges.push("Finale");
     screen.createButton("Proceed", "finaleLipSyncsDesc3()");
 }
 function finaleTeamJudging() {
@@ -7425,7 +7426,8 @@ function AS9Finale() {
     }
 
     // Go directly to your Top 3 finale
-    screen.createButton("Proceed", "finaleLipSyncsDesc3()");
+    episodeChallenges.push("Finale");
+    screen.createButton("Proceed", "finaleTop3Judging()");
 }
 let wht = [];
 let qonfi = 0;
@@ -19424,15 +19426,15 @@ getQOTUSinging(theme) {
         this.trackRecord[this.trackRecord.length - 1] += added;
     }
 }
-//DRAG DEN SEASON 1
-let aries = new MQueen("Aries Night", 7, 7, 7, 7, 7, 7, 7, "AriesNight");
-let barbieQ = new MQueen("Barbie-Q", 7, 7, 7, 7, 7, 7, 7, "Barbie-Q");
-let lgagita = new MQueen("Lady Gagita", 7, 7, 7, 7, 7, 7, 7, "LadyGagita");
-let mcris = new MQueen("Maria Cristina", 7, 7, 7, 7, 7, 7, 7, "MariaCristina");
-let naia = new MQueen("Naia", 9, 10, 8, 6, 10, 9, 12, "NAIA");
-let oa = new MQueen("O-A", 7, 7, 7, 7, 7, 7, 7, "O-A");
-let pura = new MQueen("Pura Luka Vega", 7, 7, 7, 7, 7, 7, 7, "PuraLukaVega");
-let shewarma = new MQueen("Shewarma", 6, 9, 8, 7, 8, 10, 8, "Shewarma");
+//DRAG DEN SEASON 1        acting comedy dance design improv runway lipsync
+let aries = new MQueen("Aries Night", 6, 6, 7, 6, 6, 7, 7, "AriesNight");
+let barbieQ = new MQueen("Barbie-Q", 5, 5, 7, 7, 7, 9, 9, "Barbie-Q");
+let lgagita = new MQueen("Lady Gagita", 7, 6, 9, 7, 8, 8, 8, "LadyGagita");
+let mcris = new MQueen("Maria Cristina", 8, 11, 7, 7, 9, 8, 7, "MariaCristina");
+let naia = new MQueen("Naia", 8, 10, 8, 6, 8, 9, 7, "NAIA");
+let oa = new MQueen("O-A", 6, 6, 8, 7, 6, 9, 8, "O-A");
+let pura = new MQueen("Pura Luka Vega", 6, 5, 5, 7, 6, 9, 5, "PuraLukaVega");
+let shewarma = new MQueen("Shewarma", 9, 9, 8, 7, 8, 11, 7, "Shewarma");
 let dragden_1 = [aries, barbieQ, lgagita, mcris, naia, oa, pura, shewarma];
 //DRAG DEN SEASON 2
 let dejad = new MQueen("Deja", 7, 7, 7, 7, 7, 7, 7, "Dejad");
