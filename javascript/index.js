@@ -4959,14 +4959,11 @@ let finalLS = [];
 let onFinale = false;
 let onTop4Finale = false;
 
-let T8thirdLS = [];
-let T8fourthLS = [];
+let thirdLS = [];
+let fourthLS = [];
 
-let T8semiLS1 = [];
-let T8semiLS2 = [];
-let T8firstLS = [];
-let T8secondLS = [];
-let T8finalLS = [];
+let semiLS1 = [];
+let semiLS2 = [];
 
 function finaleLS() {
     let screen = new Scene();
@@ -5009,14 +5006,14 @@ function finaleLS8Wildcard() {
     let screen = new Scene();
     screen.clean();
 
-    T8firstLS = [];
-    T8secondLS = [];
-    T8thirdLS = [];
-    T8fourthLS = [];
+    firstLS = [];
+    secondLS = [];
+    thirdLS = [];
+    fourthLS = [];
 
-    T8semiLS1 = [];
-    T8semiLS2 = [];
-    T8finalLS = [];
+    semiLS1 = [];
+    semiLS2 = [];
+    finalLS = [];
 
     screen.createHeader("The Grand Finale!");
 
@@ -5067,49 +5064,49 @@ let queens = [...currentCast];
 
     screen.createHorizontalLine();
 
-    T8firstLS.push(
+    firstLS.push(
         queens.splice(randomNumber(0, queens.length - 1), 1)[0],
         queens.splice(randomNumber(0, queens.length - 1), 1)[0]
     );
 
-    T8secondLS.push(
+    secondLS.push(
         queens.splice(randomNumber(0, queens.length - 1), 1)[0],
         queens.splice(randomNumber(0, queens.length - 1), 1)[0]
     );
 
-    T8thirdLS.push(
+    thirdLS.push(
         queens.splice(randomNumber(0, queens.length - 1), 1)[0],
         queens.splice(randomNumber(0, queens.length - 1), 1)[0]
     );
 
-    T8fourthLS.push(
+    fourthLS.push(
         queens.splice(randomNumber(0, queens.length - 1), 1)[0],
         queens.splice(randomNumber(0, queens.length - 1), 1)[0]
     );
 
     screen.createBigText("The Quarterfinal Bracket");
 
-    screen.createImage(T8firstLS[0].image,"darkblue");
-    screen.createImage(T8firstLS[1].image,"darkblue");
-    screen.createBold(T8firstLS[0].getName()+" vs. "+T8firstLS[1].getName());
+    screen.createImage(firstLS[0].image,"darkblue");
+    screen.createImage(firstLS[1].image,"darkblue");
+    screen.createBold(firstLS[0].getName()+" vs. "+firstLS[1].getName());
 
     screen.createParagraph("vs");
 
-    screen.createImage(T8secondLS[0].image,"darkred");
-    screen.createImage(T8secondLS[1].image,"darkred");
-    screen.createBold(T8secondLS[0].getName()+" vs. "+T8secondLS[1].getName());
+    screen.createImage(secondLS[0].image,"darkred");
+    screen.createImage(secondLS[1].image,"darkred");
+    screen.createBold(secondLS[0].getName()+" vs. "+secondLS[1].getName());
 
     screen.createParagraph("vs");
 
-    screen.createImage(T8thirdLS[0].image,"purple");
-    screen.createImage(T8thirdLS[1].image,"purple");
-    screen.createBold(T8thirdLS[0].getName()+" vs. "+T8thirdLS[1].getName());
+    screen.createImage(thirdLS[0].image,"purple");
+    screen.createImage(thirdLS[1].image,"purple");
+    screen.createBold(thirdLS[0].getName()+" vs. "+thirdLS[1].getName());
 
     screen.createParagraph("vs");
 
-    screen.createImage(T8fourthLS[0].image,"green");
-    screen.createImage(T8fourthLS[1].image,"green");
-    screen.createBold(T8fourthLS[0].getName()+" vs. "+T8fourthLS[1].getName());
+    screen.createImage(fourthLS[0].image,"green");
+    screen.createImage(fourthLS[1].image,"green");
+    screen.createBold(fourthLS[0].getName()+" vs. "+fourthLS[1].getName());
 
     episodeChallenges.push("Finale");
 
@@ -5119,14 +5116,14 @@ function finaleLS8() {
     let screen = new Scene();
     screen.clean();
 
-    T8firstLS = [];
-    T8secondLS = [];
-    T8thirdLS = [];
-    T8fourthLS = [];
+    firstLS = [];
+    secondLS = [];
+    thirdLS = [];
+    fourthLS = [];
 
-    T8semiLS1 = [];
-    T8semiLS2 = [];
-    T8finalLS = [];
+    semiLS1 = [];
+    semiLS2 = [];
+    finalLS = [];
 
     screen.createHeader("The Grand Finale!");
 
@@ -5147,49 +5144,49 @@ function finaleLS8() {
 
     let queens = [...currentCast];
 
-    T8firstLS.push(
+    firstLS.push(
         queens.splice(randomNumber(0, queens.length - 1),1)[0],
         queens.splice(randomNumber(0, queens.length - 1),1)[0]
     );
 
-    T8secondLS.push(
+    secondLS.push(
         queens.splice(randomNumber(0, queens.length - 1),1)[0],
         queens.splice(randomNumber(0, queens.length - 1),1)[0]
     );
 
-    T8thirdLS.push(
+    thirdLS.push(
         queens.splice(randomNumber(0, queens.length - 1),1)[0],
         queens.splice(randomNumber(0, queens.length - 1),1)[0]
     );
 
-    T8fourthLS.push(
+    fourthLS.push(
         queens.splice(randomNumber(0, queens.length - 1),1)[0],
         queens.splice(randomNumber(0, queens.length - 1),1)[0]
     );
 
     screen.createBigText("The Quarterfinal Bracket");
 
-    screen.createImage(T8firstLS[0].image,"darkblue");
-    screen.createImage(T8firstLS[1].image,"darkblue");
-    screen.createBold(T8firstLS[0].getName()+" vs. "+T8firstLS[1].getName());
+    screen.createImage(firstLS[0].image,"darkblue");
+    screen.createImage(firstLS[1].image,"darkblue");
+    screen.createBold(firstLS[0].getName()+" vs. "+firstLS[1].getName());
 
     screen.createParagraph("vs");
 
-    screen.createImage(T8secondLS[0].image,"darkred");
-    screen.createImage(T8secondLS[1].image,"darkred");
-    screen.createBold(T8secondLS[0].getName()+" vs. "+T8secondLS[1].getName());
+    screen.createImage(secondLS[0].image,"darkred");
+    screen.createImage(secondLS[1].image,"darkred");
+    screen.createBold(secondLS[0].getName()+" vs. "+secondLS[1].getName());
 
     screen.createParagraph("vs");
 
-    screen.createImage(T8thirdLS[0].image,"purple");
-    screen.createImage(T8thirdLS[1].image,"purple");
-    screen.createBold(T8thirdLS[0].getName()+" vs. "+T8thirdLS[1].getName());
+    screen.createImage(thirdLS[0].image,"purple");
+    screen.createImage(thirdLS[1].image,"purple");
+    screen.createBold(thirdLS[0].getName()+" vs. "+thirdLS[1].getName());
 
     screen.createParagraph("vs");
 
-    screen.createImage(T8fourthLS[0].image,"green");
-    screen.createImage(T8fourthLS[1].image,"green");
-    screen.createBold(T8fourthLS[0].getName()+" vs. "+T8fourthLS[1].getName());
+    screen.createImage(fourthLS[0].image,"green");
+    screen.createImage(fourthLS[1].image,"green");
+    screen.createBold(fourthLS[0].getName()+" vs. "+fourthLS[1].getName());
 
     episodeChallenges.push("Finale");
 
@@ -5203,7 +5200,7 @@ function finaleLS8Desc1() {
         firstLS[i].getASLipsync();
 
     screen.createHeader("The Quarterfinals");
-    screen.createBold(T8firstLS[0].getName() + " and " + T8firstLS[1].getName() + " lip-sync for a place in the Top 4!");
+    screen.createBold(firstLS[0].getName() + " and " + firstLS[1].getName() + " lip-sync for a place in the Top 4!");
 
     let song = lsSong().toString();
 
@@ -5216,13 +5213,13 @@ function finaleLS8Desc1() {
         eventQueen.lipsyncScore += event.points;
     }
 
-    let slay = T8firstLS.filter(q => q.lipsyncScore > 11);
-    let great = T8firstLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
-    let good = T8firstLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
-    let bad = T8firstLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
-    let flop = T8firstLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
+    let slay = firstLS.filter(q => q.lipsyncScore > 11);
+    let great = firstLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
+    let good = firstLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
+    let bad = firstLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
+    let flop = firstLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
 
-    toBlots(T8firstLS, song);
+    toBlots(firstLS, song);
     createLipsyncDesc(slay, great, good, bad, flop);
 
     screen.createButton("Show result", "finaleLS8Result1()");
@@ -5236,26 +5233,26 @@ function finaleLS8Result1() {
 
     firstLS.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
 
-    toAlots([T8firstLS[0]],[T8firstLS[1]],alotsSong);
+    toAlots([firstLS[0]],[firstLS[1]],alotsSong);
 
-    T8semiLS1.push(T8firstLS[0]);
+    semiLS1.push(firstLS[0]);
 
-		if (T8firstLS[1] == wildcardQueen)
-	T8firstLS[1].addToTrackRecord("RTRN + LOST 1ST ROUND");
-		else if (T8firstLS[1].mxcon != undefined)
-    	T8firstLS[1].addToTrackRecord("MSCONL1R");
+		if (firstLS[1] == wildcardQueen)
+	firstLS[1].addToTrackRecord("RTRN + LOST 1ST ROUND");
+		else if (firstLS[1].mxcon != undefined)
+    	firstLS[1].addToTrackRecord("MSCONL1R");
 		else
-    	T8firstLS[1].addToTrackRecord("LOST 1ST ROUND");
+    	firstLS[1].addToTrackRecord("LOST 1ST ROUND");
 
-    T8firstLS[1].rankP = 5678;
+    firstLS[1].rankP = 5678;
 
-    eliminatedCast.unshift(T8firstLS[1]);
+    eliminatedCast.unshift(firstLS[1]);
 
-    screen.createImage(T8firstLS[0].image,"silver");
-    screen.createBold(T8firstLS[0].getName()+", shantay you stay.");
+    screen.createImage(firstLS[0].image,"silver");
+    screen.createBold(firstLS[0].getName()+", shantay you stay.");
 
-    screen.createImage(T8firstLS[1].image,"sienna");
-    screen.createBold(T8firstLS[1].getName()+", sashay away.");
+    screen.createImage(firstLS[1].image,"sienna");
+    screen.createBold(firstLS[1].getName()+", sashay away.");
 
     screen.createHorizontalLine();
 
@@ -5265,30 +5262,30 @@ function finaleLS8Desc2() {
     let screen = new Scene();
     screen.clean();
 
-    for (let i = 0; i < T8secondLS.length; i++)
-        T8secondLS[i].getASLipsync();
+    for (let i = 0; i < secondLS.length; i++)
+        secondLS[i].getASLipsync();
 
     screen.createHeader("The Quarterfinals");
-    screen.createBold(T8secondLS[0].getName() + " and " + T8secondLS[1].getName() + " lip-sync for a place in the Top 4!");
+    screen.createBold(secondLS[0].getName() + " and " + secondLS[1].getName() + " lip-sync for a place in the Top 4!");
 
     let song = lsSong().toString();
 
     screen.createHorizontalLine();
 
-    let event = checkForLipsyncEvent(T8secondLS);
+    let event = checkForLipsyncEvent(secondLS);
 
     if (event != false) {
-        let eventQueen = T8secondLS.find(q => q.getName() == event.queen.getName());
+        let eventQueen = secondLS.find(q => q.getName() == event.queen.getName());
         eventQueen.lipsyncScore += event.points;
     }
 
-    let slay = T8secondLS.filter(q => q.lipsyncScore > 11);
-    let great = T8secondLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
-    let good = T8secondLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
-    let bad = T8secondLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
-    let flop = T8secondLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
+    let slay = secondLS.filter(q => q.lipsyncScore > 11);
+    let great = secondLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
+    let good = secondLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
+    let bad = secondLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
+    let flop = secondLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
 
-    toBlots(T8secondLS, song);
+    toBlots(secondLS, song);
     createLipsyncDesc(slay, great, good, bad, flop);
 
     screen.createButton("Show result", "finaleLS8Result2()");
@@ -5300,28 +5297,28 @@ function finaleLS8Result2() {
 
     screen.createHeader("I've made my decision...");
 
-    T8secondLS.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
+    secondLS.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
 
-    toAlots([T8secondLS[0]],[T8secondLS[1]],alotsSong);
+    toAlots([secondLS[0]],[secondLS[1]],alotsSong);
 
-    T8semiLS1.push(T8secondLS[0]);
+    semiLS1.push(secondLS[0]);
 
-    if (T8secondLS[1] == wildcardQueen)
-	T8secondLS[1].addToTrackRecord("RTRN + LOST 1ST ROUND")
-    else if (T8secondLS[1].mxcon != undefined)
-        T8secondLS[1].addToTrackRecord("MSCONL1R");
+    if (secondLS[1] == wildcardQueen)
+	secondLS[1].addToTrackRecord("RTRN + LOST 1ST ROUND")
+    else if (secondLS[1].mxcon != undefined)
+        secondLS[1].addToTrackRecord("MSCONL1R");
     else
-        T8secondLS[1].addToTrackRecord("LOST 1ST ROUND");
+        secondLS[1].addToTrackRecord("LOST 1ST ROUND");
  
-    T8secondLS[1].rankP = 5678;
+    secondLS[1].rankP = 5678;
 
-    eliminatedCast.unshift(T8secondLS[1]);
+    eliminatedCast.unshift(secondLS[1]);
 
-    screen.createImage(T8secondLS[0].image,"silver");
-    screen.createBold(T8secondLS[0].getName()+", shantay you stay.");
+    screen.createImage(secondLS[0].image,"silver");
+    screen.createBold(secondLS[0].getName()+", shantay you stay.");
 
-    screen.createImage(T8secondLS[1].image,"sienna");
-    screen.createBold(T8secondLS[1].getName()+", sashay away.");
+    screen.createImage(secondLS[1].image,"sienna");
+    screen.createBold(secondLS[1].getName()+", sashay away.");
 
     screen.createHorizontalLine();
 
@@ -5331,30 +5328,30 @@ function finaleLS8Desc3() {
     let screen = new Scene();
     screen.clean();
 
-    for (let i = 0; i < T8thirdLS.length; i++)
-        T8thirdLS[i].getASLipsync();
+    for (let i = 0; i < thirdLS.length; i++)
+        thirdLS[i].getASLipsync();
 
     screen.createHeader("The Quarterfinals");
-    screen.createBold(T8thirdLS[0].getName() + " and " + T8thirdLS[1].getName() + " lip-sync for a place in the Top 4!");
+    screen.createBold(thirdLS[0].getName() + " and " + thirdLS[1].getName() + " lip-sync for a place in the Top 4!");
 
     let song = lsSong().toString();
 
     screen.createHorizontalLine();
 
-    let event = checkForLipsyncEvent(T8thirdLS);
+    let event = checkForLipsyncEvent(thirdLS);
 
     if (event != false) {
-        let eventQueen = T8thirdLS.find(q => q.getName() == event.queen.getName());
+        let eventQueen = thirdLS.find(q => q.getName() == event.queen.getName());
         eventQueen.lipsyncScore += event.points;
     }
 
-    let slay = T8thirdLS.filter(q => q.lipsyncScore > 11);
-    let great = T8thirdLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
-    let good = T8thirdLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
-    let bad = T8thirdLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
-    let flop = T8thirdLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
+    let slay = thirdLS.filter(q => q.lipsyncScore > 11);
+    let great = thirdLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
+    let good = thirdLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
+    let bad = thirdLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
+    let flop = thirdLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
 
-    toBlots(T8thirdLS, song);
+    toBlots(thirdLS, song);
     createLipsyncDesc(slay, great, good, bad, flop);
 
     screen.createButton("Show result", "finaleLS8Result3()");
@@ -5366,28 +5363,28 @@ function finaleLS8Result3() {
 
     screen.createHeader("I've made my decision...");
 
-    T8thirdLS.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
+    thirdLS.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
 
-    toAlots([T8thirdLS[0]],[T8thirdLS[1]],alotsSong);
+    toAlots([thirdLS[0]],[thirdLS[1]],alotsSong);
 
-    T8semiLS2.push(T8thirdLS[0]);
+    semiLS2.push(thirdLS[0]);
 
-    if (T8thirdLS[1] == wildcardQueen)
-	T8thirdLS[1].addToTrackRecord("RTRN + LOST 1ST ROUND")
-    else if (T8thirdLS[1].mxcon != undefined)
-        T8thirdLS[1].addToTrackRecord("MSCONL1R");
+    if (thirdLS[1] == wildcardQueen)
+	thirdLS[1].addToTrackRecord("RTRN + LOST 1ST ROUND")
+    else if (thirdLS[1].mxcon != undefined)
+        thirdLS[1].addToTrackRecord("MSCONL1R");
     else
-        T8thirdLS[1].addToTrackRecord("LOST 1ST ROUND");
+        thirdLS[1].addToTrackRecord("LOST 1ST ROUND");
 
-    T8thirdLS[1].rankP = 5678;
+    thirdLS[1].rankP = 5678;
 
-    eliminatedCast.unshift(T8thirdLS[1]);
+    eliminatedCast.unshift(thirdLS[1]);
 
-    screen.createImage(T8thirdLS[0].image,"silver");
-    screen.createBold(T8thirdLS[0].getName()+", shantay you stay.");
+    screen.createImage(thirdLS[0].image,"silver");
+    screen.createBold(thirdLS[0].getName()+", shantay you stay.");
 
-    screen.createImage(T8thirdLS[1].image,"sienna");
-    screen.createBold(T8thirdLS[1].getName()+", sashay away.");
+    screen.createImage(thirdLS[1].image,"sienna");
+    screen.createBold(thirdLS[1].getName()+", sashay away.");
 
     screen.createHorizontalLine();
 
@@ -5397,30 +5394,30 @@ function finaleLS8Desc4() {
     let screen = new Scene();
     screen.clean();
 
-    for (let i = 0; i < T8fourthLS.length; i++)
-        T8fourthLS[i].getASLipsync();
+    for (let i = 0; i < fourthLS.length; i++)
+        fourthLS[i].getASLipsync();
 
     screen.createHeader("The Quarterfinals");
-    screen.createBold(T8fourthLS[0].getName() + " and " + T8fourthLS[1].getName() + " lip-sync for a place in the Top 4!");
+    screen.createBold(fourthLS[0].getName() + " and " + fourthLS[1].getName() + " lip-sync for a place in the Top 4!");
 
     let song = lsSong().toString();
 
     screen.createHorizontalLine();
 
-    let event = checkForLipsyncEvent(T8fourthLS);
+    let event = checkForLipsyncEvent(fourthLS);
 
     if (event != false) {
-        let eventQueen = T8fourthLS.find(q => q.getName() == event.queen.getName());
+        let eventQueen = fourthLS.find(q => q.getName() == event.queen.getName());
         eventQueen.lipsyncScore += event.points;
     }
 
-    let slay = T8fourthLS.filter(q => q.lipsyncScore > 11);
-    let great = T8fourthLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
-    let good = T8fourthLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
-    let bad = T8fourthLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
-    let flop = T8fourthLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
+    let slay = fourthLS.filter(q => q.lipsyncScore > 11);
+    let great = fourthLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
+    let good = fourthLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
+    let bad = fourthLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
+    let flop = fourthLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
 
-    toBlots(T8fourthLS, song);
+    toBlots(fourthLS, song);
     createLipsyncDesc(slay, great, good, bad, flop);
 
     screen.createButton("Show result", "finaleLS8Result4()");
@@ -5432,28 +5429,28 @@ function finaleLS8Result4() {
 
     screen.createHeader("I've made my decision...");
 
-    T8fourthLS.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
+    fourthLS.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
 
-    toAlots([T8fourthLS[0]],[T8fourthLS[1]],alotsSong);
+    toAlots([fourthLS[0]],[fourthLS[1]],alotsSong);
 
-    T8semiLS2.push(T8fourthLS[0]);
+    semiLS2.push(fourthLS[0]);
 
-    if (T8fourthLS[1] == wildcardQueen)
-	T8fourthLS[1].addToTrackRecord("RTRN + LOST 1ST ROUND")
-    else if (T8fourthLS[1].mxcon != undefined)
-        T8fourthLS[1].addToTrackRecord("MSCONL1R");
+    if (fourthLS[1] == wildcardQueen)
+	fourthLS[1].addToTrackRecord("RTRN + LOST 1ST ROUND")
+    else if (fourthLS[1].mxcon != undefined)
+        fourthLS[1].addToTrackRecord("MSCONL1R");
     else
-        T8fourthLS[1].addToTrackRecord("LOST 1ST ROUND");
+        fourthLS[1].addToTrackRecord("LOST 1ST ROUND");
 
-    T8fourthLS[1].rankP = 5678;
+    fourthLS[1].rankP = 5678;
 
-    eliminatedCast.unshift(T8fourthLS[1]);
+    eliminatedCast.unshift(fourthLS[1]);
 
-    screen.createImage(T8fourthLS[0].image,"silver");
-    screen.createBold(T8fourthLS[0].getName()+", shantay you stay.");
+    screen.createImage(fourthLS[0].image,"silver");
+    screen.createBold(fourthLS[0].getName()+", shantay you stay.");
 
-    screen.createImage(T8fourthLS[1].image,"sienna");
-    screen.createBold(T8fourthLS[1].getName()+", sashay away.");
+    screen.createImage(fourthLS[1].image,"sienna");
+    screen.createBold(fourthLS[1].getName()+", sashay away.");
 
     screen.createHorizontalLine();
 
@@ -5463,31 +5460,31 @@ function finaleLS8SemiDesc1() {
     let screen = new Scene();
     screen.clean();
 
-    for (let i = 0; i < T8semiLS1.length; i++) {
-        T8semiLS1[i].getASLipsync();
+    for (let i = 0; i < semiLS1.length; i++) {
+        semiLS1[i].getASLipsync();
     }
 
     screen.createHeader("The Semifinals");
-    screen.createBold(T8semiLS1[0].getName() + " and " + T8semiLS1[1].getName() + " lip-sync for a place in the Grand Finale!");
+    screen.createBold(semiLS1[0].getName() + " and " + semiLS1[1].getName() + " lip-sync for a place in the Grand Finale!");
 
     let song = lsSong().toString();
 
     screen.createHorizontalLine();
 
-    let event = checkForLipsyncEvent(T8semiLS1);
+    let event = checkForLipsyncEvent(semiLS1);
 
     if (event != false) {
-        let eventQueen = T8semiLS1.find(q => q.getName() == event.queen.getName());
+        let eventQueen = semiLS1.find(q => q.getName() == event.queen.getName());
         eventQueen.lipsyncScore += event.points;
     }
 
-    let slay = T8semiLS1.filter(q => q.lipsyncScore > 11);
-    let great = T8semiLS1.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
-    let good = T8semiLS1.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
-    let bad = T8semiLS1.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
-    let flop = T8semiLS1.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
+    let slay = semiLS1.filter(q => q.lipsyncScore > 11);
+    let great = semiLS1.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
+    let good = semiLS1.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
+    let bad = semiLS1.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
+    let flop = semiLS1.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
 
-    toBlots(T8semiLS1, song);
+    toBlots(semiLS1, song);
     createLipsyncDesc(slay, great, good, bad, flop);
 
     screen.createButton("Show result", "finaleLS8SemiResult1()");
@@ -5499,28 +5496,28 @@ function finaleLS8SemiResult1() {
 
     screen.createHeader("I've made my decision...");
 
-    T8semiLS1.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
+    semiLS1.sort((a,b)=>b.lipsyncScore-a.lipsyncScore);
 
-    toAlots([T8semiLS1[0]],[T8semiLS1[1]],alotsSong);
+    toAlots([semiLS1[0]],[semiLS1[1]],alotsSong);
 
-    T8finalLS.push(T8semiLS1[0]);
+    finalLS.push(semiLS1[0]);
 
-    if (T8semiLS1[1] == wildcardQueen)
-	T8semiLS1[1].addToTrackRecord("RTRN + LOST 2ND ROUND")
-    else if (T8semiLS1[1].mxcon != undefined)
-        T8semiLS1[1].addToTrackRecord("MSCONL2R");
+    if (semiLS1[1] == wildcardQueen)
+	semiLS1[1].addToTrackRecord("RTRN + LOST 2ND ROUND")
+    else if (semiLS1[1].mxcon != undefined)
+        semiLS1[1].addToTrackRecord("MSCONL2R");
     else
-        T8semiLS1[1].addToTrackRecord("LOST 2ND ROUND");
+        semiLS1[1].addToTrackRecord("LOST 2ND ROUND");
 
-    T8semiLS1[1].rankP = 34;
+    semiLS1[1].rankP = 34;
 
-    eliminatedCast.unshift(T8semiLS1[1]);
+    eliminatedCast.unshift(semiLS1[1]);
 
-    screen.createImage(T8semiLS1[0].image,"silver");
-    screen.createBold(T8semiLS1[0].getName()+", shantay you stay.");
+    screen.createImage(semiLS1[0].image,"silver");
+    screen.createBold(semiLS1[0].getName()+", shantay you stay.");
 
-    screen.createImage(T8semiLS1[1].image,"sienna");
-    screen.createBold(T8semiLS1[1].getName()+", sashay away.");
+    screen.createImage(semiLS1[1].image,"sienna");
+    screen.createBold(semiLS1[1].getName()+", sashay away.");
 
     screen.createHorizontalLine();
 
@@ -5530,14 +5527,14 @@ function finaleLS8SemiDesc2() {
     let screen = new Scene();
     screen.clean();
 
-    for (let i = 0; i < T8semiLS2.length; i++)
-        T8semiLS2[i].getASLipsync();
+    for (let i = 0; i < semiLS2.length; i++)
+        semiLS2[i].getASLipsync();
 
     screen.createHeader("The Semifinals");
     screen.createBold(
-        T8semiLS2[0].getName() +
+        semiLS2[0].getName() +
         " and " +
-        T8semiLS2[1].getName() +
+        semiLS2[1].getName() +
         " lip-sync for a place in the Final 2!"
     );
 
@@ -5545,20 +5542,20 @@ function finaleLS8SemiDesc2() {
 
     screen.createHorizontalLine();
 
-    let event = checkForLipsyncEvent(T8semiLS2);
+    let event = checkForLipsyncEvent(semiLS2);
 
     if (event != false) {
-        let eventQueen = T8semiLS2.find(q => q.getName() == event.queen.getName());
+        let eventQueen = semiLS2.find(q => q.getName() == event.queen.getName());
         eventQueen.lipsyncScore += event.points;
     }
 
-    let slay = T8semiLS2.filter(q => q.lipsyncScore > 11);
-    let great = T8semiLS2.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
-    let good = T8semiLS2.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
-    let bad = T8semiLS2.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
-    let flop = T8semiLS2.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
+    let slay = semiLS2.filter(q => q.lipsyncScore > 11);
+    let great = semiLS2.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
+    let good = semiLS2.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
+    let bad = semiLS2.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
+    let flop = semiLS2.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
 
-    toBlots(T8semiLS2, song);
+    toBlots(semiLS2, song);
     createLipsyncDesc(slay, great, good, bad, flop);
 
     screen.createButton("Show result", "finaleLS8SemiResult2()");
@@ -5567,14 +5564,14 @@ function finaleLS8SemiDesc2() {
     let screen = new Scene();
     screen.clean();
 
-    for (let i = 0; i < T8semiLS2.length; i++)
-        T8semiLS2[i].getASLipsync();
+    for (let i = 0; i < semiLS2.length; i++)
+        semiLS2[i].getASLipsync();
 
     screen.createHeader("The Semifinals");
     screen.createBold(
-        T8semiLS2[0].getName() +
+        semiLS2[0].getName() +
         " and " +
-        T8semiLS2[1].getName() +
+        semiLS2[1].getName() +
         " lip-sync for a place in the Final 2!"
     );
 
@@ -5582,20 +5579,20 @@ function finaleLS8SemiDesc2() {
 
     screen.createHorizontalLine();
 
-    let event = checkForLipsyncEvent(T8semiLS2);
+    let event = checkForLipsyncEvent(semiLS2);
 
     if (event != false) {
-        let eventQueen = T8semiLS2.find(q => q.getName() == event.queen.getName());
+        let eventQueen = semiLS2.find(q => q.getName() == event.queen.getName());
         eventQueen.lipsyncScore += event.points;
     }
 
-    let slay = T8semiLS2.filter(q => q.lipsyncScore > 11);
-    let great = T8semiLS2.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
-    let good = T8semiLS2.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
-    let bad = T8semiLS2.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
-    let flop = T8semiLS2.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
+    let slay = semiLS2.filter(q => q.lipsyncScore > 11);
+    let great = semiLS2.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
+    let good = semiLS2.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
+    let bad = semiLS2.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
+    let flop = semiLS2.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
 
-    toBlots(T8semiLS2, song);
+    toBlots(semiLS2, song);
     createLipsyncDesc(slay, great, good, bad, flop);
 
     screen.createButton("Show result", "finaleLS8SemiResult2()");
@@ -5606,27 +5603,27 @@ function finaleLS8SemiResult2() {
 
     screen.createHeader("I've made my decision...");
 
-    T8semiLS2.sort((a, b) => b.lipsyncScore - a.lipsyncScore);
+    semiLS2.sort((a, b) => b.lipsyncScore - a.lipsyncScore);
 
-    toAlots([T8semiLS2[0]], [T8semiLS2[1]], alotsSong);
+    toAlots([semiLS2[0]], [semiLS2[1]], alotsSong);
 
-    T8finalLS.push(T8semiLS2[0]);
+    finalLS.push(semiLS2[0]);
 
-    if (T8semiLS2[1] == wildcardQueen)
-	T8semiLS2[1].addToTrackRecord("RTRN + LOST 2ND ROUND")
-    else if (T8semiLS2[1].mxcon != undefined)
-        T8semiLS2[1].addToTrackRecord("MSCONL2R");
+    if (semiLS2[1] == wildcardQueen)
+	semiLS2[1].addToTrackRecord("RTRN + LOST 2ND ROUND")
+    else if (semiLS2[1].mxcon != undefined)
+        semiLS2[1].addToTrackRecord("MSCONL2R");
     else
-        T8semiLS2[1].addToTrackRecord("LOST 2ND ROUND");
+        semiLS2[1].addToTrackRecord("LOST 2ND ROUND");
 
-    T8semiLS2[1].rankP = 34;
-    eliminatedCast.unshift(T8semiLS2[1]);
+    semiLS2[1].rankP = 34;
+    eliminatedCast.unshift(semiLS2[1]);
 
-    screen.createImage(T8semiLS2[0].image, "silver");
-    screen.createBold(T8semiLS2[0].getName() + ", shantay you stay.");
+    screen.createImage(semiLS2[0].image, "silver");
+    screen.createBold(semiLS2[0].getName() + ", shantay you stay.");
 
-    screen.createImage(T8semiLS2[1].image, "sienna");
-    screen.createBold(T8semiLS2[1].getName() + ", sashay away.");
+    screen.createImage(semiLS2[1].image, "sienna");
+    screen.createBold(semiLS2[1].getName() + ", sashay away.");
 
     screen.createHorizontalLine();
 
@@ -5638,39 +5635,39 @@ function finaleLS8FinalDesc() {
 
     screen.createHeader("The Final Lip-Sync");
 
-    for (let i = 0; i < T8finalLS.length; i++) {
-        T8finalLS[i].getASLipsync();
-        T8finalLS[i].getFinale();
+    for (let i = 0; i < finalLS.length; i++) {
+        finalLS[i].getASLipsync();
+        finalLS[i].getFinale();
     }
 
     screen.createBold(
-        T8finalLS[0].getName() +
+        finalLS[0].getName() +
         " and " +
-        T8finalLS[1].getName() +
+        finalLS[1].getName() +
         " will lip-sync for the crown!"
     );
 
-    screen.createImage(T8finalLS[0].image);
-    screen.createImage(T8finalLS[1].image);
+    screen.createImage(finalLS[0].image);
+    screen.createImage(finalLS[1].image);
 
     let song = lsSong().toString();
 
     screen.createHorizontalLine();
 
-    let event = checkForLipsyncEvent(T8finalLS);
+    let event = checkForLipsyncEvent(finalLS);
 
     if (event != false) {
-        let eventQueen = T8finalLS.find(q => q.getName() == event.queen.getName());
+        let eventQueen = finalLS.find(q => q.getName() == event.queen.getName());
         eventQueen.lipsyncScore += event.points;
     }
 
-    let slay = T8finalLS.filter(q => q.lipsyncScore > 11);
-    let great = T8finalLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
-    let good = T8finalLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
-    let bad = T8finalLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
-    let flop = T8finalLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
+    let slay = finalLS.filter(q => q.lipsyncScore > 11);
+    let great = finalLS.filter(q => q.lipsyncScore >= 8 && q.lipsyncScore < 12);
+    let good = finalLS.filter(q => q.lipsyncScore >= 4 && q.lipsyncScore < 8);
+    let bad = finalLS.filter(q => q.lipsyncScore >= 2 && q.lipsyncScore < 4);
+    let flop = finalLS.filter(q => q.lipsyncScore >= -10 && q.lipsyncScore < 2);
 
-    toBlots(T8finalLS, song);
+    toBlots(finalLS, song);
     createLipsyncDesc(slay, great, good, bad, flop);
 
     screen.createButton("Show result", "finalLS8Winner()");
@@ -5687,11 +5684,11 @@ async function finalLS8Winner() {
 
     screen.createHorizontalLine();
 
-    for (let i = 0; i < T8finalLS.length; i++) {
-        T8finalLS[i].finaleScore += (T8finalLS[i].lipsyncScore / 2);
+    for (let i = 0; i < finalLS.length; i++) {
+        finalLS[i].finaleScore += (finalLS[i].lipsyncScore / 2);
     }
 
-    T8finalLS.sort((a, b) => b.finaleScore - a.finaleScore);
+    finalLS.sort((a, b) => b.finaleScore - a.finaleScore);
 
     let winner = 0;
 
@@ -5701,20 +5698,20 @@ async function finalLS8Winner() {
     if (randomNumber(0, 100) >= 95)
         winner = 1;
 
-    toAlots([T8finalLS[winner]], [T8finalLS[1 - winner]], alotsSong);
+    toAlots([finalLS[winner]], [finalLS[1 - winner]], alotsSong);
 
-    screen.createImage(T8finalLS[winner].image, "yellow");
-    screen.createBigText(T8finalLS[winner].getName() + "!!");
+    screen.createImage(finalLS[winner].image, "yellow");
+    screen.createBigText(finalLS[winner].getName() + "!!");
     screen.createBold("Now prance, my queen!");
 
-    if (T8finalLS[winner] == wildcardQueen)
-	T8finalLS[winner].addToTrackRecord("RTRN + WINNER")
-    else if (T8finalLS[winner].mxcon != undefined)
-        T8finalLS[winner].addToTrackRecord("MSCONWIN");
+    if (finalLS[winner] == wildcardQueen)
+	finalLS[winner].addToTrackRecord("RTRN + WINNER")
+    else if (finalLS[winner].mxcon != undefined)
+        finalLS[winner].addToTrackRecord("MSCONWIN");
     else
-        T8finalLS[winner].addToTrackRecord("WINNER");
+        finalLS[winner].addToTrackRecord("WINNER");
 
-    let T8runnerUp = T8finalLS[1 - winner];
+    let T8runnerUp = finalLS[1 - winner];
 
     if (T8runnerUp == wildcardQueen)
 	T8runnerUp.addToTrackRecord("RTRN + LOST 3RD ROUND")
@@ -5726,7 +5723,7 @@ async function finalLS8Winner() {
     T8runnerUp.rankP = 2;
     eliminatedCast.unshift(T8runnerUp);
 
-    currentCast = [T8finalLS[winner]];
+    currentCast = [finalLS[winner]];
 
     onFinale = true;
     onTop4Finale = true;
