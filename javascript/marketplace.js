@@ -94,17 +94,17 @@ let marketplaceQueens = [
     new Queen("Mhyra", 9, 6, 10, 9, 6, 12, 7, "DLC/Mhyra"),
     new Queen("Onyx Ondix", 6, 5, 7, 7, 5, 13, 7, "DLC/OnyxOndix"),
     new Queen("Carmelle", 6, 8, 11, 6, 8, 8, 9, "DLC/Carmelle"),
-    new Queen("ChasityLopez", 8, 7, 4, 10, 6, 10, 8, "DLC/ChasityLopez"),
-    new Queen("DissyAdams", 7, 8, 6, 9, 9, 11, 6, "DLC/DissyAdams"),
-    new Queen("IvoryCouture", 10, 12, 9, 11, 13, 13, 13, "DLC/IvoryCouture"),
-    new Queen("LuxMilan", 8, 6, 6, 11, 7, 11, 7, "DLC/LuxMilan"),
-    new Queen("MarinaPeru", 6, 6, 9, 6, 6, 7, 9, "DLC/MarinaPeru"),
-    new Queen("MhiyaDion", 5, 5, 10, 5, 5, 8, 10, "DLC/MhiyaDion"),
-    new Queen("OnyaChainz", 6, 7, 8, 6, 5, 11, 12, "DLC/OnyaChainz"),
-    new Queen("SilkySmoothè", 6, 8, 4, 15, 8, 13, 4, "DLC/SilkySmoothe"),
-    new Queen("StarzyGlitz", 4, 10, 9, 10, 6, 10, 12, "DLC/StarzyGlitz"),
-    new Queen("SukiSupreme", 8, 8, 6, 9, 7, 8, 9, "DLC/SukiSupreme"),
-    new Queen("YvieMoon", 4, 4, 12, 6, 3, 8, 12, "DLC/YvieMoon")
+    new Queen("Chasity Lopez", 8, 7, 4, 10, 6, 10, 8, "DLC/ChasityLopez"),
+    new Queen("Dissy Adams", 7, 8, 6, 9, 9, 11, 6, "DLC/DissyAdams"),
+    new Queen("Ivory Couture", 10, 12, 9, 11, 13, 13, 13, "DLC/IvoryCouture"),
+    new Queen("Lux Milan", 8, 6, 6, 11, 7, 11, 7, "DLC/LuxMilan"),
+    new Queen("Marina Peru", 6, 6, 9, 6, 6, 7, 9, "DLC/MarinaPeru"),
+    new Queen("Mhiya Dion", 5, 5, 10, 5, 5, 8, 10, "DLC/MhiyaDion"),
+    new Queen("Onya Chainz", 6, 7, 8, 6, 5, 11, 12, "DLC/OnyaChainz"),
+    new Queen("Silky Smoothè", 6, 8, 4, 15, 8, 13, 4, "DLC/SilkySmoothe"),
+    new Queen("Starzy Glitz", 4, 10, 9, 10, 6, 10, 12, "DLC/StarzyGlitz"),
+    new Queen("Suki Supreme", 8, 8, 6, 9, 7, 8, 9, "DLC/SukiSupreme"),
+    new Queen("Yvie Moon", 4, 4, 12, 6, 3, 8, 12, "DLC/YvieMoon")
 
 ];
 
