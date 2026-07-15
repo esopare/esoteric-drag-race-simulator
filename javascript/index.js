@@ -2452,7 +2452,6 @@ if (image.startsWith("data:image/")) {
   // 💾 Save to localStorage
   let allCustomQueens = JSON.parse(localStorage.getItem("customQueens")) || [];
   allCustomQueens.push(newQueen);
-  MQueens.push(newQueen);
   localStorage.setItem("customQueens", JSON.stringify(allCustomQueens));
 
   // 💬 Confirmation message
@@ -12364,24 +12363,9 @@ else if (dragDen) {
         }
         tournamentJudging();
     }
-    else if (currentCast.length <= 18 && bracketSeason && episodeCount >= 10) {
-        //add 3 queens to the top and 3 to the bottom
-        currentCast.sort((a, b) => (a.performanceScore - b.performanceScore));
-        for (let i = 0; i < 3; i++) {
-            topQueens.push(currentCast[i]);
-            bottomQueens.push(currentCast[currentCast.length - (i + 1)]);
-        }
-        judgingScreen();
-    }
-    else if (currentCast.length > 18 && bracketSeason && episodeCount >= 10) {
-        //add 3 queens to the top and 3 to the bottom
-        currentCast.sort((a, b) => (a.performanceScore - b.performanceScore));
-        for (let i = 0; i < 3; i++) {
-            topQueens.push(currentCast[i]);
-            bottomQueens.push(currentCast[currentCast.length - (i + 1)]);
-        }
-        judgingScreen();
-    }
+
+///ex
+
     else if (currentCast.length <= 18 && bracketSeason11 && episodeCount <= 9) {
         //add 3 queens to the top and the others safe
         currentCast.sort((a, b) => (a.performanceScore - b.performanceScore));
@@ -12802,6 +12786,8 @@ else if (bracketSeason11 && episodeCount >= 10) {
             winAndBtm2();
         } else if (dragula) {
             winAndBtm2();
+        } else if (bracketSeason && episodeCount >= 10) {
+            winAndBtm2();
         } else if (splitFormat) {
             winAndBtm2();
         } else if (thailandFormat) {
@@ -12832,6 +12818,8 @@ else if (bracketSeason11 && episodeCount >= 10) {
             winAndBtm2();
         } else if (dragula) {
             winAndBtm2();
+        } else if (bracketSeason && episodeCount >= 10) {
+            winAndBtm2();
         } else if (splitFormat) {
             winAndBtm2();
         } else if (thailandFormat) {
@@ -12857,6 +12845,8 @@ else if (bracketSeason11 && episodeCount >= 10) {
             winAndBtm2();
         } else if (dragula) {
             winAndBtm2();
+        } else if (bracketSeason && episodeCount >= 10) {
+            winAndBtm2();
         } else if (splitFormat) {
             winAndBtm2();
         } else if (thailandFormat) {
@@ -12880,6 +12870,8 @@ else if (bracketSeason11 && episodeCount >= 10) {
         if (regularFormat) {
             winAndBtm2();
         } else if (dragula) {
+            winAndBtm2();
+        } else if (bracketSeason && episodeCount >= 10) {
             winAndBtm2();
         } else if (splitFormat) {
             winAndBtm2();
@@ -20915,7 +20907,7 @@ let sahara = new Queen("Sahara Davenport", 6, 6, 10, 4, 6, 7, 10, "Sahara");
 let shangela = new Queen("Shangela", 14, 13, 10, 3, 9, 9, 12, "Shangela");
 let sonique = new Queen("Kylie Sonique Love", 11, 9, 10, 9, 8, 11, 11, "Kylie");
 let tatianna = new Queen("Tatianna", 8, 11, 8, 8, 10, 8, 10, "Tatianna");
-let tyra = new Queen("Tyra", 11, 7, 8, 11, 8, 9, 10, "Tyra");
+let tyra = new Queen("Tyra Sanchez", 11, 7, 8, 11, 8, 9, 10, "Tyra");
 let us_season2 = [jessica, jujubee, morgan, mystique, nicole, pandora, raven, sahara, shangela, sonique, tatianna, tyra];
 //SEASON 3:
 let alexis = new Queen("Alexis Mateo", 14, 12, 9, 7, 10, 8, 12, "Alexis");
@@ -20936,7 +20928,7 @@ let alisa = new Queen("Alisa Summers", 4, 4, 5, 2, 3, 5, 4, "Alisa");
 let chad = new Queen("Chad Michaels", 11, 10, 8, 9, 12, 10, 8, "Chad");
 let dida = new Queen("Dida Ritz", 8, 7, 8, 5, 7, 7, 12, "Dida");
 let jiggly = new Queen("Jiggly Caliente", 4, 6, 9, 4, 4, 7, 10, "Jiggly");
-let kenya = new Queen("Kenya Olivera", 9, 6, 6, 6, 8, 7, 8, "Kenya");
+let kenya = new Queen("Kenya Michaels", 9, 6, 6, 6, 8, 7, 8, "Kenya");
 let leshauwn = new Queen("Lashauwn Beyond", 4, 4, 6, 11, 5, 7, 7, "Lashauwn");
 let latrice = new Queen("Latrice Royale", 11, 8, 9, 8, 7, 9, 13, "Latrice");
 let madame = new Queen("Madame LaQueer", 4, 7, 6, 5, 9, 7, 6, "Madame");
@@ -20991,7 +20983,7 @@ let max = new Queen("Max", 10, 7, 5, 8, 4, 8, 5, "Max");
 let fame = new Queen("Miss Fame", 8, 4, 5, 11, 3, 10, 5, "MissFame");
 let kasha = new Queen("Mrs. Kasha Davis", 11, 8, 10, 7, 6, 9, 7, "Kasha");
 let pearl = new Queen("Pearl", 7, 10, 8, 9, 10, 9, 5, "Pearl");
-let sashab = new Queen("Frisbee Jenkins", 6, 6, 4, 4, 6, 6, 4, "SashaB");
+let sashab = new Queen("Sasha Belle", 6, 6, 4, 4, 6, 6, 4, "SashaB");
 let tempest = new Queen("Tempest DuJour", 6, 6, 5, 3, 6, 7, 4, "Tempest");
 let trixie = new Queen("Trixie Mattel", 13, 10, 6, 10, 11, 10, 5, "Trixie");
 let violet = new Queen("Violet Chachki", 6, 7, 8, 15, 8, 13, 8, "Violet");
