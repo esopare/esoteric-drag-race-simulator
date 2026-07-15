@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Marketplace</title>
+
+<link rel="stylesheet" href="css/style.light.css">
+<link rel="icon" href="image/logodiscord.png">
+
+<script src="https://kit.fontawesome.com/65fd17a1f9.js" crossorigin="anonymous"></script>
+
+<script src="javascript/index.js" defer></script>
+<script src="javascript/marketplace.js" defer></script>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+}
+
+#marketplace{
+
+    max-width:1700px;
+
+    margin:auto;
+
+    padding:130px 40px 50px;
+
+}
+
+.marketplaceHeader{
+
+    text-align:center;
+
+}
+
+.marketplaceHeader h1{
+
+    font-size:60px;
+
+    margin-bottom:10px;
+
+}
+
+.marketplaceHeader p{
+
+    font-size:20px;
+
+    color:#777;
+
+}
+
+.marketplaceToolbar{
+
+    margin:40px 0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+#queenSearch{
+
+    flex:1;
+
+    padding:15px 18px;
+
+    font-size:18px;
+
+    border-radius:15px;
+
+    border:2px solid #ff4fa5;
+
+    outline:none;
+
+    transition:.25s;
+
+}
+
+#queenSearch:focus{
+
+    box-shadow:0 0 15px rgba(255,79,165,.45);
+
+}
+
+#queenSort{
+
+    width:220px;
+
+    padding:15px;
+
+    font-size:18px;
+
+    border-radius:15px;
+
+    border:2px solid #ff4fa5;
+
+}
+
+#queenGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:25px;
+
+}
+
+.queenCard{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:15px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+    transition:.25s;
+
+}
+
+.queenCard:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.queenCard img{
+
+    width:180px;
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    display:block;
+
+    margin:0 auto 15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
+
+}
+
+.queenCard h3{
+
+    margin:15px 0;
+
+}
+
+.queenCard button{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:10px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.downloadBtn{
+
+    background:#ff4fa5;
+    color:white;
+
+}
+
+.downloadBtn:hover{
+
+    background:#ff2d92;
+
+}
+
+.previewBtn{
+
+    background:#2f2f2f;
+    color:white;
+
+}
+
+.previewBtn:hover{
+
+    background:#000;
+
+}
+.removeBtn{
+
+    background:#d33;
+    color:white;
+
+}
+
+.removeBtn:hover{
+
+    background:#b30000;
+
+}
+.downloadBtn:disabled{
+
+    background:#27ae60;
+
+    cursor:default;
+
+    opacity:1;
+
+}
+.previewWindow{
+
+    background:white;
+
+    width:850px;
+
+    max-width:90vw;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    display:flex;
+
+    gap:30px;
+
+    position:relative;
+
+}
+
+.previewLeft{
+
+    width:260px;
+
+}
+
+.previewLeft img{
+
+    width:100%;
+
+    border-radius:18px;
+
+}
+
+.previewRight{
+
+    flex:1;
+
+}
+
+.previewRight h2{
+
+    margin-top:0;
+
+    margin-bottom:30px;
+
+    font-size:34px;
+
+}
+
+.closePreviewBtn{
+
+    position:absolute;
+
+    right:20px;
+
+    top:20px;
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+}
+
+.statRow{
+
+    display:grid;
+
+    grid-template-columns:90px 1fr 30px;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:15px;
+
+}
+
+.statBar{
+
+    height:14px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.statBar div{
+
+    height:100%;
+
+    background:linear-gradient(90deg,#ff4fa5,#ff87c5);
+
+    width:0%;
+
+}
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100vw;
+    height:100vh;
+
+    background:rgba(0,0,0,.6);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:99999;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header id="header" class="header">
+
+<div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+<a href="index.html" class="logo d-flex align-items-center">
+
+<img src="image/logodiscord.png">
+
+<h1>Esoteric Simulator</h1>
+
+</a>
+
+<nav id="navbar" class="navbar">
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="predef.html">Predefined Casts</a></li>
+
+<li><a href="custom.html">Custom</a></li>
+
+<li><a href="marketplace.html" class="active">Marketplace</a></li>
+
+</ul>
+
+</nav>
+
+</div>
+
+</header>
+
+<main id="marketplace">
+
+<div class="marketplaceHeader">
+
+<h1>CUSTOM QUEEN MARKETPLACE</h1>
+
+<p>
+
+Discover and download custom queens created for Esoteric Simulator.
+
+</p>
+
+</div>
+
+<div class="marketplaceToolbar">
+
+<input
+type="search"
+id="queenSearch"
+placeholder="Search Queen..."
+>
+
+<select id="queenSort">
+
+    <option value="default">
+        Default
+    </option>
+
+    <option value="az">
+        Name A-Z
+    </option>
+
+    <option value="za">
+        Name Z-A
+    </option>
+
+    <option value="highest">
+        Highest Stats
+    </option>
+
+    <option value="lowest">
+        Lowest Stats
+    </option>
+
+</select>
+
+</div>
+
+<center>
+
+<h3 id="downloadCount">
+Downloaded Queens: 0
+</h3>
+
+</center>
+
+<br>
+
+<div id="queenGrid">
+
+<!-- marketplace.js will generate the queens here -->
+
+</div>
+
+</main>
+
+<div id="previewModal" class="modal">
+
+    <div class="previewWindow">
+
+<button id="closePreviewBtn" class="closePreviewBtn">
+    ×
+</button>
+
+        <div class="previewLeft">
+
+            <img id="previewImage" src="">
+
+        </div>
+
+        <div class="previewRight">
+
+            <h2 id="previewName"></h2>
+
+            <div class="statRow">
+                <span>Acting</span>
+                <div class="statBar"><div id="actingBar"></div></div>
+                <span id="previewActing"></span>
+            </div>
+
+            <div class="statRow">
+                <span>Comedy</span>
+                <div class="statBar"><div id="comedyBar"></div></div>
+                <span id="previewComedy"></span>
+            </div>
+
+            <div class="statRow">
+                <span>Dance</span>
+                <div class="statBar"><div id="danceBar"></div></div>
+                <span id="previewDance"></span>
+            </div>
+
+            <div class="statRow">
+                <span>Design</span>
+                <div class="statBar"><div id="designBar"></div></div>
+                <span id="previewDesign"></span>
+            </div>
+
+            <div class="statRow">
+                <span>Improv</span>
+                <div class="statBar"><div id="improvBar"></div></div>
+                <span id="previewImprov"></span>
+            </div>
+
+            <div class="statRow">
+                <span>Runway</span>
+                <div class="statBar"><div id="runwayBar"></div></div>
+                <span id="previewRunway"></span>
+            </div>
+
+            <div class="statRow">
+                <span>Lip Sync</span>
+                <div class="statBar"><div id="lipsyncBar"></div></div>
+                <span id="previewLipSync"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
