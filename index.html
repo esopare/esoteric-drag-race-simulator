@@ -166,47 +166,163 @@
     <div id="result" style="display: none;"></div>
     <div class="optContainer">
         <input type="checkbox" id="showOpt">
-        <div class="options">
-            <div class="all-options">
-                <div class="aoitem">
-                    <h3>Disable:</h3>
-                    <p><input type="checkbox" id="disableDouble">Double Shantays and Sashays</p>
-                    <p><div class="tooltip">&#x1F6C8;
-                        <span class="tooltiptext">Whoever does the best for the challenge and runway wins.</span>
-                    </div><input type="checkbox" id="riggory">Challenge Riggory</p>
-                    <p><div class="tooltip">&#x1F6C8;
-                        <span class="tooltiptext">Whoever does the best in the lipsync wins.</span>
-                    </div><input type="checkbox" id="riggoryLipsync">Lipsync Riggory</p>
-                    <h3>Twists:</h3>
-                    <p><input type="checkbox" id="immunity">Immunity</p>
-                    <p><input type="checkbox" id="beaver">Golden Beaver</p>
-                    <h3>Titles:</h3>
-                    <p><input type="checkbox" id="goldenBoot">Golden Boot Award</p>
-                    <p><input type="checkbox" id="mlostlook">Miss Lost Look</p>
-                    <h3>Fame Games:</h3>
-                    <p><input type="checkbox" id="famegames"></p>
-                </div>
-                <div class="aoitem">
-                    <h3>Lipsync Challenge:</h3>
-                    <p><input type="checkbox" id="lipSyncCha">LaLaPaRUza Smackdown</p>
-                    <p><input type="checkbox" id="canLipSync">Slay Off Extravaganza</p>
-                    <p><input type="checkbox" id="reuls">Reunion Smackdown</p>
-                    <h3>Season Twists (only enable one):</h3>
-                    <p><input type="checkbox" id="chocolateBar">Chocolate Bar - Random</p>
-                    <p><input type="checkbox" id="chocolateBarChoosable">Chocolate Bar - Choosable</p>
-                    <p><input type="checkbox" id="badonka_Dunk">Badonka Dunk - Random</p>
-                    <p><input type="checkbox" id="badonka_DunkChoosable">Badonka Dunk - Choosable</p>
-                    <p><input type="checkbox" id="chocolateBar">Lucky Queen - Random</p>
-                    <p><input type="checkbox" id="chocolateBarChoosable">Lucky Queen - Choosable</p>
-                    <p><input type="checkbox" id="chocolateBar">Lucky Cow</p>
-                    <h3>Style:</h3>
-                    <p><input type="checkbox" id="background"> Solid background</p>
-                </div>
-            </div>
+<div class="options">
+
+    <div class="twistHeader">
+
+        <h2>Twist Menu</h2>
+
+        <div class="twistButtons">
+
+
+
         </div>
+
+    </div>
+
+    <div class="twistGrid">
+
+        <!-- LEFT COLUMN -->
+
+        <div class="twistCard">
+
+            <details>
+
+                <summary>Disable</summary>
+
+                <label>
+                    <input type="checkbox" id="disableDouble">
+                    Double Shantays and Sashays
+                </label>
+
+                <label>
+                    <input type="checkbox" id="riggory">
+                    Challenge Riggory
+                </label>
+
+                <label>
+                    <input type="checkbox" id="riggoryLipsync">
+                    Lipsync Riggory
+                </label>
+
+                <label>
+                    <input type="checkbox" id="claimQueenToggle">
+                    Claim a Queen
+                </label>
+
+            </details>
+
+<details>
+
+    <summary>Twists</summary>
+
+    <label><input type="checkbox" id="immunity"> Immunity</label>
+
+    <label><input type="checkbox" id="beaver"> Golden Beaver</label>
+    <label><input type="checkbox" id="famegames"> Fame Games</label>
+
+    <div class="miniAccordion">
+
+        <div class="miniHeader">
+            <span class="miniIcon">+</span>
+            Chocolate Bar
+        </div>
+
+        <div class="miniBody">
+            <label><input type="checkbox" id="chocolateBar"> Random</label>
+            <label><input type="checkbox" id="chocolateBarChoosable"> Choosable</label>
+        </div>
+
+    </div>
+
+    <div class="miniAccordion">
+
+        <div class="miniHeader">
+            <span class="miniIcon">+</span>
+            Badonka Dunk
+        </div>
+
+        <div class="miniBody">
+            <label><input type="checkbox" id="badonka_Dunk"> Random</label>
+            <label><input type="checkbox" id="badonka_DunkChoosable"> Choosable</label>
+        </div>
+
+    </div>
+
+
+</details>
+
+
+
+        </div>
+
+        <!-- MIDDLE COLUMN -->
+
+        <div class="twistCard">
+
+            <details>
+
+                <summary>Lipsync Challenge</summary>
+
+                <label>
+                    <input type="checkbox" id="lipSyncCha">
+                    LaLaPaRUza Smackdown
+                </label>
+
+                <label>
+                    <input type="checkbox" id="canLipSync">
+                    Slay Off Extravaganza
+                </label>
+
+                <label>
+                    <input type="checkbox" id="reuls">
+                    Reunion Smackdown
+                </label>
+
+            </details>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+
+        <div class="twistCard">
+
+            <details>
+
+                <summary>Titles</summary>
+
+                <label>
+                    <input type="checkbox" id="goldenBoot">
+                    Golden Boot Award
+                </label>
+
+                <label>
+                    <input type="checkbox" id="mlostlook">
+                    Miss Lost Look
+                </label>
+
+            </details>
+
+            <details>
+
+                <summary>Style</summary>
+
+                <label>
+                    <input type="checkbox" id="background">
+                    Solid Background
+                </label>
+
+            </details>
+
+        </div>
+
+    </div>
+
+</div>
         <div class="btn-mas">
             <label for="showOpt" class="optTxt"> TWISTS</label>
         </div>
+</div>
     <a href="#" class="toTop">
         <i class="fa-solid fa-angle-up"></i>
     </a>
@@ -221,5 +337,31 @@
         'floating-chat.donateButton.text-color': '#323842'
         });
     </script>
+<script>
+
+document.querySelectorAll(".subTwistHeader").forEach(header=>{
+
+    header.addEventListener("click",()=>{
+
+        const body=header.nextElementSibling;
+        const icon=header.querySelector(".toggle");
+
+        if(body.style.display==="block"){
+
+            body.style.display="none";
+            icon.textContent="+";
+
+        }else{
+
+            body.style.display="block";
+            icon.textContent="-";
+
+        }
+
+    });
+
+});
+
+</script>
 </body>
 </html>
