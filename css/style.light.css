@@ -415,7 +415,7 @@ input {
     bottom: 16px;
 }
 
-.options, .optTxt{
+.optTxt{
     display: flex;
     text-decoration: none;
     height: fit-content;
@@ -446,23 +446,16 @@ input {
     color:#3D0A1F
 }
 
-.options {
-    margin-bottom: -15px;
-    opacity: 0;
-    visibility: hidden;
-    display: none;
-}
+
 
 .options h3{
     color: #3D0A1F;
 }
 
-#showOpt:checked~ .options{
-    margin-bottom: 10px;
+#showOpt:checked ~ .options{
     opacity: 1;
     visibility: visible;
     display: block;
-    height: 50vh;
 }
 
 .optTxt{
@@ -2016,3 +2009,632 @@ select#finale {
   border-radius: 50%;
   border: 2px solid white;
 }
+/* ===========================
+   SETTINGS BUTTON
+=========================== */
+
+#settingsButton{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+
+    width:60px;
+    height:60px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#7a2fd0;
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    z-index:9999;
+
+    transition:.2s;
+}
+
+#settingsButton:hover{
+    transform:scale(1.08);
+}
+
+/* ===========================
+   SETTINGS WINDOW
+=========================== */
+
+#settingsModal{
+
+    display:none;
+
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:900px;
+    max-width:90vw;
+
+    background:#ef9dd0;
+
+    border-radius:25px;
+
+    padding:20px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+    z-index:10000;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.settingsHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.settingsHeader h2{
+
+    margin:0;
+
+    font-size:28px;
+}
+
+.settingsHeader button{
+
+    width:45px;
+    height:45px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:22px;
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.settingsGrid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+}
+
+.settingsColumn{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+/* ===========================
+   CATEGORY BUTTONS
+=========================== */
+
+.accordion{
+
+    width:100%;
+
+    text-align:left;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#d878bc;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.panel{
+
+    display:none;
+
+    padding:15px;
+
+    background:white;
+
+    border-radius:10px;
+}
+
+/* =======================================================
+   NEW TWIST MENU
+======================================================= */
+
+.options{
+
+    position:fixed;
+
+    inset:0;
+
+    margin:auto;
+
+    width:90%;
+
+    max-width:1200px;
+
+    height:80vh;
+
+    background:white;
+
+    border-radius:24px;
+
+    border:4px solid #3D0A1F;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.4);
+
+    display:none;
+
+    overflow-y:auto;
+
+    z-index:99999;
+
+    padding:30px;
+
+    box-sizing:border-box;
+
+}
+
+.twistHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:2px solid #ddd;
+
+    padding-bottom:20px;
+
+    margin-bottom:25px;
+
+}
+
+.twistHeader h2{
+
+    margin:0;
+
+    font-size:2rem;
+
+    color:#3D0A1F;
+
+}
+
+.twistButtons{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.twistIcon{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:12px;
+
+    border:none;
+
+    background:#3D0A1F;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    transition:.2s;
+
+}
+
+.twistIcon:hover{
+
+    transform:scale(1.08);
+
+    background:#df74b6;
+
+}
+
+.twistGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+}
+
+.twistCard{
+
+    background:white;
+
+    border-radius:18px;
+
+    border:1px solid #ddd;
+
+    padding:18px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.twistCard details{
+
+    margin-bottom:18px;
+
+}
+
+.twistCard summary{
+
+    list-style:none;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    font-size:1.15rem;
+
+    color:#3D0A1F;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:#f2f2f2;
+
+    transition:.2s;
+
+}
+
+.twistCard summary:hover{
+
+    background:#df74b6;
+
+    color:white;
+
+}
+
+.twistCard details[open] summary{
+
+    background:#3D0A1F;
+
+    color:white;
+
+}
+
+.twistCard label{
+
+    display:block;
+
+    padding:8px 6px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+.twistCard input{
+
+    margin-right:10px;
+
+}
+
+@media(max-width:900px){
+
+.twistGrid{
+
+    grid-template-columns:1fr;
+
+}
+
+.options{
+
+    width:95%;
+
+    height:85vh;
+
+}
+
+}
+/* =======================================================
+   MORE
+======================================================= */
+/* Dark overlay */
+
+.optContainer::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(4px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.25s;
+
+    z-index:9998;
+
+    pointer-events:none;
+
+}
+
+#showOpt:checked ~ .options ~ .btn-mas::before{
+    display:none;
+}
+
+#showOpt:checked + .options,
+#showOpt:checked ~ .options{
+    z-index:9999;
+}
+
+#showOpt:checked ~ .options{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#showOpt:checked ~ .options,
+#showOpt:checked ~ .btn-mas{
+    position:relative;
+}
+.twistCard input[type="checkbox"]{
+
+    transform:scale(1.25);
+
+    accent-color:#df74b6;
+
+}
+.twistCard label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:8px 10px;
+
+    border-radius:10px;
+
+    transition:.2s;
+
+}
+
+.twistCard label:hover{
+
+    background:#f3f3f3;
+
+}
+///////// EXPAND
+.twistCard {
+    width: 100%;
+    min-width: 0;
+}
+
+.twistCard details {
+    width: 100%;
+}
+
+.twistCard summary {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.options {
+    width: 1100px;
+    max-width: 90vw;
+    overflow-x: hidden;
+}
+///////plus and mi
+.twistCard summary {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.twistCard summary::before {
+    content: "+";
+    width: 22px;
+    margin-right: 8px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.twistCard details[open] summary::before {
+    content: "−";
+}
+//// more col
+.twistCard details details{
+    margin-left:20px;
+    margin-top:8px;
+}
+
+.twistCard details details summary{
+    font-size:15px;
+    background:#f7f7f7;
+}
+
+.twistCard details details label{
+    margin-left:20px;
+}
+////
+/* Smaller nested twist buttons */
+
+.subTwist{
+
+    margin-left:18px;
+    margin-top:10px;
+
+}
+
+.subTwist summary{
+
+    background:#f5f5f5 !important;
+
+    color:#3D0A1F !important;
+
+    font-size:.95rem !important;
+
+    padding:8px 12px !important;
+
+    border-radius:10px;
+
+}
+
+.subTwist summary::before{
+
+    width:18px;
+
+    font-size:16px;
+
+}
+
+.subTwist label{
+
+    margin-left:18px;
+
+    font-size:.95rem;
+
+}
+//
+.subTwist{
+    margin-top:10px;
+    margin-left:20px;
+}
+
+.subTwistHeader{
+    cursor:pointer;
+    font-weight:bold;
+    padding:8px 12px;
+    border-radius:10px;
+    transition:.2s;
+    user-select:none;
+}
+
+.subTwistHeader:hover{
+    background:#f0f0f0;
+}
+
+.subTwistHeader .toggle{
+    display:inline-block;
+    width:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.subTwistBody{
+    display:none;
+    margin-left:28px;
+    margin-top:8px;
+}
+
+.subTwistBody label{
+    display:block;
+    margin:6px 0;
+}
+////mini
+.miniAccordion{
+    margin:12px 0 0 18px;
+}
+
+.miniHeader{
+    display:flex;
+    align-items:center;
+
+    background:#ffffff;
+    border:2px solid #d8d8d8;
+    border-radius:12px;
+
+    padding:10px 14px;
+
+    cursor:pointer;
+
+    font-weight:600;
+    font-size:15px;
+
+    transition:.2s;
+}
+
+.miniHeader:hover{
+    background:#f5f5f5;
+}
+
+.miniIcon{
+    width:22px;
+    font-size:18px;
+    font-weight:bold;
+    text-align:center;
+    margin-right:8px;
+}
+
+.miniBody{
+    display:none;
+    margin-left:26px;
+    margin-top:8px;
+}
+
+.miniBody label{
+    display:block;
+    margin:8px 0;
+}
+.options{
+    background: rgba(255, 247, 252, .93);
+    backdrop-filter: blur(15px);
+
+    border: 2px solid rgba(223,116,182,.45);
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.6);
+}
+background: linear-gradient(
+    180deg,
+    rgba(255,250,253,.95),
+    rgba(255,241,248,.90)
+);
