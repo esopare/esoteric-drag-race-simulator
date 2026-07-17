@@ -10327,6 +10327,7 @@ let queenOfTheUni2 = false;
 let as9_dstw = false;
 let mudrakels = false;
 let solidbk = false;
+let claimQueen = false;
 function predefCast(cast, format, finale, premiere = '', returning = '') {
     currentCast = cast;
     totalCastSize = cast.length;
@@ -17745,6 +17746,18 @@ function showvotes() {
         for (let i = 0; i < winV.length; i++){
             winV[i].removeAttribute("hidden");
         }
+        div.removeAttribute("hidden");
+        if (mismovoto == true){
+            let imageVoted = document.querySelectorAll("img[src='" + top2[0].lipstick.image +"']")[1];
+            imageVoted.removeAttribute("hidden");
+            let imageVotedd = document.querySelectorAll("img[src='" + top2[1].lipstick.image +"']")[2];
+            imageVotedd.removeAttribute("hidden");
+        }else{
+            let imageVoted = document.querySelectorAll("img[src='" + top2[0].lipstick.image +"']")[1];
+            imageVoted.removeAttribute("hidden");
+            let imageVotedd = document.querySelectorAll("img[src='" + top2[1].lipstick.image +"']")[1];
+            imageVotedd.removeAttribute("hidden");
+        }
     }else if (slaysianRoyale){
         let winV = document.querySelectorAll("p#winVP");
         for (let i = 0; i < winV.length; i++){
@@ -20256,6 +20269,7 @@ class MQueen {
         this._improvStat = improv;
         this._runwayStat = runway;
         this._lipsyncStat = lipsync;
+        this.claimedBy = "";
         if (image == "noimage") {
             this.image = "image/queens/noimage.jpg";
         } else if (custom == true) {
@@ -20269,6 +20283,9 @@ class MQueen {
         return score - stat;
     }
     getName() {
+        if (this.claimedBy && this.claimedBy.trim() !== "") {
+        return `${this._name} • 🖈${this.claimedBy}`;
+    }
         return this._name;
     }
     getLipSyncStat() {
@@ -20743,6 +20760,7 @@ class Queen {
         this._improvStat = improv;
         this._runwayStat = runway;
         this._lipsyncStat = lipsync;
+        this.claimedBy = "";
         if (image == "noimage") {
             this.image = "image/queens/noimage.jpg";
         } else if (custom == true) {
@@ -20756,6 +20774,9 @@ class Queen {
         return score - stat;
     }
     getName() {
+        if (this.claimedBy && this.claimedBy.trim() !== "") {
+        return `${this._name} • 🖈${this.claimedBy}`;
+    }
         return this._name;
     }
     getLipSyncStat() {
@@ -29809,15 +29830,63 @@ searchInput.addEventListener("input", e => {
         }
     });
 });
+function hasAltImages(queen) {
 
+    const mainFile = queen.image
+        .split("/")
+        .pop()
+        .replace(".webp", "")
+        .replace(".jpg", "");
+
+    const baseName = mainFile.split("_")[0];
+
+    const altPath = `image/queens/alt/${baseName}_1.webp`;
+
+    let img = new Image();
+
+    img.src = altPath;
+
+    return img;
+}
 showingQueens = allQueens.map(queen => {
     const card = queenCardTemplate.content.cloneNode(true).children[0];
     const cardImage = card.querySelector("[data-image]");
     const header = card.querySelector("[data-header]");
-    let image = document.createElement("img");
-    image.src = queen.image;
-    image.setAttribute("style", `border-color: black; width: 105px; height: 105px;`);
-    cardImage.appendChild(image);
+let image = document.createElement("img");
+image.src = queen.image;
+image.setAttribute("style", `border-color: black; width: 105px; height: 105px;`);
+
+cardImage.appendChild(image);
+
+
+let testAlt = new Image();
+
+const mainFile = queen.image
+    .split("/")
+    .pop()
+    .replace(".webp", "")
+    .replace(".jpg", "");
+
+const baseName = mainFile.split("_")[0];
+
+testAlt.src = `image/queens/alt/${baseName}_1.webp`;
+
+
+testAlt.onload = () => {
+
+    let leftArrow = document.createElement("button");
+    leftArrow.className = "arrow left-arrow";
+    leftArrow.innerHTML = "◀";
+
+    let rightArrow = document.createElement("button");
+    rightArrow.className = "arrow right-arrow";
+    rightArrow.innerHTML = "▶";
+
+
+    cardImage.appendChild(leftArrow);
+    cardImage.appendChild(rightArrow);
+
+};
     header.textContent = queen._name;
     card.setAttribute("id", queen._name);
     cardImage.setAttribute("id", queen._name);
@@ -29868,25 +29937,69 @@ queenCardContainer.addEventListener("click", e => {
 
 function updateCast() {
     chosenKweensContainer.innerHTML = "";
+
     currentCast.forEach(queen => {
         chosenKweensContainer.innerHTML += addKween(queen);
     });
+
+    checkCastAltImages();
+}
+function checkCastAltImages() {
+
+    document.querySelectorAll(".alt-buttons").forEach(buttons => {
+
+        let test = new Image();
+
+        test.onload = () => {
+            buttons.style.display = "block";
+        };
+
+        test.onerror = () => {
+            buttons.style.display = "none";
+        };
+
+        test.src = buttons.dataset.alt;
+
+    });
+
 }
 
 function addKween(queen) {
+
+    const mainFile = queen.image
+        .split("/")
+        .pop()
+        .replace(".webp", "")
+        .replace(".jpg", "");
+
+    const baseName = mainFile.split("_")[0];
+
+    const altPath = `image/queens/alt/${baseName}_1.webp`;
+
+
     return `
         <div class="card chosen-card" id="${queen._name}">
             <div class="data-image">
                 <img class="queen-photo" src="${queen.image}"
                      alt="${queen._name}"
                      style="border-color: black; width: 80px; height: 80px;"/>
-                <button class="arrow left-arrow">◀</button>
-                <button class="arrow right-arrow">▶</button>
+
+                <span class="alt-buttons" data-alt="${altPath}">
+                    <button class="arrow left-arrow">◀</button>
+                    <button class="arrow right-arrow">▶</button>
+                </span>
+
             </div>
-            <div class="data-header">${queen._name}</div>
-            <div class="data-body" id="${queen._name}">
-                <button id="remove">X</button>
-            </div>
+
+            <div class="data-header">
+    ${queen._name}${queen.claimedBy ? ` • 🖈 ${queen.claimedBy}` : ""}
+</div>
+
+<div class="data-body" id="${queen._name}">
+    ${claimQueen ? `<button class="claim-btn" data-queen="${queen._name}">🖈</button>` : ""}
+    <button id="remove">X</button>
+</div>
+
         </div>
     `;
 }
@@ -29917,71 +30030,133 @@ chosenKweensContainer.addEventListener("click",function(e) {
         }
     }
 })
-chosenKweensContainer.addEventListener("click", (e) => {
+chosenKweensContainer.addEventListener("click", function(e) {
+
+    if (!e.target.classList.contains("claim-btn"))
+        return;
+
+    let queenName = e.target.dataset.queen;
+
+    let queen = currentCast.find(q => q._name == queenName);
+
+    if (!queen) return;
+
+
+    let player = prompt(
+        "Who is claiming " + queen.getName() + "?",
+        queen.claimedBy
+    );
+
+
+    if (player === null)
+        return;
+
+
+    queen.claimedBy = player.trim();
+
+    updateCast();
+
+});
+document.addEventListener("click", (e) => {
+
     if (!e.target.classList.contains("arrow")) return;
 
-    const card = e.target.closest(".chosen-card");
+    const card = e.target.closest(".card");
+
+    if (!card) return;
+
     const queenName = card.id;
-    const queenFound = currentCast.find(q => q._name === queenName);
-    const img = card.querySelector(".queen-photo");
 
-    // Stop if custom image
-    if (queenFound.custom === true) return;
+    const queenFound = allQueens.find(q => q._name === queenName);
 
-    // Get the base name like "Jujubee"
-    const mainFile = queenFound.image.split("/").pop().replace(".webp", "");
-    const baseName = mainFile.split("_")[0]; // ensures we remove _1, _2 etc.
+    if (!queenFound) return;
 
-const folder = queenFound.image.includes("image/queens/others/")
-    ? "image/queens/others"
-    : "image/queens";
+    const img = card.querySelector("img");
 
-const defaultImage = `${folder}/${baseName}.webp`;
-const altBase = `image/queens/alt/${baseName}`;
+    // Get base image name
+    const mainFile = queenFound.image
+        .split("/")
+        .pop()
+        .replace(".webp", "")
+        .replace(".jpg", "");
 
-    // Build availableImages only once
+    const baseName = mainFile.split("_")[0];
+
+
+    const folder = queenFound.image.includes("image/queens/others/")
+        ? "image/queens/others"
+        : "image/queens";
+
+
+    const defaultImage = `${folder}/${baseName}.webp`;
+
+    const altBase = `image/queens/alt/${baseName}`;
+
+
+    // Load alt images
     if (!queenFound.availableImages) {
+
         queenFound.availableImages = [defaultImage];
         queenFound._imageIndex = 0;
 
-        // Check alt folder images: alt/Jujubee_1.webp → alt/Jujubee_20.webp
-        for (let i = 1; i <= 20; i++) {
-            const altPath = `${altBase}_${i}.webp`;
 
-            const probe = new Image();
+        for (let i = 1; i <= 20; i++) {
+
+            let altPath = `${altBase}_${i}.webp`;
+
+            let probe = new Image();
+
             probe.onload = () => {
+
                 if (!queenFound.availableImages.includes(altPath)) {
                     queenFound.availableImages.push(altPath);
                 }
+
             };
+
             probe.src = altPath;
         }
+
     }
 
-    setTimeout(() => {
-        const total = queenFound.availableImages.length;
 
-        if (e.target.classList.contains("left-arrow")) {
-            queenFound._imageIndex =
-                (queenFound._imageIndex - 1 + total) % total;
-        } else {
-            queenFound._imageIndex =
-                (queenFound._imageIndex + 1) % total;
+    setTimeout(() => {
+
+        let total = queenFound.availableImages.length;
+
+
+        if (total <= 1) {
+            return;
         }
 
-        const newPath = queenFound.availableImages[queenFound._imageIndex];
-        const test = new Image();
 
-        test.onload = () => {
-            img.src = newPath;
-            queenFound.image = newPath;
-        };
-        test.onerror = () => {
-            img.src = defaultImage;
-            queenFound.image = defaultImage;
-        };
-        test.src = newPath;
-    }, 100);
+        if (e.target.classList.contains("left-arrow")) {
+
+            queenFound._imageIndex--;
+
+            if (queenFound._imageIndex < 0)
+                queenFound._imageIndex = total - 1;
+
+        } 
+        
+        else {
+
+            queenFound._imageIndex++;
+
+            if (queenFound._imageIndex >= total)
+                queenFound._imageIndex = 0;
+
+        }
+
+
+        let newImage = queenFound.availableImages[queenFound._imageIndex];
+
+
+        img.src = newImage;
+
+
+    }, 200);
+
 });
 
 
@@ -30666,6 +30841,11 @@ function checkMulti(contestant) {
         return 1
     }
 }
+//////////////
+document.getElementById("claimQueenToggle").addEventListener("change", function() {
+    claimQueen = this.checked;
+});
+//////////////
 function fgWnn() {
     let screen = new Scene();
     screen.createHorizontalLine();
@@ -30753,6 +30933,26 @@ function chismoso(cast) {
     main.appendChild(contenedor);
     main.appendChild(styleEl);
 }*/
+document.querySelectorAll(".miniHeader").forEach(header => {
 
+    header.onclick = function(){
 
+        const body = this.nextElementSibling;
+        const icon = this.querySelector(".miniIcon");
+
+        if(body.style.display === "block"){
+
+            body.style.display = "none";
+            icon.textContent = "+";
+
+        }else{
+
+            body.style.display = "block";
+            icon.textContent = "-";
+
+        }
+
+    };
+
+});
 ///// REUNION
