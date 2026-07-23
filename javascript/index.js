@@ -3877,7 +3877,8 @@ function updSelec() {
     centering.appendChild(hr5);
 
     // Keep the existing proceed button
-    if (flag) centering.appendChild(button);
+if (flag)
+    centering.appendChild(button);
 
     main.appendChild(centering);
 
@@ -21060,7 +21061,7 @@ let us_season10 = [aquaria, asia, blair, dusty, eureka, kalorie, kameron, mayhem
 //ALL STARS 4:
 let allstars_4 = [farrah, gia, jasmine, latrice, manila, monet, monique, naomi, trinity, valentina];
 //SEASON 11:  acting, comedy, dance, design, improv, runway, lipsync
-let akeria = new Queen("A'keria C. Davenport", 8, 9, 11, 12, 10, 13, 10, "Akeria");
+let akeria = new Queen("A'keria C. Davenport", 8, 8, 10, 12, 10, 14, 13, "Akeria");
 let ariel = new Queen("Ariel Versace", 8, 6, 8, 5, 8, 8, 8, "Ariel");
 let brooke = new Queen("Brooke Lynn Hytes", 8, 8, 13, 12, 8, 10, 13, "Brooke");
 let honeyd = new Queen("Honey Davenport", 4, 6, 5, 7, 4, 9, 4, "HoneyD");
@@ -21071,14 +21072,14 @@ let plastique = new Queen("Plastique Tiara", 11, 10, 10, 15, 8, 15, 9, "Plastiqu
 let rajah = new Queen("Ra'Jah O'Hara", 8, 8, 11, 12, 9, 12, 13, "Rajah");
 let scarlet = new Queen("Scarlet Envy", 13, 9, 6, 13, 9, 11, 8, "Scarlet");
 let shuga = new Queen("Shuga Cain", 10, 9, 7, 7, 8, 11, 7, "Shuga");
-let silky = new Queen("Silky Nutmeg Ganache", 11, 11, 9, 9, 10, 9, 12, "Silky");
+let silky = new Queen("Silky Nutmeg Ganache", 11, 11, 9, 9, 10, 10, 13, "Silky");
 let soju = new Queen("Soju", 4, 4, 4, 4, 4, 4, 4, "Soju");
 let yvie = new Queen("Yvie Oddly", 12, 7, 13, 12, 9, 12, 15, "Yvie");
 let us_season11 = [akeria, ariel, brooke, honeyd, kahanna, mercedes, ninaw, plastique, rajah, scarlet, shuga, silky, soju, vanessa, yvie];
 //SEASON 12: 
 let aiden = new Queen("Aiden Zhane", 9, 3, 6, 4, 3, 6, 6, "Aiden");
 let brita = new Queen("Brita", 7, 8, 7, 4, 6, 8, 11, "Brita");
-let crystal = new Queen("Crystal Methyd", 9, 9, 10, 10, 8, 13, 8, "CrystalM");
+let crystal = new Queen("Crystal Methyd", 9, 10, 10, 10, 8, 15, 9, "CrystalM");
 let dahlia = new Queen("Dahlia Sin", 4, 4, 6, 5, 5, 10, 4, "Dahlia");
 let gigi = new Queen("Gigi Goode", 10, 11, 11, 13, 9, 12, 8, "Gigi");
 let heidi = new Queen("Heidi N Closet", 9, 9, 11, 9, 12, 10, 13, "Heidi");
@@ -21096,7 +21097,7 @@ let allstars_5 = [alexis, blair, derrick, india, jujubee, mariah, mayhem, miz, o
 let denali = new Queen("Denali", 4, 8, 14, 9, 10, 11, 13, "Denali");
 let elliott = new Queen("Elliott With 2 Ts", 5, 5, 12, 9, 3, 8, 11, "Elliott");
 let mik = new Queen("Gottmik", 9, 11, 7, 14, 14, 15, 9, "Gottmik");
-let joey = new Queen("Joey Jay", 8, 9, 8, 8, 9, 11, 7, "Joey");
+let joey = new Queen("Joey Jay", 8, 11, 9, 8, 9, 12, 11, "Joey");
 let kahmora = new Queen("Kahmora Hall", 3, 4, 3, 5, 4, 12, 4, "Kahmora");
 let kandym = new Queen("Kandy Muse", 11, 10, 10, 7, 8, 10, 14, "KandyM");
 let lala = new Queen("LaLa Ri", 6, 8, 13, 7, 10, 9, 14, "LaLa");
@@ -21115,7 +21116,7 @@ let angeria = new Queen("Angeria Paris VanMicheals", 13, 11, 10, 12, 9, 13, 11, 
 let bosco = new Queen("Bosco", 11, 12, 6, 7, 12, 11, 6, "Bosco");
 let daya = new Queen("Daya Betty", 9, 8, 9, 9, 10, 10, 8, "DayaBetty");
 let deja = new Queen("DeJa Skye", 9, 7, 9, 8, 13, 8, 8, "DeJa");
-let jasmineK = new Queen("Jasmine Kennedie", 8, 6, 13, 9, 6, 11, 13, "JasmineK");
+let jasmineK = new Queen("Jasmine Kennedie", 8, 7, 14, 9, 6, 12, 14, "JasmineK");
 let jorgeous = new Queen("Jorgeous", 9, 7, 15, 10, 6, 11, 15, "Jorgeous");
 let june = new Queen("June Jambalaya", 5, 6, 6, 4, 5, 6, 6, "June");
 let kerri = new Queen("Kerri Colby", 6, 6, 5, 5, 6, 9, 6, "Kerri");
@@ -21147,7 +21148,7 @@ let sugar = new Queen("Sugar Solay", 9, 7, 6, 6, 5, 11, 7, "Sugar");
 let us_season15 = [amethyst, anetra, auraMayari, irene, jax, loosey, luxx, malaysia, marcia, mistress, poppy, robin, salina, sashaColby, spice, sugar];
 //SEASON 16
 let amandaTori = new Queen("Amanda Tori Meating", 9, 7, 7, 7, 7, 7, 9, "AmandaToriMeating");
-let dawn = new Queen("Dawn", 10, 10, 10, 14, 10, 14, 8, "Dawn");
+let dawn = new Queen("Dawn", 10, 9, 10, 14, 10, 15, 7, "Dawn");
 let geneva = new Queen("Geneva Karr", 5, 7, 10, 6, 8, 8, 11, "GenevaKarr");
 let hershii = new Queen("Hershii LiqCour-Jeté", 7, 8, 6, 3, 8, 6, 7, "HershiiLiqCourJete");
 let megami = new Queen("Megami", 9, 7, 10, 10, 9, 10, 12, "Megami");
@@ -29906,16 +29907,23 @@ queenCardContainer.addEventListener("click", e => {
         } else if (e.target.matches("img")) {
             id = e.target.parentNode.parentNode.id
         }
-        let queenFound = allQueens.find((queen) => {
-            return queen._name == id
-        });
-        //get selected names and compare them to the all queens list:
-        for (let k = 0; k < allQueens.length; k++) {
-            if (queenFound.getName() == allQueens[k].getName()) {
-                currentCast.push(allQueens[k]);
-                break;
-            }
-        }
+let queenFound = allQueens.find((queen) => {
+    return queen._name == id;
+});
+
+// Save whatever image is currently showing in the search card
+const currentImage = e.target.closest(".card").querySelector("img").src;
+
+// Add the queen
+for (let k = 0; k < allQueens.length; k++) {
+    if (queenFound.getName() == allQueens[k].getName()) {
+
+        allQueens[k].image = currentImage;
+
+        currentCast.push(allQueens[k]);
+        break;
+    }
+}
         updateCast();
         resetSearch();
         let button = document.getElementById("randomK");
@@ -30149,10 +30157,10 @@ document.addEventListener("click", (e) => {
         }
 
 
-        let newImage = queenFound.availableImages[queenFound._imageIndex];
+let newImage = queenFound.availableImages[queenFound._imageIndex];
 
-
-        img.src = newImage;
+img.src = newImage;
+queenFound.image = newImage;
 
 
     }, 200);
