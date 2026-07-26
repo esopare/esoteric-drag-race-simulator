@@ -74,7 +74,8 @@
       <option value="porkchop">Porkchop Premiere</option>
       <option value="porkchop-elim">Porkchop Premiere (Elimination)</option>
       <option value="lsass-premiere">Lip-Sync Assassin Premiere</option>
-      <option value="rateaqueen">Rate A Queen (S16)</option>
+      <option value="rateaqueen">Rate-A-Queen (S16)</option>
+      <option value="s17-premiere">Rate-A-Queen (S17)</option>
       <option value="triple-premiere">Triple Premiere</option>
     </select>
   </div>
@@ -83,8 +84,9 @@
     <p>Choose your returning format:</p>
     <select id="returning">
       <option>None</option>
-      <option value="choose">Choose Who Returns</option>
-      <option value="choose-2">Choose 2 Who Returns</option>
+      <option value="choose">Choose</option>
+      <option value="choose-2">Choose 2</option>
+      <option value="choose-5">Choose 5</option>
       <option value="random">Random Queen Returns</option>
       <option value="queensofcomedy">Queens of Comedy</option>
       <option value="kittygirlgroup">Kitty Girl Group</option>
@@ -114,7 +116,7 @@
       <option value="slaysian-royale">Slaysian Royale</option>
       <option value="queenoftu">Queen of the Universe (S1)</option>
       <option value="queenoftus2">Queen of the Universe (S2)</option>
-      <option value="bracket-format">Tournament of All Stars (S10)</option>
+      <option value="bracket-format">Tournament of All Stars</option>
       <option value="bracket-format2">Tournament of All Stars (S11)</option>
       <option value="drag-den">Drag Den</option>
       <option value="split-format">Split Format</option>
@@ -134,6 +136,7 @@
       <option value="teams">Teams Finale</option>
       <option value="top5">Top 5</option>
       <option value="jury-top5">Top 5 Jury Vote</option>
+      <option value="top6as11">Top 6 (All Stars 11)</option>
       <option value="top8">Top 8</option>
       <option value="top8lftc">Top 8 Lip-Sync For The Crown</option>
       <option value="top8wildcard">Top 8 Lip-Sync For The Crown (Wildcard)</option>
@@ -280,6 +283,69 @@
                 </label>
 
             </details>
+
+
+<details>
+    <summary>Custom Brackets</summary>
+
+    <label>
+        <input type="checkbox" id="enableCustomBracket">
+        Enable Custom Brackets
+    </label>
+
+    <label>
+        Episodes Per Bracket
+        <input type="number" id="episodesPerBracket" value="3" min="1">
+    </label>
+
+    <label>
+        Number of Brackets
+        <input type="number" id="numberOfBrackets" value="3" min="2">
+    </label>
+
+    <label>
+        Passers Per Bracket
+        <input type="number" id="passersPerBracket" value="3" min="1">
+    </label>
+
+    <hr>
+
+    <label>
+        Second Round Brackets (N/A)
+        <input type="number" id="secondRoundBrackets">
+    </label>
+
+    <label>
+        Second Round Episodes (N/A)
+        <input type="number" id="secondRoundEpisodes">
+    </label>
+
+    <label>
+        Second Round Passers (N/A)
+        <input type="number" id="secondRoundPassers">
+    </label>
+
+    <hr>
+
+<label>
+    Merge Format
+    <select id="mergeFormat">
+        <option value="lipsycnforlife">Regular</option>
+        <option value="lipassassin">Lipsync Assassin</option>
+        <option value="fatal">Fatal Selection</option>
+        <option value="thaiformat">Thailand Format</option>
+        <option value="top2as">Lipsync For Your Legacy</option>
+        <option value="raqwin">Rate-A-Queen</option>
+        <option value="mdragula">Dragula</option>
+    </select>
+</label>
+
+    <hr>
+
+    <button type="button" onclick="buildBracketSettings()">
+        BUILD
+    </button>
+</details>
 
         </div>
 
