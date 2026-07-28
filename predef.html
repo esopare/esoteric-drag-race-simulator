@@ -258,7 +258,7 @@
                         <div class="content-season_overlay" aria-hidden="true" id="asseason10"></div></div>
                     <div class="content-season">
                         <h3 class="content-season-title">All Stars Season 11</h3>
-                        <button onclick="predefCast(allstars_11, 'bracket-format2', 'LFTC', '', '')">Simulate</button>
+                        <button onclick="predefCast(allstars_11, 'bracket-format2', 'top6as11', '', '')">Simulate</button>
                         <div class="content-season_overlay" aria-hidden="true" id="asseason11"></div></div>
                     <div class="content-season">
                         <h3 class="content-season-title">All Stars Season 12</h3>
@@ -861,59 +861,226 @@
 
         <div id="result"></div>
     </div>
-    <div class="optContainer">
-        <input type="checkbox" id="showOpt">
-        <div class="options">
-            <div class="all-options">
-                <div class="aoitem">
-                    <h3>Disable:</h3>
-                    <p><input type="checkbox" id="disableDouble">Double Shantays and Sashays</p>
-                    <p><div class="tooltip">&#x1F6C8;
-                        <span class="tooltiptext">Whoever does the best for the challenge and runway wins.</span>
-                    </div><input type="checkbox" id="riggory">Challenge Riggory</p>
-                    <p><div class="tooltip">&#x1F6C8;
-                        <span class="tooltiptext">Whoever does the best in the lipsync wins.</span>
-                    </div><input type="checkbox" id="riggoryLipsync">Lipsync Riggory</p>
-                    <h3>Twists:</h3>
-                    <p><input type="checkbox" id="immunity">Immunity</p>
-                    <p><input type="checkbox" id="beaver">Golden Beaver</p>
-                    <h3>Titles:</h3>
-                    <p><input type="checkbox" id="goldenBoot">Golden Boot Award</p>
-                    <p><input type="checkbox" id="mlostlook">Miss Lost Look</p>
-                    <p><input type="checkbox" id="goldenBoot">Trade of The Season</p>
-                    <p><input type="checkbox" id="goldenBoot">Fan Favorite</p>
-                    <p><input type="checkbox" id="goldenBoot">Miss Villian</p>
-                    <p><input type="checkbox" id="goldenBoot">Miss Robbed</p>
-                    <h3>Fame Games:</h3>
-                    <p><input type="checkbox" id="famegames"></p>
-                </div>
-                <div class="aoitem">
-                    <h3>Lipsync Challenge:</h3>
-                    <p><input type="checkbox" id="lipSyncCha">LaLaPaRUza Smackdown</p>
-                    <p><input type="checkbox" id="canLipSync">Slay Off Extravaganza</p>
-                    <p><input type="checkbox" id="reuls">Reunion Smackdown</p>
-                    <h3>Season Twists (only enable one):</h3>
-                    <p><input type="checkbox" id="chocolateBar">Chocolate Bar - Random</p>
-                    <p><input type="checkbox" id="chocolateBarChoosable">Chocolate Bar - Choosable</p>
-                    <p><input type="checkbox" id="badonka_Dunk">Badonka Dunk - Random</p>
-                    <p><input type="checkbox" id="badonka_DunkChoosable">Badonka Dunk - Choosable</p>
-                    <p><input type="checkbox" id="chocolateBar">Lucky Queen - Random</p>
-                    <p><input type="checkbox" id="chocolateBarChoosable">Lucky Queen - Choosable</p>
-                    <p><input type="checkbox" id="chocolateBar">Lucky Cow</p>
-                    <h3>Style:</h3>
-                    <p><input type="checkbox" id="background"> Solid background</p>
-                </div>
-            </div>
+    <div class="optContainer">        <input type="checkbox" id="showOpt">
+<div class="options">
+
+    <div class="twistHeader">
+
+        <h2>Twist Menu</h2>
+
+        <div class="twistButtons">
+
+
+
         </div>
-        <div class="btn-mas">
-            <label for="showOpt" class="optTxt"> Options</label>
-        </div>
+
     </div>
+
+    <div class="twistGrid">
+
+        <!-- LEFT COLUMN -->
+
+        <div class="twistCard">
+
+            <details>
+
+                <summary>Disable</summary>
+
+                <label>
+                    <input type="checkbox" id="disableDouble">
+                    Double Shantays and Sashays
+                </label>
+
+                <label>
+                    <input type="checkbox" id="riggory">
+                    Challenge Riggory
+                </label>
+
+                <label>
+                    <input type="checkbox" id="riggoryLipsync">
+                    Lipsync Riggory
+                </label>
+
+                <label>
+                    <input type="checkbox" id="claimQueenToggle">
+                    Claim a Queen
+                </label>
+
+            </details>
+
+<details>
+
+    <summary>Twists</summary>
+
+    <label><input type="checkbox" id="immunity"> Immunity</label>
+
+    <label><input type="checkbox" id="beaver"> Golden Beaver</label>
+    <label><input type="checkbox" id="famegames"> Fame Games</label>
+
+    <div class="miniAccordion">
+
+        <div class="miniHeader">
+            <span class="miniIcon">+</span>
+            Chocolate Bar
+        </div>
+
+        <div class="miniBody">
+            <label><input type="checkbox" id="chocolateBar"> Random</label>
+            <label><input type="checkbox" id="chocolateBarChoosable"> Choosable</label>
+        </div>
+
+    </div>
+
+    <div class="miniAccordion">
+
+        <div class="miniHeader">
+            <span class="miniIcon">+</span>
+            Badonka Dunk
+        </div>
+
+        <div class="miniBody">
+            <label><input type="checkbox" id="badonka_Dunk"> Random</label>
+            <label><input type="checkbox" id="badonka_DunkChoosable"> Choosable</label>
+        </div>
+
+    </div>
+
+
+</details>
+
+
+
+        </div>
+
+        <!-- MIDDLE COLUMN -->
+
+        <div class="twistCard">
+
+            <details>
+
+                <summary>Lipsync Challenge</summary>
+
+                <label>
+                    <input type="checkbox" id="lipSyncCha">
+                    LaLaPaRUza Smackdown
+                </label>
+
+                <label>
+                    <input type="checkbox" id="canLipSync">
+                    Slay Off Extravaganza
+                </label>
+
+                <label>
+                    <input type="checkbox" id="reuls">
+                    Reunion Smackdown
+                </label>
+
+            </details>
+
+
+<details>
+    <summary>Custom Brackets</summary>
+
+    <label>
+        <input type="checkbox" id="enableCustomBracket">
+        Enable Custom Brackets
+    </label>
+
+    <label>
+        Episodes Per Bracket
+        <input type="number" id="episodesPerBracket" value="3" min="1">
+    </label>
+
+    <label>
+        Number of Brackets
+        <input type="number" id="numberOfBrackets" value="3" min="2">
+    </label>
+
+    <label>
+        Passers Per Bracket
+        <input type="number" id="passersPerBracket" value="3" min="1">
+    </label>
+
+    <hr>
+
+    <label>
+        Second Round Brackets (N/A)
+        <input type="number" id="secondRoundBrackets">
+    </label>
+
+    <label>
+        Second Round Episodes (N/A)
+        <input type="number" id="secondRoundEpisodes">
+    </label>
+
+    <label>
+        Second Round Passers (N/A)
+        <input type="number" id="secondRoundPassers">
+    </label>
+
+    <hr>
+
+<label>
+    Merge Format
+    <select id="mergeFormat">
+        <option value="lipsycnforlife">Regular</option>
+    </select>
+</label>
+
+    <hr>
+
+    <button type="button" onclick="buildBracketSettings()">
+        BUILD
+    </button>
+</details>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+
+        <div class="twistCard">
+
+            <details>
+
+                <summary>Titles</summary>
+
+                <label>
+                    <input type="checkbox" id="goldenBoot">
+                    Golden Boot Award
+                </label>
+
+                <label>
+                    <input type="checkbox" id="mlostlook">
+                    Miss Lost Look
+                </label>
+
+            </details>
+
+            <details>
+
+                <summary>Style</summary>
+
+                <label>
+                    <input type="checkbox" id="background">
+                    Solid Background
+                </label>
+
+            </details>
+
+        </div>
+
+    </div>
+
+</div>
+        <div class="btn-mas">
+            <label for="showOpt" class="optTxt"> TWISTS</label>
+        </div>
+</div>
     <a href="#" class="toTop">
         <i class="fa-solid fa-angle-up"></i>
     </a>
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="libs/html2canvas.js"></script>
     <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
     <script>
         kofiWidgetOverlay.draw('arainbow4u', {
@@ -924,6 +1091,28 @@
         });
     </script>
 <script>
+document.querySelectorAll(".subTwistHeader").forEach(header=>{
+
+    header.addEventListener("click",()=>{
+
+        const body=header.nextElementSibling;
+        const icon=header.querySelector(".toggle");
+
+        if(body.style.display==="block"){
+
+            body.style.display="none";
+            icon.textContent="+";
+
+        }else{
+
+            body.style.display="block";
+            icon.textContent="-";
+
+        }
+
+    });
+
+});
   // Function to hide all pre-defined season selection elements
   function hidePredefinedSeasons() {
     // Hide the country tabs
