@@ -491,9 +491,6 @@ class ComedyChallenge {
         if (currentCast.length > 8) {
             whatChallengeIs = 0;
             episodeChallenges.push("Stand Up");
-        } else if (bracketSeason) {
-            whatChallengeIs = 0;
-            episodeChallenges.push("Rappin Roast");
         } else {
             whatChallengeIs = 1;
             episodeChallenges.push("Roast");
@@ -4027,6 +4024,8 @@ function reSimulate() {
     bracket1Cast = [];
     bracket2Cast = [];
     bracket3Cast = [];
+    customBracketCasts = [];
+    currentCustomBracket = 0;
     bracket1AdvancedQueens = [];
     bracket2AdvancedQueens = [];
     bracket3AdvancedQueens = [];
@@ -10849,6 +10848,7 @@ let thailandFormat = false;
 let team = false;
 let dragula = false;
 let dragDen = false;
+let enableCustomBracket = false;
 let fatalSelection = false;
 let splitFormat = false;
 let queenOfTheUniverse = false;
@@ -12378,7 +12378,7 @@ function startSimulation(challenge = "") {
             lookperdido = false;
             slayoff = false;
             reuls = false;
-        } else if(bracketSeason && (smackdown || s14Premiere || globalPremiere || s12Premiere || s9Premiere || s6Premiere || tripleprem || porkchopPremiere || porkchopElim || uk3Premiere || lipassPremiere || parPremiere || ph2Premiere || conjoinedQueens || queensOfComedy || reinasDLC || kittyGirlGroup || attentionGGroup || readingIF || lalaparuza || voteReturn || chocolateBarTwist || badonkaDunkTwist || fameGames || slayoff || reuls) || bracketSeason && currentCast.length < 12) {
+        } else if(bracketSeason && (smackdown || s14Premiere || globalPremiere || s12Premiere || s9Premiere || s6Premiere || tripleprem || porkchopPremiere || porkchopElim || uk3Premiere || lipassPremiere || parPremiere || ph2Premiere || conjoinedQueens || queensOfComedy || reinasDLC || kittyGirlGroup || attentionGGroup || readingIF || lalaparuza || voteReturn || chocolateBarTwist || badonkaDunkTwist || fameGames || slayoff || reuls) || bracketSeason && currentCast.length < 10) {
             window.alert("Tournament Of All Stars Format isn't avaliable with any combination of premiere, returning challenge, Fame Games or Chocolate Bar Twist. Finale format must be Top 8 Lipsync for the Crown. It needs at least 12 contestants. Only available return formats are Random and Choose.");
             s6Premiere = false;
             tripleprem = false;
@@ -13370,73 +13370,6 @@ else if (bracketSeason11 && episodeCount >= 10) {
         }
         judgingThailand();
     }
-    else if (currentCast.length > 6 & enableCustomBracket) {
-        currentCast.sort((a, b) => (a.performanceScore - b.performanceScore));
-        for (let i = 0; i < 3; i++) {
-            topQueens.push(currentCast[i]);
-            bottomQueens.push(currentCast[currentCast.length - (i + 1)]);
-        }
-        if (currentCast[3].performanceScore < 10) {
-            topQueens.push(currentCast[3]);
-            bottomQueens.splice(bottomQueens.indexOf(currentCast[currentCast.length - 3]), 1);
-        }
-// ADD SAFE TO EVERYONE ELSE
-for (let queen of currentCast) {
-    if (!topQueens.includes(queen) && !bottomQueens.includes(queen)) {
-        queen.addToTrackRecord("SAFE");
-        queen.ppe += 3;
-    }
-}
-        if (currentCast[currentCast.length - 3].performanceScore < 16 && currentCast[currentCast.length - 3].performanceScore >= 10) {
-            bottomQueens.splice(bottomQueens.indexOf(currentCast[currentCast.length - 3]), 1);
-            judgingScreen();
-        }
-        if (regularFormat) {
-            winAndBtm2();
-        } else if (dragula) {
-            winAndBtm2();
-} else if (bracketSeason && enableCustomBracket &&
-    episodeCount >= (
-        bracketConfig.rounds[0].episodes *
-        bracketConfig.rounds[0].brackets + 1
-    )) {
-
-    if (bracketConfig.mergeFormat == "lipassassin") {
-	lipsync_assassin = true;
-        topAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "fatal") {
-        fatalSelectionTopAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "thaiformat") {
-	thailandFormat = true;
-        judgingThailand();
-
-    } else if (bracketConfig.mergeFormat == "top2as") {
-	all_stars = true;
-        top2AndBtm();
-
-    } else if (bracketConfig.mergeFormat == "mdragula") {
-	dragula = true;
-        winAndBtm2();
-
-    } else if (bracketConfig.mergeFormat == "raqwin") {
-    currentCast.sort((a, b) => a.performanceScore - b.performanceScore);
-
-    // Put the entire cast into topQueens
-    topQueens = [...currentCast];
-
-    // No performance bottoms after the merge
-    bottomQueens = [];
-
-        RAQwin();
-
-    } else {
-        // DEFAULT MERGE FORMAT
-        winAndBtm2();
-    }
-    }
-    }
     else if (currentCast.length > 6) {
         //add first 3 queens to the top and last 3 queens to the bottom:
         currentCast.sort((a, b) => (a.performanceScore - b.performanceScore));
@@ -13509,37 +13442,7 @@ for (let queen of currentCast) {
         bracketConfig.rounds[0].episodes *
         bracketConfig.rounds[0].brackets + 1
     )) {
-
-    if (bracketConfig.mergeFormat == "lipassassin") {
-        topAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "fatal") {
-        fatalSelectionTopAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "thaiformat") {
-        judgingThailand();
-
-    } else if (bracketConfig.mergeFormat == "top2as") {
-        top2AndBtm();
-
-    } else if (bracketConfig.mergeFormat == "mdragula") {
         winAndBtm2();
-
-    } else if (bracketConfig.mergeFormat == "raqwin") {
-    currentCast.sort((a, b) => a.performanceScore - b.performanceScore);
-
-    // Put the entire cast into topQueens
-    topQueens = [...currentCast];
-
-    // No performance bottoms after the merge
-    bottomQueens = [];
-
-        RAQwin();
-
-    } else {
-        // DEFAULT MERGE FORMAT
-        winAndBtm2();
-    }
         } else if (splitFormat) {
             winAndBtm2();
         } else if (thailandFormat) {
@@ -13577,29 +13480,7 @@ for (let queen of currentCast) {
         bracketConfig.rounds[0].episodes *
         bracketConfig.rounds[0].brackets + 1
     )) {
-
-    if (bracketConfig.mergeFormat == "lipassassin") {
-        topAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "fatal") {
-        fatalSelectionTopAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "thaiformat") {
-        thaiWinBottom2();
-
-    } else if (bracketConfig.mergeFormat == "top2as") {
-        top2AndBtm();
-
-    } else if (bracketConfig.mergeFormat == "mdragula") {
         winAndBtm2();
-
-    } else if (bracketConfig.mergeFormat == "raqwin") {
-        RAQwin();
-
-    } else {
-        // DEFAULT MERGE FORMAT
-        winAndBtm2();
-    }
         } else if (splitFormat) {
             winAndBtm2();
         } else if (thailandFormat) {
@@ -13632,29 +13513,7 @@ for (let queen of currentCast) {
         bracketConfig.rounds[0].episodes *
         bracketConfig.rounds[0].brackets + 1
     )) {
-
-    if (bracketConfig.mergeFormat == "lipassassin") {
-        topAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "fatal") {
-        fatalSelectionTopAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "thaiformat") {
-        thaiWinBottom2();
-
-    } else if (bracketConfig.mergeFormat == "top2as") {
-        top2AndBtm();
-
-    } else if (bracketConfig.mergeFormat == "mdragula") {
         winAndBtm2();
-
-    } else if (bracketConfig.mergeFormat == "raqwin") {
-        RAQwin();
-
-    } else {
-        // DEFAULT MERGE FORMAT
-        winAndBtm2();
-    }
         } else if (splitFormat) {
             winAndBtm2();
         } else if (thailandFormat) {
@@ -13686,29 +13545,7 @@ for (let queen of currentCast) {
         bracketConfig.rounds[0].episodes *
         bracketConfig.rounds[0].brackets + 1
     )) {
-
-    if (bracketConfig.mergeFormat == "lipassassin") {
-        topAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "fatal") {
-        fatalSelectionTopAndBtm();
-
-    } else if (bracketConfig.mergeFormat == "thaiformat") {
-        thaiWinBottom2();
-
-    } else if (bracketConfig.mergeFormat == "top2as") {
-        top2AndBtm();
-
-    } else if (bracketConfig.mergeFormat == "mdragula") {
         winAndBtm2();
-
-    } else if (bracketConfig.mergeFormat == "raqwin") {
-        RAQwin();
-
-    } else {
-        // DEFAULT MERGE FORMAT
-        winAndBtm2();
-    }
         } else if (splitFormat) {
             winAndBtm2();
 	} else if (slaysianRoyale) {
@@ -32323,7 +32160,6 @@ alert(
     "\nPassers: " + bracketConfig.rounds[0].passers
 );
 }
-let enableCustomBracket = false;
 let customBracketCasts = [];
 let currentCustomBracket = 0;
 function customBracketChoose() {
