@@ -8639,7 +8639,18 @@ function contestantProgress() {
             rank.innerHTML += "<br>" + winnerQueen.minqdd;
         }
         winner.appendChild(rank);
-        name.innerHTML = winnerQueen.getName();
+        if ((bracketSeason || bracketSeason11) && winnerQueen.bracket) {
+    let winnerColor = bracketColors[winnerQueen.bracket - 1] || "#ffffff";
+
+name.innerHTML =
+    winnerQueen.getName() +
+    "<br><small>(Bracket " + winnerQueen.bracket + ")</small>";
+name.style.backgroundColor = winnerColor;
+name.style.color = getTextColor(winnerColor);
+name.style.fontWeight = "bold";
+} else {
+    name.innerHTML = winnerQueen.getName();
+}
         winner.appendChild(name);
         let photo = document.createElement("td");
         photo.setAttribute("style", "background: url("+ winnerQueen.image +"); background-size: cover; background-position: center; background-repeat: no-repeat;");
@@ -9228,7 +9239,24 @@ if (winnerQueen.dragdagulanLoss && winnerQueen.dragdagulanLoss.indexOf(i + 1) !=
             contestant.appendChild(rank);
             let name = document.createElement("td");
             name.setAttribute("class", "nameTR");
-            name.innerHTML = currentCast[i].getName();
+            if ((bracketSeason || bracketSeason11) && currentCast[i].bracket) {
+    let currentColor = bracketColors[currentCast[i].bracket - 1] || "#ffffff";
+
+name.innerHTML =
+    currentCast[i].getName() +
+    "<br><small>(Bracket " + currentCast[i].bracket + ")</small>";
+name.style.backgroundColor = currentColor;
+name.style.color = getTextColor(currentColor);
+name.style.fontWeight = "bold";
+} else {
+    name.innerHTML = currentCast[i].getName();console.log(
+    currentCast[i].getName(),
+    currentCast[i].bracket,
+    bracketSeason,
+    bracketSeason11,
+    enableCustomBracket
+);
+}
             contestant.appendChild(name);
             let photo = document.createElement("td");
             photo.setAttribute("style", "background: url("+ currentCast[i].image +"); background-size: cover; background-position: center; background-repeat: no-repeat;");
@@ -9798,13 +9826,20 @@ if (currentCast[i].dragdagulanLoss.indexOf(k + 1) != -1) {
         let contestant = document.createElement("tr");
         let rank = document.createElement("td");
         rank.setAttribute("style", "background-color: #f5ebf5; font-weight: bold; 50px;");
-        if (eliminatedCast[i].rankP == 0) {
-            rank.innerHTML = (rankNumber+1+i);
-            if (rank.innerHTML == 3) {
-                rank.innerHTML += "rd"
-            } else {
-                rank.innerHTML += "th";
-            }
+if (eliminatedCast[i].rankP == 0) {
+    rank.innerHTML = (rankNumber+1+i);
+    if (rank.innerHTML == 3) {
+        rank.innerHTML += "rd"
+    } else {
+        rank.innerHTML += "th";
+    }
+        } else if (
+    eliminatedCast[i].rankP == "b0") {
+
+    let rangeStart = rankNumber + 1;
+
+    rank.innerHTML = rangeStart + "th-" + totalCastSize + "th";
+
         } else if (eliminatedCast[i].rankP == 1) {
             rank.innerHTML += "1st<br><small>(Winner)</small>";
         } else if (eliminatedCast[i].rankP == 2) {
@@ -9862,7 +9897,18 @@ else if (
         contestant.appendChild(rank);
         let name = document.createElement("td");
         name.setAttribute("class", "nameTR");
-        name.innerHTML = eliminatedCast[i].getName();
+        if ((bracketSeason || bracketSeason11) && eliminatedCast[i].bracket) {
+    let elimColor = bracketColors[eliminatedCast[i].bracket - 1] || "#ffffff";
+
+name.innerHTML =
+    eliminatedCast[i].getName() +
+    "<br><small>(Bracket " + eliminatedCast[i].bracket + ")</small>";
+name.style.backgroundColor = elimColor;
+name.style.color = getTextColor(elimColor);
+name.style.fontWeight = "bold";
+} else {
+    name.innerHTML = eliminatedCast[i].getName();
+}
         contestant.appendChild(name);
         let photo = document.createElement("td");
         photo.setAttribute("style", "background: url("+ eliminatedCast[i].image +"); background-size: cover; background-position: center; background-repeat: no-repeat;");
@@ -14714,6 +14760,8 @@ function judgingFloppersScreen() {
     btm2.innerHTML += "I'm sorry my dears but you are up for elimination.";
     screen.createButton("Proceed", "lipsyncDesc()");
 }
+let bracketColors =
+    JSON.parse(localStorage.getItem("bracketColors")) || [];
 let currentBracket = 1;
 let choosingBracket = 1;
 let bracketQueens = [];
@@ -30109,6 +30157,7 @@ let whoWhyCompetition = [
 let whoWhyRelation = [
     "they are annoying",
     "their attitude doesn't represent the values of a winner",
+    "I just don't think that you see her as a complete bitch. Thank you.",
     "they are lacking maturity",
     "of their delusion about their performance throughout the season",
     "they lacked maturity to be on the season",
@@ -32153,13 +32202,17 @@ function buildBracketSettings() {
     }
 
     console.log(bracketConfig);
+
+buildBracketColors();
 alert(
     "✅ Custom Bracket Built!\n\n" +
     "Brackets: " + bracketConfig.rounds[0].brackets +
     "\nEpisodes: " + bracketConfig.rounds[0].episodes +
     "\nPassers: " + bracketConfig.rounds[0].passers
 );
+
 }
+
 let customBracketCasts = [];
 let currentCustomBracket = 0;
 function customBracketChoose() {
@@ -32333,6 +32386,67 @@ miniChallenge();
 
     });
 
+}
+function buildBracketColors() {
+console.log("BUILDING COLORS");
+    let container = document.getElementById("bracketColorsContainer");
+    container.innerHTML = "";
+
+    let brackets = Number(document.getElementById("numberOfBrackets").value);
+
+    for (let i = 1; i <= brackets; i += 2) {
+
+        let row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.gap = "40px";
+        row.style.marginBottom = "10px";
+
+        for (let j = 0; j < 2 && i + j <= brackets; j++) {
+
+            let index = i + j;
+
+            let item = document.createElement("div");
+            item.className = "bracketColorRow";
+
+            let label = document.createElement("label");
+            label.innerHTML = "Bracket " + index;
+
+            let preview = document.createElement("div");
+            preview.className = "bracketColorPreview";
+            preview.style.backgroundColor = bracketColors[index - 1] || "#ffffff";
+
+            let picker = document.createElement("input");
+            picker.type = "color";
+            picker.value = bracketColors[index - 1] || "#ffffff";
+            picker.style.display = "none";
+
+            preview.onclick = () => picker.click();
+
+            picker.oninput = () => {
+                preview.style.backgroundColor = picker.value;
+                bracketColors[index - 1] = picker.value;
+                localStorage.setItem("bracketColors", JSON.stringify(bracketColors));
+            };
+
+            item.appendChild(label);
+            item.appendChild(preview);
+            item.appendChild(picker);
+
+            row.appendChild(item);
+        }
+
+        container.appendChild(row);
+    }
+}
+buildBracketColors();
+function getTextColor(hex) {
+    let r = parseInt(hex.substr(1, 2), 16);
+    let g = parseInt(hex.substr(3, 2), 16);
+    let b = parseInt(hex.substr(5, 2), 16);
+
+    let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+    return brightness > 150 ? "black" : "white";
 }
 function checkMulti(contestant) {
     if (contestant.mult != undefined) {
