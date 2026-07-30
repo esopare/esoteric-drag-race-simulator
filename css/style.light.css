@@ -2638,3 +2638,35 @@ background: linear-gradient(
     rgba(255,250,253,.95),
     rgba(255,241,248,.90)
 );
+///brackets
+#bracketColorsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+    margin-top: 10px;
+}
+
+.bracketColorRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bracketColorRow label {
+    font-weight: bold;
+    margin: 0;
+}
+
+.bracketColorPreview {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: transform 0.15s;
+    flex-shrink: 0;
+}
+
+.bracketColorPreview:hover {
+    transform: scale(1.15);
+}
