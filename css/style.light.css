@@ -2829,16 +2829,3 @@ background: linear-gradient(
     width: 100%;
     margin: 2px auto;
 }
-//log.updateLog {
-    font-size: 12px;
-    line-height: 1.4;
-}
-
-.updateLog h3 {
-    font-size: 15px;
-}
-
-.updateLog ul {
-    margin-top: 5px;
-    padding-left: 20px;
-}
