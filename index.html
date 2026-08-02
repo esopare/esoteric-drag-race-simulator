@@ -33,6 +33,7 @@
                 <li><a href="custom.html" id="inblock">Custom</a></li>
                 <li><a href="franchisebuilder.html" id="inblock">Franchise Builder</a></li>
                 <li><a href="marketplace.html" id="inblock">Marketplace</a></li>
+                <li><a href="halloffame.html" id="inblock">Hall of Fame</a></li>
               </ul>
             </nav>
       
@@ -45,15 +46,78 @@
         <div class="content-main">
             <div class="content-left">
                 <p><big>This is your chance to simulate a drag race season with all your favorite contestants!</big></p>
-                <div class="search-wrapper">
-                    <big><label for="search">Choose your contestants:</label></big>
-                    <input type="search" id="search" class="searchInput" placeholder="Type a name.." data-search>
-                </div>
+<div class="search-wrapper">
+    <big><label for="search">Choose your contestants:</label></big>
+
+    <div class="searchRow">
+
+        <input type="search" id="search" class="searchInput" placeholder="Type a name.." data-search>
+
+        <div class="filterContainer">
+<button id="filterBtn" class="filterIconBtn" type="button">
+    ☰
+</button>
+<div id="filterMenu" class="filterMenu" hidden>
+
+    <h3>Included</h3>
+
+    <div id="includedList">
+
+        <label><input type="checkbox" checked> RuPaul's Drag Race</label>
+        <label><input type="checkbox" checked> RDR UK</label>
+        <label><input type="checkbox" checked> Canada's Drag Race</label>
+        <label><input type="checkbox" checked> DR España</label>
+        <label><input type="checkbox" checked> DR Down Under</label>
+        <label><input type="checkbox" checked> DR France</label>
+        <label><input type="checkbox" checked> DR Italia</label>
+        <label><input type="checkbox" checked> DR Philippines</label>
+        <label><input type="checkbox" checked> DR Thailand</label>
+        <label><input type="checkbox" checked> DR Holland</label>
+        <label><input type="checkbox" checked> DR Belgique</label>
+        <label><input type="checkbox" checked> DR México</label>
+        <label><input type="checkbox" checked> DR Brasil</label>
+        <label><input type="checkbox" checked> DR Sverige</label>
+        <label><input type="checkbox" checked> DR Germany</label>
+        <label><input type="checkbox" checked> Dragula</label>
+        <label><input type="checkbox" checked> Queen of the Universe</label>
+        <label><input type="checkbox" checked> Drag Den</label>
+        <label><input type="checkbox" checked> La Más Draga</label>
+        <label><input type="checkbox" checked> Mudrakels</label>
+        <label><input type="checkbox" checked> Call Me Mother</label>
+        <label><input type="checkbox" checked> Queen of Drags</label>
+        <label><input type="checkbox" checked> Regias del Drag</label>
+        <label><input type="checkbox" checked> Switch Drag Race</label>
+        <label><input type="checkbox" checked> House of Drags</label>
+        <label><input type="checkbox" checked> Queen Stars</label>
+        <label><input type="checkbox" checked> Caravana</label>
+        <label><input type="checkbox" checked> Drag Latina</label>
+        <label><input type="checkbox" checked> King of Drags</label>
+        <label><input type="checkbox" checked> Morbidrags</label>
+        <label><input type="checkbox" checked> Crystal Envy's Diamond Race</label>
+	<label><input type="checkbox" checked> Custom Queens</label>
+
+    </div>
+
+    <hr>
+
+    <h3>Excluded</h3>
+
+    <div id="excludedList">
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+</div>
                 <div>
                     <button onclick="addRandomContestant()" id="randomK">Random</button>
                     <button onclick="addRandomCustomContestant()" id="randomKC">Random Customs</button>
                     <button onclick="moreKweens()" class="hide" id="moreK">Choose More Contestants</button>
                 </div>
+
                 <div class="drag-cards" data-drag-cards-container></div>
 <div class="format-wrapper">
 
@@ -164,7 +228,42 @@
             </div>
         </div>
     </div>
-    </div>
+    </div><div class="updateLog">
+    <h3>NEW UPDATE!</h3>
+
+    <p><b>Added Features:</b></p>
+    <ul>
+        <li>More mini-challenge varieties</li>
+        <li>Search filter</li>
+        <li>Toggle disable reunion in finale</li>
+        <li>Crowning lines</li>
+        <li>Exit lines</li>
+        <li>New queens from Crystal Envy's Diamond Race Season 2</li>
+        <li>Added alt images for Ceviche, Crystal Envy, Envy Peru, and Samara</li>
+        <li>Hall of Fame page</li>
+        <li>Hall of Fame & Custom Hall of Famers</li>
+        <li>Drag Race Royale (WIP)</li>
+    </ul>
+
+    <p><b>New Challenges:</b></p>
+    <ul>
+        <li>Who Wore It Best</li>
+        <li>Room Design</li>
+        <li>Photoshoot</li>
+        <li>Singing</li>
+        <li>RuPaul's Drag Race Live!</li>
+        <li>Pageant (Miss Shutaca)</li>
+        <li>Book Memoir</li>
+        <li>Las Vegas</li>
+        <li>Character Design</li>
+        <li>Pageant & Talent Show</li>
+        <li>Roast Battle</li>
+        <li>Monologues</li>
+        <li>Untucked Acting</li>
+        <li>Rappin' Roast</li>
+        <li>Make Over & Girl Group</li>
+    </ul>
+</div>
     <div id="result" style="display: none;"></div>
     <div class="optContainer">
         <input type="checkbox" id="showOpt">
@@ -196,6 +295,17 @@
                     <input type="checkbox" id="disableDouble">
                     Double Shantays and Sashays
                 </label>
+
+		<label>
+		    <input type="checkbox" id="disableReunion">
+		    Reunion in Finale
+		</label>
+
+            </details>
+
+            <details>
+
+                <summary>Enable</summary>
 
                 <label>
                     <input type="checkbox" id="riggory">
@@ -283,6 +393,16 @@
 
             </details>
 
+            <details>
+
+                <summary>Extra Episodes</summary>
+
+                <label>
+                    <input type="checkbox" id="reunb4finale">
+                    Reunion Before Finale N/A
+                </label>
+
+            </details>
 
 <details>
     <summary>Custom Brackets</summary>
