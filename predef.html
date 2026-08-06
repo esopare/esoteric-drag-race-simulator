@@ -865,7 +865,8 @@
 
         <div id="result"></div>
     </div>
-    <div class="optContainer">        <input type="checkbox" id="showOpt">
+    <div class="optContainer">
+        <input type="checkbox" id="showOpt">
 <div class="options">
 
     <div class="twistHeader">
@@ -894,6 +895,17 @@
                     <input type="checkbox" id="disableDouble">
                     Double Shantays and Sashays
                 </label>
+
+		<label>
+		    <input type="checkbox" id="disableReunion">
+		    Reunion in Finale
+		</label>
+
+            </details>
+
+            <details>
+
+                <summary>Enable</summary>
 
                 <label>
                     <input type="checkbox" id="riggory">
@@ -975,12 +987,45 @@
                 </label>
 
                 <label>
+                    <input type="checkbox" id="SlaysianLl">
+                    Slaysian Lipsync LaLaPaRUza
+                </label>
+
+                <label>
                     <input type="checkbox" id="reuls">
                     Reunion Smackdown
                 </label>
 
             </details>
 
+            <details>
+
+                <summary>Extra Episodes</summary>
+
+                <label>
+                    Additional Episodes:
+                </label>
+
+                <label>
+                    <input type="checkbox" id="reunb4finale">
+                    Reunion Before Finale N/A
+                </label>
+
+                <label>
+                    Additional Challenges:
+                </label>
+
+		<label>
+		    <input type="checkbox" id="pickYourPoisonTwist">
+		    CAN6 Pick Your Poison
+		</label>
+
+		<label>
+		    <input type="checkbox" id="snatchRusical">
+		    Snatch Game: The Rusical
+		</label>
+
+            </details>
 
 <details>
     <summary>Custom Brackets</summary>
@@ -1036,6 +1081,12 @@
     <button type="button" onclick="buildBracketSettings()">
         BUILD
     </button>
+
+    <hr>
+
+<label>Bracket Colors</label>
+<div id="bracketColorsContainer"></div>
+
 </details>
 
         </div>
@@ -1054,9 +1105,45 @@
                 </label>
 
                 <label>
+                    <input type="checkbox" id="fanFavor">
+                    Fan Favorite
+                </label>
+
+                <label>
+                    <input type="checkbox" id="mVillain">
+                    Miss Villain
+                </label>
+
+                <label>
+                    <input type="checkbox" id="Robbed">
+                    Miss Robbed
+                </label>
+
+                <label>
+                    <input type="checkbox" id="DPopstar">
+                    Drag Popstar
+                </label>
+
+                <label>
+                    <input type="checkbox" id="Mogul">
+                    Fashion Mogul
+                </label>
+
+                <label>
+                    <input type="checkbox" id="WorstLook">
+                    Miss Worst Look
+                </label>
+
+                <label>
                     <input type="checkbox" id="mlostlook">
                     Miss Lost Look
                 </label>
+
+                <label>
+                    <input type="checkbox" id="mBrick">
+                    Miss Brick
+                </label>
+
 
             </details>
 
