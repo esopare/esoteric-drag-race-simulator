@@ -13423,7 +13423,7 @@ let imgTxtPrdf = [
     {id: "phseason1", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a1/DRP1.jpg"},
     {id: "phseason2", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/74/DRPH2Cast.jpg"},
     {id: "phseason3", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/63/DRPH3Cast.jpg"},
-    {id: "phseason4", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/2/21/DRPHComingSoon.png"},
+    {id: "phseason4", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/ce/DRPH4Cast.jpg"},
     {id: "beseason1", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/a6/DRBE1Banner.jpg"},
     {id: "beseason2", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/ce/DRBE2Banner.jpg"},
     {id: "mxseason1", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/a/ac/DRMX1.jpg"},
@@ -25802,7 +25802,7 @@ let deltaQ = new Queen("The Delta Quadrant", 7, 7, 7, 7, 7, 7, 7, "DeltaQuadrant
 let flesh = new Queen("Flesh", 7, 7, 7, 7, 7, 7, 7, "Flesh");
 let kykelly = new Queen("KY Kelly", 7, 7, 7, 7, 7, 7, 7, "KYKelly");
 let luckyR = new Queen("Lucky Roy Singh", 7, 7, 7, 7, 7, 7, 7, "LuckyRoySingh");
-let madanni = new Queen("Ma Dannii X", 7, 7, 7, 7, 7, 7, 7, "MaDanniX");
+let madanni = new Queen("ma_danni_x", 7, 7, 7, 7, 7, 7, 7, "MaDanniX");
 let mochaUK = new Queen("Mocha", 7, 7, 7, 7, 7, 7, 7, "MochaUK");
 let naya = new Queen("Naya Thorn", 7, 7, 7, 7, 7, 7, 7, "NayaThorn");
 let paris = new Queen("Paris Baby", 7, 7, 7, 7, 7, 7, 7, "ParisBaby");
@@ -26235,7 +26235,7 @@ let zymba = new Queen("Zymba Ding", 10, 6, 10, 9, 7, 10, 12, "ZymbaDing");
 let drph_season3 = [angel, jquinn, john, khianna, maxie, myx, popstar, tita, versex, yudipota, zymba];
 //DRAG RACE PHILIPPINES 4
 let andy = new Queen("Andy Crocker", 7, 7, 7, 7, 7, 7, 7, "AndyCrocker");
-let bhorj = new Queen("Bhørj Gum", 7, 7, 7, 7, 7, 7, 7, "BhørjGum");
+let bhorj = new Queen("Bhorj Gum", 7, 7, 7, 7, 7, 7, 7, "BhørjGum");
 let bomba = new Queen("Bombalicious Eklaver", 7, 7, 7, 7, 7, 7, 7, "BombaliciousEklaver");
 let dixxxy = new Queen("Dixxxy Decoy", 7, 7, 7, 7, 7, 7, 7, "DixxxyDecoy");
 let ghulli = new Queen("Ghulli Ghush", 7, 7, 7, 7, 7, 7, 7, "GhulliGhush");
@@ -26247,7 +26247,7 @@ let misua = new Queen("Misua", 7, 7, 7, 7, 7, 7, 7, "Misua");
 let piayuuuh = new Queen("Piayuuuh", 7, 7, 7, 7, 7, 7, 7, "Piayuuuh");
 let taylor = new Queen("Taylor Sheesh", 7, 7, 7, 7, 7, 7, 7, "TaylorSheesh");
 let valeria = new Queen("Valeria", 7, 7, 7, 7, 7, 7, 7, "Valeria");
-let drph_season4 = [andy, bhorj, bomba, dixxxy, ghulli, katana, manza, maureen, merckz, misua, piayuuuh, taylor, valeria];
+let drph_season4 = [andy, bhorj, bomba, dixxxy, ghulli, katana, manza, maureen, merckz, misua, taylor, valeria];
 //DRAG RACE BELGIQUE 1
 let amanda = new Queen("Amanda Tears", 7, 6, 6, 6, 6, 8, 8, "AmandaTears");
 let athena = new Queen("Athena Likis", 9, 6, 7, 6, 8, 13, 9, "AthenaLikis");
