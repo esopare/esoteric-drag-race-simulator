@@ -2,7 +2,7 @@
 //mini-challenge stuff:
 let miniChallenges = [
     {name: "Making a Magazine Mover", type: "runway"},
-    {name: "Mock eac other in a Puppet Challenge", type: "comedy"},
+    {name: "Mock each other in a Puppet Challenge", type: "comedy"},
     {name: "Photo Shoot with Drag Race Hall of Famers", type: "photoshoot"},
     {name: "Baby Drag Makeover", type: "design"},
     {name: "Quick-Drag Fashion Show", type: "runway"},
@@ -5072,12 +5072,35 @@ function newEpisode() {
 
     let savedCast = currentCast;
 
+// Skip the old custom bracket cast restoration during Round 2
+if (
+    enableCustomBracket &&
+    customBracketRound == 2
+) {
+
+    currentCast =
+        [...secondRoundCasts[
+            customBracketNumber - 1
+        ]];
+}
     if ((bracketSeason || bracketSeason11) &&
     (!enableCustomBracket && episodeCount <= 9 ||
      enableCustomBracket && episodeCount <= (
     bracketConfig.rounds[0].episodes *
     bracketConfig.rounds[0].brackets
 ))) {
+// SECOND ROUND CUSTOM BRACKET
+if (
+    enableCustomBracket &&
+    customBracketRound == 2 &&
+    secondRoundCasts.length > 0
+) {
+
+    currentCast =
+        [...secondRoundCasts[
+            customBracketNumber - 1
+        ]];
+}
 
         currentCast = [
             ...bracket1Cast,
@@ -5097,6 +5120,19 @@ if (enableCustomBracket) {
     }
 
 }
+
+// SECOND ROUND CAST OVERRIDE
+if (
+    enableCustomBracket &&
+    customBracketRound == 2 &&
+    secondRoundCasts.length > 0
+) {
+
+    currentCast =
+        [...secondRoundCasts[
+            customBracketNumber - 1
+        ]];
+}
     }
 
 if ((bracketSeason || bracketSeason11) &&
@@ -5111,6 +5147,35 @@ as11Merged = true;
         ...bracket2AdvancedQueens,
         ...bracket3AdvancedQueens
     ];
+// KEEP ROUND 2 FROM BEING MERGED EARLY
+if (
+    enableCustomBracket &&
+    customBracketRound == 2 &&
+    secondRoundCasts.length > 0
+) {
+
+    let roundOneEpisodes =
+        bracketConfig.rounds[0].episodes *
+        bracketConfig.rounds[0].brackets;
+
+    let roundTwoEpisodes =
+        bracketConfig.rounds[1].episodes *
+        bracketConfig.rounds[1].brackets;
+
+    if (
+        episodeCount > roundOneEpisodes &&
+        episodeCount <=
+            roundOneEpisodes + roundTwoEpisodes
+    ) {
+
+        as11Merged = false;
+
+        currentCast =
+            [...secondRoundCasts[
+                customBracketNumber - 1
+            ]];
+    }
+}
 if (enableCustomBracket) {
 
     currentCast = [];
@@ -5150,7 +5215,26 @@ if ((bracketSeason || bracketSeason11) &&
 
     currentCast = savedCast;
 }
+// SECOND ROUND CURRENT CAST
+if (
+    enableCustomBracket &&
+    customBracketRound == 2 &&
+    secondRoundCasts.length > 0
+) {
 
+    let roundOneEpisodes =
+        bracketConfig.rounds[0].episodes *
+        bracketConfig.rounds[0].brackets;
+
+    if (episodeCount > roundOneEpisodes) {
+
+        currentCast =
+            [...secondRoundCasts[
+                customBracketNumber - 1
+            ]];
+
+    }
+}
     queensRemainingScreen.createHorizontalLine();
     queensRemainingScreen.createButton("Download", "downloadTR()", "downloadTR");
 }
@@ -13439,6 +13523,7 @@ let imgTxtPrdf = [
     {id: "dragula4", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/00/BBD4FullCastPhoto.jpg"},
     {id: "dragula5", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/7/75/BBD5FullCastPhoto.jpg"},
     {id: "dragula6", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/86/TBBD6FullCastPhoto.jpg"},
+    {id: "dragula7", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/0/07/TBBD7FullCastPhoto.jpg"},
     {id: "titans1", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/3/31/DragulaTitansCastImage.jpg"},
     {id: "titans2", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/eb/TBBDT2FullCastPhoto.jpg"},
     {id: "qotu1", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1e/QOTU1Cast.jpg"},
@@ -17405,6 +17490,45 @@ for (let i = 0; i < standings.length; i++) {
     );
 }
 
+// SECOND ROUND CUSTOM BRACKET CHECK
+if (
+    enableCustomBracket &&
+    customBracketRound == 2 &&
+    secondRoundCasts.length > 0
+) {
+
+    let secondRoundConfig =
+        bracketConfig.rounds[1];
+
+    let roundOneEpisodes =
+        bracketConfig.rounds[0].episodes *
+        bracketConfig.rounds[0].brackets;
+
+    let episodesBeforeCurrentBracket =
+        roundOneEpisodes +
+        (
+            (customBracketNumber - 1) *
+            secondRoundConfig.episodes
+        );
+
+    let secondRoundFinalEpisode =
+        episodesBeforeCurrentBracket +
+        secondRoundConfig.episodes;
+
+    if (
+        episodeCount ==
+        secondRoundFinalEpisode
+    ) {
+
+        screen.createButton(
+            "Proceed",
+            "showSecondRoundResult()"
+        );
+
+        return;
+    }
+}
+
 if (bracketSeason || enableCustomBracket) {
 
     let bracket = getBracketNumber();
@@ -17775,6 +17899,54 @@ if (enableCustomBracket) {
 
     }
 
+}
+if (
+    enableCustomBracket &&
+    bracketConfig.rounds.length > 1 &&
+    getBracketNumber() ==
+        bracketConfig.rounds[0].brackets
+) {
+
+    secondRoundAdvanced = [];
+
+    for (
+        let i = 1;
+        i <= bracketConfig.rounds[0].brackets;
+        i++
+    ) {
+
+        let advanced =
+            window[
+                "bracket" +
+                i +
+                "AdvancedQueens"
+            ];
+
+        if (advanced)
+            secondRoundAdvanced.push(
+                ...advanced
+            );
+    }
+
+    currentCast = [...result.advanced];
+
+    screen.createHorizontalLine();
+
+    screen.createBold(
+        "The first round is complete!"
+    );
+
+    screen.createBold(
+        secondRoundAdvanced.length +
+        " queens have advanced to the second round."
+    );
+
+    screen.createButton(
+        "Proceed",
+        "startSecondRoundSetup()"
+    );
+
+    return;
 }
     
     screen.createButton("Proceed", "untucked()");
@@ -25150,15 +25322,14 @@ let celebdr2 = [chakra, chicli, donbell, elecowl, fabulosity, jackiewo, mili, po
 //DRAGULA S7
 let annie = new MQueen("Annie Agurl", 7, 7, 7, 7, 7, 7, 7, "AnnieAgurl");
 let areal = new MQueen("Areal Haunting", 7, 7, 7, 7, 7, 7, 7, "ArealHaunting");
-let dvvsk = new MQueen("Dvvsk", 7, 7, 7, 7, 7, 7, 7, "Dusk");
+let dvvsk = new MQueen("DVVSK", 7, 7, 7, 7, 7, 7, 7, "Dusk");
 let inkubus = new MQueen("Inkubus", 7, 7, 7, 7, 7, 7, 7, "Inkubus");
 let koochie = new MQueen("Koochie Koochie Ku", 7, 7, 7, 7, 7, 7, 7, "KoochieKoochieKu");
 let krustyna = new MQueen("Krustyna Clown", 7, 7, 7, 7, 7, 7, 7, "KrustynaClown");
-let purus = new MQueen("Purus Tal-iban", 7, 7, 7, 7, 7, 7, 7, "PurusTaliban");
+let purus = new MQueen("Purus", 7, 7, 7, 7, 7, 7, 7, "PurusTaliban");
 let samuel = new MQueen("Samuel Bendix", 7, 7, 7, 7, 7, 7, 7, "SamuelBendix");
 let scythe = new MQueen("Scythe", 7, 7, 7, 7, 7, 7, 7, "Scythe");
 let valarose = new MQueen("Vanda LaRose", 7, 7, 7, 7, 7, 7, 7, "VandaLaRose");
-let dragula7 = [annie, areal, dvvsk, inkubus, koochie, krustyna, purus, samuel, scythe, valarose];
 //THE GIG
 let annday = new MQueen("Annie Daynow", 7, 7, 7, 7, 7, 7, 7, "AnnieDaynow");
 let chandel = new MQueen("Chanel Deluna", 7, 7, 7, 7, 7, 7, 7, "ChanelDeluna");
@@ -25642,7 +25813,7 @@ let jane = new Queen("Plane Jane", 12, 12, 9, 9, 13, 11, 10, "PlaneJane");
 let plasma = new Queen("Plasma", 13, 9, 9, 7, 8, 9, 10, "Plasma");
 let qQueen = new Queen("Q", 12, 10, 8, 15, 8, 15, 8, "Q");
 let sapphira = new Queen("Sapphira Cristál", 8, 11, 12, 10, 11, 13, 13, "SapphiraCristal");
-let xunami = new Queen("Xunami Muse", 7, 6, 8, 8, 6, 10, 8, "XunamiMuse");
+let xunami = new Queen("Xunami Muse", 7, 6, 8, 10, 6, 12, 9, "XunamiMuse");
 let us_season16 = [amandaTori, dawn, geneva, hershii, megami, mhiya, mirage, morphine, nymphia, jane, plasma, qQueen, sapphira, xunami];
 // SEASON 17
 let acacia = new Queen("Acacia Forgot", 7, 6, 8, 8, 6, 10, 8, "AcaciaForgot");
@@ -25914,7 +26085,7 @@ let janey = new Queen("Janey Jacké", 7, 6, 13, 11, 6, 11, 12, "Janey");
 let madamem = new Queen("Madame Madness", 8, 6, 5, 6, 5, 8, 7, "MadameM");
 let mama = new Queen("Ma'Ma Queen", 9, 6, 5, 6, 6, 10, 7, "Mama");
 let megan = new Queen("Megan Schoonbrood", 7, 6, 6, 5, 6, 9, 8, "Megan");
-let abby = new Queen("Miss Abby OMG", 5, 6, 11, 6, 5, 8, 10, "Abby");
+let abby = new Queen("Miss Abby OMG", 5, 6, 11, 7, 5, 12, 10, "Abby");
 let patty = new Queen("Patty Pam-Pam", 5, 6, 6, 6, 5, 9, 7, "Patty");
 let roem = new Queen("Roem", 6, 6, 5, 5, 5, 6, 5, "Roem");
 let sederginne = new Queen("Sederginne", 7, 6, 6, 7, 5, 13, 5, "Sederginne");
@@ -26288,16 +26459,16 @@ let cristian = new Queen("Cristian Peralta", 9, 13, 11, 12, 11, 12, 11, "Cristia
 let gala = new Queen("Gala Varo", 9, 5, 10, 9, 6, 11, 13, "GalaVaro");
 let kero = new Queen("Lady Kero", 7, 7, 7, 9, 9, 10, 11, "LadyKero");
 let margaret = new Queen("Margaret Y Ya", 5, 6, 9, 9, 6, 9, 9, "MargaretYYa");
-let matraka = new Queen("Matraka", 10, 8, 10, 10, 9, 12, 11, "Matraka");
+let matraka = new Queen("Matraka", 11, 11, 13, 10, 12, 10, 12, "Matraka");
 let vallarta = new Queen("Miss Vallarta", 4, 4, 4, 4, 4, 4, 4, "MissVallarta");
 let pixiePixie = new Queen("Pixie Pixie", 8, 8, 6, 8, 6, 10, 8, "PixiePixie");
-let regina = new Queen("Regina Voce", 11, 10, 9, 9, 8, 8, 10, "ReginaVoce");
+let regina = new Queen("Regina Voce", 12, 12, 9, 10, 12, 10, 11, "ReginaVoce");
 let serenaM = new Queen("Serena Morena", 5, 5, 5, 8, 5, 9, 9, "SerenaMorena");
 let vermelha = new Queen("Vermelha Noir", 4, 4, 4, 5, 4, 7, 5, "VermelhaNoir");
 let drmx_season1 = [argennis, cristian, gala, kero, margaret, matraka, vallarta, pixiePixie, regina, serenaM, vermelha];
 // DRAG RACE MEXICO 2
 let avaP = new Queen("Ava Pocket", 7, 6, 10, 8, 6, 9, 10, "AvaPocket");
-let elektraV = new Queen("Elektra Vandergeld", 7, 8, 10, 12, 8, 14, 11, "ElektraVandergeld");
+let elektraV = new Queen("Elektra Vandergeld", 8, 10, 13, 13, 10, 15, 12, "ElektraVandergeld");
 let evaB = new Queen("Eva Blunt", 9, 9, 9, 10, 9, 12, 10, "EvaBlunt");
 let garconne = new Queen("Garçonne", 7, 7, 6, 10, 7, 11, 7, "Garconne");
 let horacio = new Queen("Horacio Potasio", 7, 9, 13, 9, 6, 12, 15, "HoracioPotasio");
@@ -26422,6 +26593,7 @@ let scylla = new Queen("Scylla", 6, 5, 6, 6, 5, 7, 6, "Scylla");
 let severity = new Queen("Severity Stone", 4, 4, 4, 4, 4, 4, 4, "SeverityStone");
 let vivvi = new Queen("Vivvi The Force", 5, 5, 4, 7, 5, 8, 5, "VivviTheForce");
 let dragula_6 = [asiaC, auntie, auroraG, desireedik, grey, jaharia, majesty, pi, scylla, severity, vivvi, yuri];
+let dragula_7 = [annie, areal, dvvsk, felony, inkubus, koochie, krustyna, purus, samuel, satanna, scythe, valarose];
 //TITANS 2
 let titans_s2 = [abhora, blackberri, cynthiaD, disas, dollya, evah, frankieD, jadejolie, jaharia, jaykay, laza, loris, priscilla, sigourney];
 //QUEEN OF THE UNIVERSE SEASON 1
@@ -31975,6 +32147,38 @@ if ((bracketSeason || bracketSeason11) && !enableCustomBracket) {
             queen.addToTrackRecord("");
     }
 }
+// SECOND ROUND TRACK RECORD BLANKS
+if (
+    enableCustomBracket &&
+    customBracketRound == 2 &&
+    secondRoundCasts.length > 0
+) {
+
+    for (
+        let i = 0;
+        i < secondRoundCasts.length;
+        i++
+    ) {
+
+        if (
+            i + 1 != customBracketNumber
+        ) {
+
+            for (
+                let queen of secondRoundCasts[i]
+            ) {
+
+                if (
+                    queen.trackRecord.length <
+                    episodeCount
+                ) {
+
+                    queen.addToTrackRecord("");
+                }
+            }
+        }
+    }
+}
     areRelations()
     screen.createButton("Show relationships", "shoRel()", "shButt");
     if (fameGames) {
@@ -36530,6 +36734,15 @@ alert(
 
 let customBracketCasts = [];
 let currentCustomBracket = 0;
+// SECOND ROUND BRACKET SYSTEM
+let customBracketRound = 1;
+let customBracketNumber = 1;
+
+let secondRoundCasts = [];
+let secondRoundOriginals = [];
+let secondRoundAdvanced = [];
+
+let secondRoundChoosing = false;
 function customBracketChoose() {
 
     let screen = new Scene();
@@ -36701,6 +36914,638 @@ miniChallenge();
 
     });
 
+}
+// ==========================================
+// SECOND ROUND BRACKET SYSTEM
+// ==========================================
+
+function startSecondRoundSetup() {
+
+    let distribution =
+        document.getElementById("secondRoundDistribution").value;
+
+    customBracketRound = 2;
+    customBracketNumber = 1;
+
+    if (distribution == "automatic") {
+
+        automaticSecondRound();
+
+    } else {
+
+        chooseSecondRound();
+
+    }
+}
+
+
+function automaticSecondRound() {
+
+    let config = bracketConfig.rounds[1];
+
+    let totalBrackets = config.brackets;
+
+    let queens = [...secondRoundAdvanced];
+
+    shuffle(queens);
+
+    secondRoundCasts = [];
+
+    let baseSize =
+        Math.floor(queens.length / totalBrackets);
+
+    let remainder =
+        queens.length % totalBrackets;
+
+    let index = 0;
+
+    for (let i = 0; i < totalBrackets; i++) {
+
+        let size = baseSize;
+
+        if (i < remainder)
+            size++;
+
+        secondRoundCasts.push(
+            queens.slice(index, index + size)
+        );
+
+        index += size;
+    }
+
+// Preserve the Round 1 track records
+for (let bracket of secondRoundCasts) {
+
+    for (let queen of bracket) {
+
+        queen.secondRoundStartTrackRecord =
+            [...queen.trackRecord];
+
+    }
+}
+
+    secondRoundOriginals =
+        secondRoundCasts.map(
+            bracket => [...bracket]
+        );
+
+    customBracketRound = 2;
+    customBracketNumber = 1;
+
+    currentCast =
+        [...secondRoundCasts[0]];
+
+    secondRoundPreview();
+}
+
+
+function chooseSecondRound() {
+
+    secondRoundChoosing = true;
+
+    choosingBracket = 1;
+
+    currentCast =
+        [...secondRoundAdvanced];
+
+    secondRoundCasts = [];
+    secondRoundOriginals = [];
+
+    customBracketRound = 2;
+    customBracketNumber = 1;
+
+    customSecondRoundChoose();
+}
+
+
+function customSecondRoundChoose() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    let totalBrackets =
+        bracketConfig.rounds[1].brackets;
+
+    screen.createHeader(
+        "Second Round Brackets!"
+    );
+
+    screen.createParagraph(
+        "Choose the queens entering Second Round Bracket " +
+        choosingBracket + "."
+    );
+
+    screen.createHorizontalLine();
+
+    let main =
+        document.querySelector("div#MainBlock");
+
+    let centering =
+        document.createElement("center");
+
+    let br =
+        document.createElement("br");
+
+    let tempArr = [];
+
+    let bracketsLeft =
+        totalBrackets - choosingBracket + 1;
+
+    let size =
+        Math.ceil(
+            currentCast.length / bracketsLeft
+        );
+
+    for (let i = 0; i < size; i++) {
+
+        let select =
+            document.createElement("select");
+
+        select.setAttribute(
+            "class",
+            "queenList"
+        );
+
+        select.setAttribute(
+            "id",
+            "secondRoundSelect" + i
+        );
+
+        let img =
+            document.createElement("img");
+
+        img.setAttribute(
+            "class",
+            "images"
+        );
+
+        img.setAttribute(
+            "id",
+            "secondRoundImage" + i
+        );
+
+        img.setAttribute(
+            "style",
+            "width:105px;height:105px;"
+        );
+
+        let p =
+            document.createElement("p");
+
+        p.appendChild(img);
+
+        for (let k = 0; k < currentCast.length; k++) {
+
+            let option =
+                document.createElement("option");
+
+            option.innerHTML =
+                currentCast[k].getName();
+
+            option.value =
+                currentCast[k].image;
+
+            select.add(option);
+        }
+
+        let numb =
+            randomNumber(
+                0,
+                currentCast.length - 1
+            );
+
+        while (tempArr.includes(numb)) {
+
+            numb =
+                randomNumber(
+                    0,
+                    currentCast.length - 1
+                );
+        }
+
+        select.selectedIndex = numb;
+
+        tempArr.push(numb);
+
+        select.addEventListener(
+            "change",
+            function () {
+
+                img.src =
+                    "image/queens/" +
+                    select.value +
+                    ".webp";
+            }
+        );
+
+        centering.appendChild(p);
+        centering.appendChild(select);
+        centering.appendChild(br);
+        centering.appendChild(br);
+    }
+
+    main.appendChild(centering);
+    main.appendChild(br);
+
+    screen.createButton(
+        "Proceed",
+        "",
+        "createSecondRoundBracket"
+    );
+
+    let createBracket =
+        document.getElementById(
+            "createSecondRoundBracket"
+        );
+
+    createBracket.addEventListener(
+        "click",
+        () => {
+
+            let selected = [];
+
+            for (let i = 0; i < size; i++) {
+
+                let select =
+                    document.getElementById(
+                        "secondRoundSelect" + i
+                    );
+
+                let value =
+                    select.options[
+                        select.selectedIndex
+                    ].text;
+
+                let queen =
+                    currentCast.find(
+                        q =>
+                            q.getName() == value
+                    );
+
+                if (
+                    selected.includes(queen)
+                ) {
+
+                    window.alert(
+                        "Choose different contestants."
+                    );
+
+                    return;
+                }
+
+                selected.push(queen);
+            }
+
+            secondRoundCasts.push(
+                selected
+            );
+
+            for (let queen of selected) {
+
+                currentCast.splice(
+                    currentCast.indexOf(queen),
+                    1
+                );
+            }
+
+            choosingBracket++;
+
+            if (
+                choosingBracket <
+                totalBrackets
+            ) {
+
+                customSecondRoundChoose();
+
+            } else {
+
+                secondRoundCasts.push(
+                    [...currentCast]
+                );
+
+                secondRoundOriginals =
+                    secondRoundCasts.map(
+                        bracket =>
+                            [...bracket]
+                    );
+
+                customBracketNumber = 1;
+
+                currentCast =
+                    [...secondRoundCasts[0]];
+
+                secondRoundPreview();
+            }
+        }
+    );
+}
+
+
+function secondRoundPreview() {
+
+    let screen = new Scene();
+    screen.clean();
+
+    screen.createHeader(
+        "Second Round Brackets"
+    );
+
+    for (
+        let i = 0;
+        i < secondRoundCasts.length;
+        i++
+    ) {
+
+        screen.createHorizontalLine();
+
+        screen.createBold(
+            "Bracket " + (i + 1)
+        );
+
+        for (
+            let queen of secondRoundCasts[i]
+        ) {
+
+            screen.createImage(
+                queen.image,
+                "cyan"
+            );
+
+            screen.createBold(
+                queen.getName()
+            );
+        }
+    }
+
+    screen.createHorizontalLine();
+
+screen.createButton(
+    "Proceed",
+    "newEpisode()"
+);
+}
+function showSecondRoundResult() {
+
+    let config =
+        bracketConfig.rounds[1];
+
+    let activeCast =
+        [...currentCast];
+
+// Make sure we're judging the current
+// Round 2 bracket only.
+activeCast =
+    [...secondRoundCasts[
+        customBracketNumber - 1
+    ]];
+
+    activeCast.sort(
+        (a, b) => b.stars - a.stars
+    );
+
+    let advanced = [];
+    let eliminated = [];
+
+    let passers =
+        config.passers;
+
+    for (
+        let i = 0;
+        i < passers &&
+        i < activeCast.length;
+        i++
+    ) {
+
+        advanced.push(
+            activeCast[i]
+        );
+    }
+
+    let cutoff =
+        advanced.length > 0
+            ? advanced[advanced.length - 1].stars
+            : 0;
+
+    let tiedQueens = [];
+
+    for (
+        let i = advanced.length;
+        i < activeCast.length;
+        i++
+    ) {
+
+        if (
+            activeCast[i].stars ==
+            cutoff
+        ) {
+
+            tiedQueens.push(
+                activeCast[i]
+            );
+
+        } else {
+
+            eliminated.push(
+                activeCast[i]
+            );
+        }
+    }
+
+    // Resolve a tie at the final passing position
+    if (tiedQueens.length > 0) {
+
+        let contenders = [
+            advanced[advanced.length - 1],
+            ...tiedQueens
+        ];
+
+        contenders.sort(
+            (a, b) => b.ppe - a.ppe
+        );
+
+        let winner =
+            contenders.shift();
+
+        advanced[
+            advanced.length - 1
+        ] = winner;
+
+        eliminated.push(
+            ...contenders
+        );
+    }
+
+    let screen = new Scene();
+    screen.clean();
+
+    screen.createHeader(
+        "Second Round Results"
+    );
+
+    screen.createBold(
+        "The queens advancing are..."
+    );
+
+    screen.createHorizontalLine();
+
+    for (
+        let queen of advanced
+    ) {
+
+        let last =
+            queen.trackRecord[
+                queen.trackRecord.length - 1
+            ];
+
+        if (last == "WIN")
+            queen.editTrackRecord(
+                "WIN+ADV"
+            );
+
+        else if (last == "HIGH")
+            queen.editTrackRecord(
+                "HIGH+ADV"
+            );
+
+        else
+            queen.editTrackRecord(
+                "SAFE+ADV"
+            );
+
+        screen.createImage(
+            queen.image,
+            "gold"
+        );
+
+        screen.createBold(
+            queen.getName() +
+            " advances with " +
+            queen.stars +
+            " MVQ Point" +
+            (
+                queen.stars == 1
+                    ? ""
+                    : "s"
+            )
+        );
+    }
+
+    screen.createHorizontalLine();
+
+    screen.createBold(
+        "The eliminated queens..."
+    );
+
+    for (
+        let queen of eliminated
+    ) {
+
+        let last =
+            queen.trackRecord[
+                queen.trackRecord.length - 1
+            ];
+
+        if (last == "WIN")
+            queen.editTrackRecord(
+                "WIN+ELIM"
+            );
+
+        else if (last == "HIGH")
+            queen.editTrackRecord(
+                "HIGH+ELIM"
+            );
+
+        else
+            queen.editTrackRecord(
+                "SAFE+ELIM"
+            );
+
+        queen.rankP = 0;
+
+        if (
+            !eliminatedCast.includes(
+                queen
+            )
+        ) {
+
+            eliminatedCast.unshift(
+                queen
+            );
+        }
+
+        let index =
+            currentCast.indexOf(
+                queen
+            );
+
+        if (index != -1) {
+
+            currentCast.splice(
+                index,
+                1
+            );
+        }
+
+        screen.createImage(
+            queen.image,
+            "red"
+        );
+
+        screen.createBold(
+            queen.getName() +
+            ", sashay away..."
+        );
+    }
+
+    // Save this bracket's passers
+    secondRoundAdvanced.push(
+        ...advanced
+    );
+
+    // Are there more Round 2 brackets?
+    if (
+        customBracketNumber <
+        config.brackets
+    ) {
+
+        customBracketNumber++;
+
+        currentCast =
+            [
+                ...secondRoundCasts[
+                    customBracketNumber - 1
+                ]
+            ];
+
+        screen.createButton(
+            "Proceed",
+            "untucked()"
+        );
+
+        return;
+    }
+
+    // All Round 2 brackets are finished
+    currentCast =
+        [...secondRoundAdvanced];
+
+    as11Merged = true;
+
+    screen.createHorizontalLine();
+
+    screen.createBold(
+        "The second round is complete!"
+    );
+
+    screen.createBold(
+        secondRoundAdvanced.length +
+        " queens remain."
+    );
+
+    screen.createButton(
+        "Proceed",
+        "untucked()"
+    );
 }
 function buildBracketColors() {
 console.log("BUILDING COLORS");
