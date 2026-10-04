@@ -241,7 +241,7 @@ currentMiniChallenge = {
         }
         else {
 	if (dragula == true) {
-            description.innerHTML = "For our today's Fright Feats, you ghouls will " + desc3[randomNumber(0, 30)] + desc4[randomNumber(0, 30)];
+            currentMiniChallenge = miniChallenges[randomNumber(0, miniChallenges.length - 1)];
 	}
 	else if (dragula == false) {
             currentMiniChallenge = miniChallenges[randomNumber(0, miniChallenges.length - 1)];
