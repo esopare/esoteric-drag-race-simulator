@@ -13478,7 +13478,7 @@ let imgTxtPrdf = [
     {id: "canseason4", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/e/e4/CDR4CastPhoto.png"},
     {id: "canseason5", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/1b/CDR5.jpg"},
     {id: "canseason6", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/1/14/CDR6CastPhoto.png"},
-    {id: "canseason7", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/b/b5/CDRComingsoon.png"},
+    {id: "canseason7", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/c/c0/CDR7CastPhoto2.jpg"},
     {id: "canAS1", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/6/6b/CDRAS1CastBanner.jpg"},
     {id: "esseason1", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/d/d6/DRES1.jpg"},
     {id: "esseason2", link: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/f/fb/DRES2.jpg"},
@@ -26405,19 +26405,19 @@ let yudipota = new Queen("Yudipota", 9, 7, 6, 10, 6, 8, 6, "Yudipota");
 let zymba = new Queen("Zymba Ding", 10, 6, 10, 9, 7, 10, 12, "ZymbaDing");
 let drph_season3 = [angel, jquinn, john, khianna, maxie, myx, popstar, tita, versex, yudipota, zymba];
 //DRAG RACE PHILIPPINES 4 acting comedy dance design improv runway lipsync
-let andy = new Queen("Andy Crocker", 6, 6, 7, 6, 7, 7, 12, "AndyCrocker");
-let bhorj = new Queen("Bhorj Gum", 7, 7, 7, 13, 7, 7, 7, "BhørjGum");
-let bomba = new Queen("Bombalicious Eklaver", 5, 5, 7, 7, 7, 7, 7, "BombaliciousEklaver");
-let dixxxy = new Queen("Dixxxy Decoy", 7, 7, 7, 5, 7, 7, 7, "DixxxyDecoy");
-let ghulli = new Queen("Ghulli Ghush", 7, 7, 7, 7, 7, 7, 7, "GhulliGhush");
-let katana = new Queen("Katana", 7, 7, 7, 7, 11, 9, 10, "Katana");
-let manza = new Queen("Manza", 7, 7, 12, 7, 7, 7, 14, "Manza");
-let maureen = new Queen("Maureen Biology", 7, 7, 7, 7, 11, 10, 7, "MaureenBiology");
-let merckz = new Queen("Merckz", 7, 7, 11, 7, 7, 9, 9, "Merckz");
+let andy = new Queen("Andy Crocker", 6, 6, 8, 5, 7, 7, 12, "AndyCrocker");
+let bhorj = new Queen("Bhorj Gum", 8, 10, 5, 13, 5, 8, 6, "BhørjGum");
+let bomba = new Queen("Bombalicious Eklaver", 5, 6, 7, 8, 6, 8, 8, "BombaliciousEklaver");
+let dixxxy = new Queen("Dixxxy Decoy", 6, 6, 10, 6, 6, 9, 8, "DixxxyDecoy");
+let ghulli = new Queen("Ghulli Ghush", 5, 5, 7, 10, 6, 8, 6, "GhulliGhush");
+let katana = new Queen("Katana", 7, 7, 10, 9, 11, 10, 12, "Katana");
+let manza = new Queen("Manza", 8, 9, 12, 7, 7, 10, 14, "Manza");
+let maureen = new Queen("Maureen Biology", 7, 7, 7, 13, 8, 13, 8, "MaureenBiology");
+let merckz = new Queen("Merckz", 10, 10, 11, 9, 7, 12, 8, "Merckz");
 let misua = new Queen("Misua", 7, 7, 7, 7, 7, 7, 7, "Misua");
 let piayuuuh = new Queen("Piayuuuh", 7, 7, 7, 7, 7, 7, 7, "Piayuuuh");
-let taylor = new Queen("Taylor Sheesh", 10, 12, 7, 7, 7, 7, 7, "TaylorSheesh");
-let valeria = new Queen("Valeria", 7, 7, 10, 7, 9, 7, 8, "Valeria");
+let taylor = new Queen("Taylor Sheesh", 8, 10, 6, 8, 7, 8, 7, "TaylorSheesh");
+let valeria = new Queen("Valeria", 8, 6, 11, 8, 8, 10, 8, "Valeria");
 let drph_season4 = [andy, bhorj, bomba, dixxxy, ghulli, katana, manza, maureen, merckz, misua, taylor, valeria];
 //DRAG RACE BELGIQUE 1
 let amanda = new Queen("Amanda Tears", 7, 6, 6, 6, 6, 8, 8, "AmandaTears");
